@@ -1,0 +1,132 @@
+<!--Pack-->
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Pack table </h4>
+        <button mat-raised-button type="button" matTooltip="Edit Task"(click)="openAdd()" class="btn btn-primary btn-link btn-sm btn-just-icon">
+          <i class="material-icons">edit</i>
+        </button>
+      <ng-template #classic2 let-c="close" let-d="dismiss">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-header bg-white pb-5">
+                <div class="text-muted text-center mb-3">
+                  <small>Add Pack</small>
+                </div>
+              </div>
+              <div class="card-body px-lg-5 py-lg-5">
+                <form role="form" (submit)="onSubmitForm()">
+                  <div class="form-group mb-3">
+                    <select class="form-control" [(ngModel)]="p.typePack">
+                      <option *ngFor="let type of typePackEnum" [value]="type.value">{{ type.label }}</option>
+                    </select>
+                                      </div>
+                  <div class="form-group mb-3">
+                    <input class="form-control" placeholder="montant" type="text" [(ngModel)]="p.montant">
+                  </div>
+                  <div class="form-group mb-3">
+                    <input class="form-control" placeholder="description" type="text" [(ngModel)]="p.description">
+                  </div>
+                  <div class="form-group mb-3">
+                    <input class="form-control" placeholder="nbPlace" type="text"  [(ngModel)]="p.nbPlace">
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary my-4">Add Pack</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>  
+      </div>
+     <div *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+          <ng-container *ngIf="alert.icon">
+            <div class="alert-inner--icon">
+              <i class="{{alert.icon}}"></i>
+            </div>
+          </ng-container>
+          <span class="alert-inner--text"><strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+        </ngb-alert>
+      </div> 
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            
+            <thead class=" text-primary">
+              <th>
+                idPack
+              </th>
+              <th>
+                Type
+              </th>
+              <th>
+                Montant
+              </th>
+              <th>
+                description
+              </th>
+              
+              <th>
+                actions
+              </th>
+            </thead>
+            <tbody>
+               <tr *ngFor="let p of Packs">
+                <td>
+                {{p.idPack}}
+                </td>
+                <td>
+                  {{p.typePack}}
+                </td>
+                <td>
+                  {{p.montant}}
+                </td>
+                <td>
+                  {{p.description}}
+                </td>
+            
+                
+                <td class="text-right">
+  
+                  <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="openUpdate(p)" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                    <i class="material-icons">edit</i>
+                  </button>
+                     
+                <ng-template #classic1 let-c="close" let-d="dismiss">
+                  <div class="modal-content">
+                    <div class="modal-body p-0">
+                      <div class="card bg-secondary shadow border-0">
+                        <div class="card-header bg-white pb-5">
+                          <div class="text-muted text-center mb-3">
+                            <small>Update Pack</small>
+                          </div>
+                        </div>
+                        <div class="card-body px-lg-5 py-lg-5">
+                          <form role="form" (submit)="updatePack()">
+                            <div class="form-group mb-3">
+                              <input class="form-control" [valueAsNumber]="selectedPack.montant" type="number" [(ngModel)]="selectedPack.montant">
+                            </div>
+                            <div class="form-group mb-3">
+                              <input class="form-control" placeholder="description" type="text" [(ngModel)]="selectedPack.description">
+                            </div>
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary my-4">Mettre à jour le pack</button>
+                            </div>
+                          </form>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </td> 
+              </tr> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,170 @@
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+
+<section class="section section-shaped">
+    <div class="shape shape-style-1 shape-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="container py-md">
+        <div class="button-group">
+            <a routerLink="/Student" class="btn btn-white mt-4">Espace Student</a>
+            <a routerLink="/signup" class="btn btn-white mt-4">Espace Exposant</a>
+        </div>
+
+        <div class="row justify-content-between align-items-center welcome-content">
+            <div class="col-lg-6 mb-lg-auto">
+                <div class="rounded shadow-lg overflow-hidden transform-perspective-right bootstrap-slider">
+                    <ngb-carousel>
+                        <ng-template ngbSlide>
+                            <img class="img-reg" src="assets/13.jpg" alt="Image de présentation 1">
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <img class="img-reg" src="assets/12.jpg" alt="Image de présentation 2">
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <img class="img-reg" src="assets/20244.png" alt="Image de présentation 3">
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+            </div>
+
+            <div class="col-lg-5 mb-5 mb-lg-0 welcome-text">
+                <h1 class="welcome-title">Welcome</h1>
+                <p class="welcome-subtitle">To our platform</p>
+
+                <div class="button-group">
+                    <a href="javascript:void(0)" (click)="openLogin()" class="btn btn-sm btn-default">Authentificate</a>
+                    <a href="javascript:void(0)" (click)="openLoginAdmin()" class="btn btn-sm btn-default">Admin</a>
+                </div>
+
+                <ng-template #classic2 let-c="close" let-d="dismiss">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            <div class="card bg-secondary shadow border-0">
+                                <div class="card-header bg-white pb-5">
+                                    <div class="text-muted text-center mb-3">
+                                        <small>Sign in with</small>
+                                    </div>
+                                    <div class="btn-wrapper text-center">
+                                        <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                        <span class="btn-inner--icon">
+                          <img src="./assets/img/icons/common/github.svg" alt="Github">
+                        </span>
+                                            <span class="btn-inner--text">Github</span>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                        <span class="btn-inner--icon">
+                          <img src="./assets/img/icons/common/google.svg" alt="Google">
+                        </span>
+                                            <span class="btn-inner--text">Google</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body px-lg-5 py-lg-5">
+                                    <div class="text-center text-muted mb-4">
+                                        <small>Or sign in with credentials</small>
+                                    </div>
+                                    <form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitFormL()">
+                                        <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                </div>
+                                                <input class="form-control" placeholder="Email" type="email" (focus)="focus=true" (blur)="focus=false" formControlName="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                                </div>
+                                                <input class="form-control" placeholder="Password" type="password" (focus)="focus1=true" (blur)="focus1=false" formControlName="password">
+                                            </div>
+                                        </div>
+                                        <div class="custom-control custom-control-alternative custom-checkbox">
+                                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                                            <label class="custom-control-label" for=" customCheckLogin">
+                                                <span>Remember me</span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="login-form-button login-form-margin">Sign in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #classic1 let-c="close" let-d="dismiss">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            <div class="card bg-secondary shadow border-0">
+                                <div class="card-header bg-white pb-5">
+                                    <div class="text-muted text-center mb-3">
+                                        <small>Sign in with</small>
+                                    </div>
+                                    <div class="btn-wrapper text-center">
+                                        <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                        <span class="btn-inner--icon">
+                          <img src="./assets/img/icons/common/github.svg" alt="Github">
+                        </span>
+                                            <span class="btn-inner--text">Github</span>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+                        <span class="btn-inner--icon">
+                          <img src="./assets/img/icons/common/google.svg" alt="Google">
+                        </span>
+                                            <span class="btn-inner--text">Google</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body px-lg-5 py-lg-5">
+                                    <div class="text-center text-muted mb-4">
+                                        <small>Or sign in with credentials</small>
+                                    </div>
+                                    <form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                                        <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                </div>
+                                                <input class="form-control" placeholder="Email" type="email" (focus)="focus=true" (blur)="focus=false" formControlName="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                                </div>
+                                                <input class="form-control" placeholder="Password" type="password" (focus)="focus1=true" (blur)="focus1=false" formControlName="password">
+                                            </div>
+                                        </div>
+                                        <div class="custom-control custom-control-alternative custom-checkbox">
+                                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                                            <label class="custom-control-label" for=" customCheckLogin">
+                                                <span>Remember me</span>
+                                            </label>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="login-form-button login-form-margin">Sign in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>

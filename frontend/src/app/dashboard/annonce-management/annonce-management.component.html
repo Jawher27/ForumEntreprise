@@ -1,0 +1,10 @@
+<div class="panel-header panel-header-sm">
+</div>
+<p>annonce-management works!</p>
+<select [(ngModel)]="selectedTypeId" (change)="onTypeChange()">
+    <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
+  </select>
+  
+  <ul>
+    <li *ngFor="let announcement of announcements">{{ announcement.title }}</li>
+  </ul>

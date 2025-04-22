@@ -1,0 +1,147 @@
+<div class="panel-header panel-header-sm">
+</div>
+<!-- Offres Section -->
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title"> Offres table </h4>
+      <button mat-raised-button type="button" matTooltip="Remove" (click)="openOfferModal()" class="btn btn-danger btn-link btn-sm btn-just-icon">
+        <i class="material-icons">Add</i>
+      </button>
+    </div>
+    <div *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+        <ng-container *ngIf="alert.icon">
+          <div class="alert-inner--icon">
+            <i class="{{alert.icon}}"></i>
+          </div>
+        </ng-container>
+        <span class="alert-inner--text"><strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+      </ngb-alert>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th>idOffre</th>
+            <th>description</th>
+            <th>typeOffre</th>
+            <th>experience</th>
+            <th>dateCreation</th>
+            <th>lieu</th>
+            <th>validite</th>
+            <th>user</th>
+            <th>actions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let offre of offers">
+              <td>{{offre.idOffre}}</td>
+              <td>{{offre.description}}</td>
+              <td>{{ getOfferTypeDisplayName(offre.typeOffre) }}</td>
+              <td>{{offre.experience}}</td>
+              <td>{{offre.dateCreation | date}}</td>
+              <td>{{offre.lieu}}</td>
+              <td>{{offre.validite ? 'Yes' : 'No'}}</td>
+              <td>{{offre.user?.firstName}}</td>
+              <td class="text-right">
+                <!-- Your actions buttons go here -->
+
+                <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="openUpdate(offre)" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                  <i class="material-icons">edit</i>
+                </button>
+                <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" (click)="delete(offre.idOffre)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                  <i class="material-icons">Delete</i>
+              </button>       
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Reviews Section -->
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title"> Reviews table </h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th>idReview</th>
+            <th>rating</th>
+            <th>comment</th>
+            <th>offer</th>
+            <th>user</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let review of reviews">
+              <td>{{review.idReview}}</td>
+              <td>{{review.rating}}</td>
+              <td>{{review.comment}}</td>
+              <td>{{review.offre.idOffre}}</td>
+              <td>{{review.user.firstName}}</td>
+
+              <td class="text-right">      
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+<ng-template #offerModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-white pb-5">
+          <div class="text-muted text-center mb-3">
+            <small>Offer</small>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" (submit)="onSubmitForm()">
+            <div class="form-group mb-3">
+              <label for="description">Description</label>
+              <textarea  class="form-control" placeholder="Description" type="text" id ="description" name ="description" [(ngModel)]="o.description"> </textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="typeOffre">Type</label>
+              <select class="form-control" id="typeOffre" name="typeOffre" [(ngModel)]="o.typeOffre">
+                <option value="STAGE_PFE">Stage PFE</option>
+                <option value="STAGE_ETE">Stage Été</option>
+                <option value="OFFRE_EMPLOI">Offre d'emploi</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="experience">Experience</label>
+              <input class="form-control" placeholder="Experience" type="text" id ="experience" name ="experience" [(ngModel)]="o.experience">
+            </div>
+            <div class="form-group mb-3">
+              <label for="dateCreation">Date de creation</label>
+              <input class="form-control" placeholder="Date Creation" type="date" id ="creation" name ="creation"  [(ngModel)]="o.dateCreation">
+            </div>
+            <div class="form-group mb-3">
+              <label for="lieu">Lieu</label>
+              <input class="form-control" placeholder="Lieu" type="text" id ="lieu" name ="lieu"  [(ngModel)]="o.lieu">
+            </div>
+            <div class="form-group mb-3">
+              <label for="validite">Validity</label>
+              <input class="form-control" placeholder="Validity" type="checkbox" id ="validity" name ="validity" [(ngModel)]="o.validite">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

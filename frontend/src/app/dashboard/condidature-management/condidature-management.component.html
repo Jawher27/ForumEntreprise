@@ -1,0 +1,161 @@
+<div class="panel-header panel-header-sm">
+</div>
+<p>condidature-management works!</p>
+<div class="card-body"> 
+  <div class="table-responsive">
+    <table class="table">
+      <thead class=" text-primary">
+        <th>
+          id condidature
+        </th>
+        <th>
+          Nom
+        </th>
+        <th>
+          Prenom
+        </th> 
+        <th>
+          CV
+        </th>
+        <th>
+          role
+        </th>
+        <th>
+          État de la candidature
+        </th>
+        <th class="text-right">
+          CoverLetter
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of con">
+          <td>{{ i.idCondidature }}</td>
+          <td>{{ i.user?.firstName }}</td>
+          <td>{{ i.user?.lastName }}</td>
+          <td>{{ i.user?.cv }}</td>
+          <td>{{ i.user?.role }}</td>
+          <td>{{ i.etatCondidature }}</td> 
+          <td>{{ i.coverLetter }}</td>   
+          <td class="text-right">
+            <button mat-raised-button type="button" matTooltip="Remove" (click)="openEntretienModal(i.idCondidature)" class="btn btn-danger btn-link btn-sm btn-just-icon">AjouterEntretien</button>
+          </td>  
+        </tr>
+      </tbody>
+    </table>   
+
+    <!-- Table pour afficher les entretiens -->
+    <table class="table">
+      <thead class=" text-primary">
+        <th>
+          id entretien 
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Time
+        </th>
+        <th>
+          Salle
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of en">
+          <td>{{ i.idEntretien }}</td>
+          <td>{{ i.date }}</td> 
+          <td>{{ i.time}}</td> 
+          <td>{{ i.room }}</td>  
+          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="openUpdate(i.idEntretien)" class="btn btn-primary btn-link btn-sm btn-just-icon">
+            <i class="material-icons">edit</i>
+           </button> 
+  
+            <button mat-raised-button type="button" matTooltip="Supprimer" (click)="deleteEntretien(i.idEntretien)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+              <i class="material-icons">delete</i> 
+      
+            </button> 
+
+           
+         
+
+         
+        </tr>
+      </tbody>
+    </table> 
+    
+  </div>
+
+  <!-- Modèle de modal pour la gestion des entretiens -->
+  <ng-template #entretienModal let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card bg-secondary shadow border-0">
+          <div class="card-header bg-white pb-5">
+            <div class="text-muted text-center mb-3">
+              <small>Entretien</small>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <form role="form" (submit)="onSubmitForm()">
+              <div class="form-group mb-3">
+                <label for="date">Date</label>
+                <input class="form-control" placeholder="Date" type="date" id="date" name="date" [(ngModel)]="e.date">
+              </div>
+              <div class="form-group mb-3">
+                <label for="date">Time</label>
+                <input class="form-control" placeholder="Time" type="time" id="Time" name="Time" [(ngModel)]="e.time">
+              </div>
+            
+              <div class="form-group mb-3">
+                <label for="room">Salle</label>
+                <input class="form-control" placeholder="Salle" type="text" id="room" name="room" [(ngModel)]="e.room">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary my-4">Soumettre</button> 
+               
+              </div> 
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+
+<!-- Modèle de modal pour update entretien -->
+<ng-template #UpdateEntertiennModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-white pb-5">
+          <div class="text-muted text-center mb-3">
+            <small>Entretien</small>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" (submit)="onUpdateForm()">
+            <div class="form-group mb-3">
+              <label for="date">date</label>
+              <input class="form-control" placeholder="date" type="date" [(ngModel)]="entre.date">
+            </div>
+            <div class="form-group mb-3">
+              <label for="time">Time</label>
+              <input class="form-control" placeholder="Time" type="time" [(ngModel)]="entre.time">
+            </div>
+          
+            <div class="form-group mb-3">
+              <label for="room">Salle</label>
+              <input class="form-control" placeholder="Salle" type="text" [(ngModel)]="entre.room">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4">Soumettre</button> 
+             
+            </div> 
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,188 @@
+.text-diamond {
+    color: #85d3d4; /* Couleur Diamand */
+}
+.text-gold {
+    color: #dfca3f; /* Couleur Diamand */
+}
+.text-silver {
+    color: #403e41; /* Couleur Diamand */
+}
+.custom-icon-container {
+    width: 120px; /* Largeur du cercle */
+    height: 100px; /* Hauteur du cercle */
+  }
+  
+  .custom-icon-img {
+    width: 80px; /* Largeur de l'image */
+    height: 80px; /* Hauteur de l'image */
+  }
+  .icon-shape-bleu {
+    color: #85d3d4;
+    background-color: rgba(139, 226, 232, 0.5)
+}
+.icon-shape-gold {
+    color: #dfca3f;
+    background-color: rgba(214, 201, 16, 0.5)
+}
+.icon-shape-silver {
+    color: #403e41;
+    background-color: rgba(81, 87, 96, 0.5)
+}
+.btn-D {
+    color: #fff;
+    border-color: #85d3d4;
+    background-color: #85d3d4;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08)
+}
+.btn-G {
+    color: #fff;
+    border-color: #dfca3f;
+    background-color: #dfca3f;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08)
+}
+.btn-S {
+    color: #fff;
+    border-color: #403e41;
+    background-color: #403e41;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08)
+}
+/* stand.component.css */
+.stand-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stand {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color: lightblue;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+  
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}
+.stand:hover {
+  background-color: #e0e0e0;
+}
+
+.stand.reserved {
+  background-color: #d32f2f; /* Rouge */
+}
+
+.stand.selected {
+  background-color: #ffeb3b; /* Jaune */
+}
+.not-selectable
+ {
+  opacity: 0.5; 
+  cursor: not-allowed; 
+}
+
+/*Indicateur*/
+.selected-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ffeb3b; /* Jaune */
+  margin-right: 5px;
+}
+
+.reserved-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #d32f2f; /* Rouge */
+  margin-right: 5px;
+}
+
+.not-selectable-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #d32f2f; 
+  opacity: 0.5; 
+
+  margin-right: 5px;
+}
+
+.free-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: lightblue;
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.select{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color: rgb(241, 241, 118);
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.reserv{
+  background-color: lightblue;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.diss{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color:rgb(24, 185, 32);
+
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5; 
+}
+.avai{
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color: lightblue;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+

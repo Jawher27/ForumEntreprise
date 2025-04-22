@@ -1,0 +1,14 @@
+
+  .navbar {
+    position: relative; /* Assure que la sub-navbar est positionnée par rapport à la navbar */
+    z-index: 1; /* Élève la navbar au-dessus de la sub-navbar */
+  }
+  
+  .sub-navbar {
+    position: absolute; /* Position absolue par rapport à son conteneur parent (.navbar) */
+    top: 100%; /* Place la sub-navbar juste en dessous de la navbar */
+    left: 0; /* Alignement à gauche */
+    width: 100%; /* La sub-navbar prend toute la largeur */
+    z-index: 0; /* Par défaut, laisse la sub-navbar en dessous de la navbar */
+  }
+  

@@ -1,0 +1,89 @@
+<section class="section section-lg section-shaped">
+    <br>
+    <div class="shape shape-style-1 shape-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <section class="section section-lg pt-lg-0 section-contact-us">
+        <div class="container">
+            <div class="row row-grid align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <img src="./assets/img/theme/Logo_ESPRIT_-_Tunisie.png" class="img-fluid floating">
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="pr-md-5">
+                        <div class="contact-form-container">
+                            <div class="card-body">
+                                <!-- Alert de succès -->
+                                <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Votre candidature a été soumise avec succès!
+                                    <button type="button" class="btn-close" (click)="closeAlert()"></button>
+                                </div>
+
+                                <!-- Alert d'échec -->
+                                <div *ngIf="showFailedsAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    Une erreur s'est produite lors de la soumission de votre candidature.
+                                    <button type="button" class="btn-close" (click)="closeFailedAlert()"></button>
+                                </div>
+
+                                <!-- Message d'erreur général -->
+                                <div *ngIf="errorMessage" class="alert alert-danger">
+                                    {{ errorMessage }}
+                                </div>
+
+                                <form [formGroup]="candidatureForm" (ngSubmit)="onSubmit()">
+                                    <div class="mb-3">
+                                        <label for="cv" class="form-label">CV (format PDF uniquement)</label>
+                                        <input
+                                                type="file"
+                                                class="form-control"
+                                                id="cv"
+                                                accept="application/pdf"
+                                                (change)="onCvChange($event)"
+                                                formControlName="cv"
+                                                required>
+                                        <div *ngIf="candidatureForm.get('cv').invalid && candidatureForm.get('cv').touched" class="text-danger">
+                                            Le CV est requis
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="coverLetter" class="form-label">Lettre de motivation (format PDF uniquement)</label>
+                                        <input
+                                                type="file"
+                                                class="form-control"
+                                                id="coverLetter"
+                                                accept="application/pdf"
+                                                (change)="onCoverLetterChange($event)"
+                                                formControlName="coverLetter"
+                                                required>
+                                        <div *ngIf="candidatureForm.get('coverLetter').invalid && candidatureForm.get('coverLetter').touched" class="text-danger">
+                                            La lettre de motivation est requise
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button
+                                                type="submit"
+                                                class="btn btn-primary"
+                                                [disabled]="candidatureForm.invalid || isSubmitting">
+                                            <span class="spinner-border spinner-border-sm" *ngIf="isSubmitting"></span>
+                                            Soumettre la candidature
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

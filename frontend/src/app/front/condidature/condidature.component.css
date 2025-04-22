@@ -1,0 +1,52 @@
+/* contact.component.css */
+
+.red-background {
+    background-color: rgba(128, 3, 3, 0.964);
+  }
+  
+  .contact-form-container {
+    background-color: rgba(224, 212, 212, 0.271); /* Couleur de fond transparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(203, 194, 194, 0.732); /* Ombre autour du cadre */
+  }
+  .btn-success {
+    background-color: transparent; /* Rendre le fond du bouton transparent */
+    color: rgb(16, 16, 16); /* Définir la couleur du texte en vert */
+    border: 2px solid rgba(183, 186, 183, 0.711); /* Ajouter une bordure solide verte */
+  }
+  
+  .btn-success:hover {
+    background-color: rgba(163, 175, 163, 0.755); /* Changer la couleur du fond au survol */
+    color: white; /* Changer la couleur du texte au survol */
+  }
+  .text-white {
+    color: #fff; /* Couleur blanche */
+  }
+  /* Style minimaliste pour le combo modèle de lettre */
+.select-wrapper {
+  position: relative;
+  width: 200px; /* Largeur du combo */
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 8px; /* Espacement intérieur */
+  font-size: 14px; /* Taille de police */
+  border: 1px solid #ced4da; /* Bordure */
+  border-radius: 4px; /* Coins arrondis */
+  appearance: none; /* Suppression de l'apparence native */
+  background-color: #fff; /* Couleur de fond */
+  cursor: pointer; /* Curseur */
+}
+
+/* Flèche de sélection */
+.select-wrapper::after {
+  content: "\25BC"; /* Unicode de la flèche vers le bas */
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Empêche le clic sur la flèche */
+}

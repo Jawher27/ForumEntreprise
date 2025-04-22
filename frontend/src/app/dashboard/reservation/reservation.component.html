@@ -1,0 +1,64 @@
+
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Reservation table </h4>
+        <form role="form" (submit)="GetReservationByType()">
+          <div class="form-group mb-3">
+            <select class="form-control" [(ngModel)]="selectedType">
+              <option *ngFor="let type of typePackEnum" [value]="type.value">{{ type.label }}</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary my-4">Rechercher</button>
+          </div>
+        </form>
+<div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        
+        <thead class=" text-primary">
+          <th>
+            idReservation
+          </th>
+          <th>
+            User
+          </th>
+          <th>
+            Stand
+          </th>
+          <th>
+            Pack
+          </th>
+          <th>
+            Date Reservation
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let res of reservations">
+            <td>
+            {{res.idReservation}}
+            </td>
+            <td>
+                Monsieur {{res.user.firstName}} {{res.user.lastName}}
+              </td>
+              
+            <td>
+             {{res.stand.numero}}
+            </td>
+            <td>
+              {{res.stand.pack.typePack}}
+            </td>
+            <td>
+              {{res.dateReservation}}
+            </td>
+           
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+      </div>
+      </div>
+      </div>

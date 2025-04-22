@@ -1,0 +1,117 @@
+/* Add custom styles for the job cards */
+.job-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .job-card .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .job-card .card-body {
+    padding: 15px;
+  }
+  
+  .job-card .card-footer {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+  }
+  
+  .job-card button.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .job-card button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .rating-input {
+    font-size: 24px; /* Adjust the font size as needed */
+  }
+  
+  .star {
+    cursor: pointer;
+    margin-right: 8px; /* Adjust the spacing between stars as needed */
+  }
+  /* Add these styles to your CSS file or component styles */
+
+/* General styling for card section */
+.section {
+  padding: 80px 0;
+}
+
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Styling for buttons */
+.btn {
+  border-radius: 25px;
+}
+
+.btn-primary {
+  background-color: #5e72e4;
+}
+
+.btn-secondary {
+  background-color: #f4f5f7;
+  color: #8898aa;
+}
+
+.btn-warning {
+  background-color: #fb6340;
+}
+
+.btn-info {
+  background-color: #11cdef;
+}
+
+.btn-danger {
+  background-color: #f5365c;
+}
+
+/* Additional styling for the suggested offers section */
+.section-lg.pt-lg-5.mt--200 {
+  background-color: #f8f9fe;
+}
+
+/* Adjust spacing for improved alignment */
+.mb-5 {
+  margin-bottom: 2.5rem;
+}
+
+/* Centered text */
+.text-center {
+  text-align: center;
+}
+
+/* Card hover effect */
+.card-lift--hover:hover {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust button spacing in the card */
+.card-body .btn {
+  margin-right: 10px;
+}
+
+/* Optional: Add animation to buttons */
+.btn-sm {
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-sm:hover {
+  transform: scale(1.1);
+}

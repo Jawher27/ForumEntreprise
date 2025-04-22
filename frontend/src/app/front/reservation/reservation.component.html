@@ -1,0 +1,174 @@
+<main class="profile-page">
+    <section class="section-profile-cover section-shaped my-0">
+      <div class="container shape-container d-flex align-items-center py-lg">
+        <div class="col px-0">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 text-center">
+              <br><br><br>
+              <h4 class="display-4 mb-3 text-white">Welcome to Our Forum</h4>
+              <p class="lead text-white mb-3">We are delighted to have your presence.</p>
+              <p class="lead text-white mb-5">The forum offers three types of packages.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+      <div class="shape shape-style-1 shape-primary alpha-4">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- SVG separator -->
+      <div class="separator separator-bottom separator-skew">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </section>
+    <section class="section section-lg pt-lg-0 mt--200">
+      <div class="container">
+        <div class="row justify-content-center">
+       
+          <div class="col-lg-12">
+  
+            <div class="row row-grid">
+              <div class="col-lg-4">
+                <div class="card card-lift--hover shadow border-0">
+                  <div class="card-body py-5">
+                    <div class="icon icon-shape icon-shape-bleu rounded-circle mb-2 custom-icon-container">
+                      <img src="../../../assets/img/icons/diamand.png" alt="Description de l'image" class="custom-icon-img">
+                    </div>
+                    <h6 class="text-diamond text-uppercase">Diamant</h6>
+                    <p class="description mt-3">{{packD.description}}</p>
+                    <div>
+                      <p class="description mt-3">Price : {{packD.montant}} DT</p>
+                    </div>
+                    <a class="btn btn-D mt-4 " (click)="openStandsD()">Book Pack</a>
+                    <ng-template #classicD let-c="close" let-d="dismiss">
+                      <div class="modal-content bg-gradient-danger">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="stand-container">
+                          <div *ngFor="let stand of stands" [ngClass]="{'stand': true, 'selected': stand.idStand === selectedStandId, 'reserved': !stand.disponible, 'not-selectable': !standAppartientAuPackD(stand)}" (click)="standAppartientAuPackD(stand) ? onSelectStand(stand.idStand) : null">
+                            Stand {{ stand.numero }}
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <p><span class="selected-color"></span> Stand sélectionné</p>
+                          <p><span class="reserved-color"></span> Stand réservé</p>
+                          <p><span class="not-selectable-color"></span> Stand non sélectionnable</p>
+                          <p><span class="free-color"></span> Stand disponible</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-white" [disabled]="!selectedStandId" (click)="Reserver() ">Book this stand</button>
+                          <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div> 
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card card-lift--hover shadow border-0">
+                  <div class="card-body py-5">
+                    <div class="icon icon-shape icon-shape-gold rounded-circle mb-4 custom-icon-container">
+                      <img src="../../../assets/img/icons/Gold.png" alt="Description de l'image" class="custom-icon-img">
+                    </div>
+                    
+                    <h6 class="text-gold text-uppercase">Gold</h6>
+                    <p class="description mt-3">{{packG.description}}</p>
+                    <div>
+                      <p class="description mt-3">Price : {{packG.montant}} DT</p>
+
+                    </div>
+                    <a (click)="openStandsG()" class="btn btn-G mt-4">Book Pack</a>
+                    <ng-template #classicG let-c="close" let-d="dismiss">
+                      <div class="modal-content bg-gradient-danger">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="stand-container">
+                          <div *ngFor="let stand of stands" [ngClass]="{'stand': true, 'selected': stand.idStand === selectedStandId, 'reserved': !stand.disponible, 'not-selectable': !standAppartientAuPackG(stand)}" (click)="standAppartientAuPackG(stand) ? onSelectStand(stand.idStand) : null">
+                            Stand {{ stand.numero }}
+                          </div>
+                        </div>
+                          <div class="modal-footer">
+                            <p><span class="selected-color"></span> Stand sélectionné</p>
+                            <p><span class="reserved-color"></span> Stand réservé</p>
+                            <p><span class="not-selectable-color"></span> Stand non sélectionnable</p>
+                            <p><span class="free-color"></span> Stand disponible</p>
+                          </div>
+                       
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-white" [disabled]="!selectedStandId" (click)="Reserver() ">Book this stand</button>
+                          <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+                          
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card card-lift--hover shadow border-0">
+                  <div class="card-body py-5">
+                    <div class="icon icon-shape icon-shape-silver rounded-circle mb-4 custom-icon-container">
+                      <img src="../../../assets/img/icons/Silver.png" alt="Description de l'image" class="custom-icon-img">
+                    </div>
+                    
+                    <h6 class="text-silver text-uppercase">Silver</h6>
+                    <p class="description mt-3">{{packS.description}}</p>
+                    <div>
+                      <p class="description mt-3">Price : {{packS.montant}} DT</p>
+
+                    </div>
+                    <a (click)="openStandsS()" class="btn btn-S mt-4">Book Pack</a>
+                    <ng-template #classicS let-c="close" let-d="dismiss">
+                      <div class="modal-content bg-gradient-danger">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="stand-container">
+                          <div *ngFor="let stand of stands" [ngClass]="{'stand': true, 'selected': stand.idStand === selectedStandId, 'reserved': !stand.disponible, 'not-selectable': !standAppartientAuPackS(stand)}" (click)="standAppartientAuPackS(stand) ? onSelectStand(stand.idStand) : null">
+                            Stand {{ stand.numero }}
+                          </div>
+                        </div>
+                        <div class="stand-container">                      
+                        </div>
+                        <div class="modal-footer">
+                          <p><span class="selected-color"></span> Stand sélectionné</p>
+                          <p><span class="reserved-color"></span> Stand réservé</p>
+                          <p><span class="not-selectable-color"></span> Stand non sélectionnable</p>
+                          <p><span class="free-color"></span> Stand disponible</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-white" [disabled]="!selectedStandId" (click)="Reserver() ">Book this stand</button>
+                          <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" (click)="c('Close click')">Close</button>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  

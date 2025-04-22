@@ -1,0 +1,263 @@
+<section class="section section-lg creative-section" style="background-color: hsla(0, 63%, 55%, 0.999);">
+  <div class="container">
+    <div class="row row-grid align-items-center">
+<!--      <div class="col-md-6 order-md-2">-->
+<!--        <img src="./assets/img/theme/EspaceEntrepriseimage.jpg" class="img-fluid floating creative-image">-->
+<!--      </div>-->
+      <div class="col-md-6 order-md-1">
+        <div class="card bg-secondary text-white shadow creative-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-4">
+              <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mr-4">
+                <i class="ni ni-satisfied"></i>
+              </div>
+              <div>
+                <h4 class="creative-title"> Internship Offer </h4>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="button" (click)="openOfferModal()" class="btn btn-danger creative-button">Add Offer</button>
+            </div>
+            <!-- Other content goes here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <!--  ************************ MY OFFERS   SECTION **************************   -->
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+
+<section class="section section-lg pt-lg-0 mt--200">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="row row-grid">
+          
+        
+         <!-- Use *ngFor to iterate over each offer -->
+         <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4">
+            <div class="card card-lift--hover shadow border-0">
+              <div class="card-body py-5">
+                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
+                  <i class="ni ni-planet"></i>
+                  
+                </div>
+
+                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
+                <p class="description mt-3"><strong>Required Experience :</strong> {{ offre.experience }}</p> 
+                <p class="description mt-3"><strong>Location :</strong> {{ offre.lieu }}</p> 
+                <p class="description mt-3"> <strong>Posted on:</strong> {{offre.dateCreation | date }}</p> 
+
+                <p class="description mt-3">{{ offre.description }}</p>
+                <!-- Action buttons go here -->
+                <div class="text-center">
+                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>
+                  </div>
+                  <div class="text-center">
+                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>
+                  </div>
+                  <div class="text-center mt-2">
+                      <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>
+    <!-- Show Less button -->
+    <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>
+  </div>
+</section>
+
+
+
+ <!--************************************     MODAL    ************************************-->
+
+<ng-template #offerModal let-c="close" let-d="dismiss">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-header bg-white pb-5">
+          <div class="text-muted text-center mb-3">
+            <small>Offer</small>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form role="form" (submit)="onSubmitForm()">
+            <div class="form-group mb-3">
+              <label for="description">Description</label>
+              <textarea  class="form-control" placeholder="Description" type="text" id ="description" name ="description" [(ngModel)]="o.description"> </textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="typeOffre">Type</label>
+              <select class="form-control" id="typeOffre" name="typeOffre" [(ngModel)]="o.typeOffre">
+                <option value="STAGE_PFE">Stage PFE</option>
+                <option value="STAGE_ETE">Stage Été</option>
+                <option value="OFFRE_EMPLOI">Offre d'emploi</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="experience">Experience</label>
+              <input class="form-control" placeholder="Experience" type="text" id ="experience" name ="experience" [(ngModel)]="o.experience">
+            </div>
+            <div class="form-group mb-3">
+              <label for="dateCreation">Date de creation</label>
+              <input class="form-control" placeholder="Date Creation" type="date" id ="creation" name ="creation"  [(ngModel)]="o.dateCreation">
+            </div>
+            <div class="form-group mb-3">
+              <label for="lieu">Lieu</label>
+              <input class="form-control" placeholder="Lieu" type="text" id ="lieu" name ="lieu"  [(ngModel)]="o.lieu">
+            </div>
+            <div class="form-group mb-3">
+              <label for="validite">Validity</label>
+              <input class="form-control" placeholder="Validity" type="checkbox" id ="validity" name ="validity" [(ngModel)]="o.validite">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary my-4">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modale de détails et candidatures -->
+<ng-template #detailsModal let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Détails de l'offre</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- PDF Viewer -->
+            <div *ngIf="showCv || showCoverLetter" class="pdf-viewer-container">
+                <div class="pdf-viewer-header d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">{{ showCv ? 'CV' : 'Lettre de motivation' }} - {{ selectedCandidature?.user?.firstName }} {{ selectedCandidature?.user?.lastName }}</h5>
+                    <button class="btn btn-sm btn-danger" (click)="closeViewer()">
+                        <i class="ni ni-fat-remove"></i> Fermer
+                    </button>
+                </div>
+                <div class="pdf-viewer-content">
+<!--                    <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="600" frameborder="0"></iframe>-->
+<!--                    <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="600" frameborder="0"></iframe>-->
+
+                    <iframe
+                            *ngIf="showCv && selectedCandidature?.idCondidature && documentUrls.get(selectedCandidature.idCondidature)?.cvUrl"
+                            [src]="documentUrls.get(selectedCandidature.idCondidature).cvUrl"
+                            width="100%"
+                            height="600"
+                            frameborder="0"></iframe>
+                    <iframe
+                            *ngIf="showCoverLetter && selectedCandidature?.idCondidature && documentUrls.get(selectedCandidature.idCondidature)?.coverLetterUrl"
+                            [src]="documentUrls.get(selectedCandidature.idCondidature).coverLetterUrl"
+                            width="100%"
+                            height="600"
+                            frameborder="0"></iframe>
+                </div>
+            </div>
+
+            <!-- Détails de l'offre -->
+            <div [class.d-none]="showCv || showCoverLetter">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow">
+                            <div class="card-header bg-white">
+                                <h5 class="text-warning text-uppercase">{{ selectedOffre.typeOffre }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <strong>Description:</strong>
+                                    <p>{{ selectedOffre.description }}</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Experience requise:</strong> {{ selectedOffre.experience }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Lieu:</strong> {{ selectedOffre.lieu }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Date de publication:</strong> {{ selectedOffre.dateCreation | date }}</p>
+                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <p><strong>Validité:</strong> {{ selectedOffre.validite ? 'Active' : 'Inactive' }}</p>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste des candidatures -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card shadow">
+                            <div class="card-header bg-white">
+                                <h5>Liste des candidatures</h5>
+                            </div>
+                            <div class="card-body">
+                                <div *ngIf="candidatures.length === 0" class="text-center py-4">
+                                    <p>Aucune candidature pour cette offre.</p>
+                                </div>
+                                <div *ngIf="candidatures.length > 0" class="table-responsive">
+                                    <table class="table align-items-center">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Candidat</th>
+
+                                            <th scope="col">État</th>
+                                            <th scope="col">Documents</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let candidature of candidatures">
+                                            <td>{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</td>
+
+                                            <td>
+                          <span [ngClass]="{
+                            'badge badge-pill badge-success': candidature.etatCondidature === 'ACCEPTED',
+                            'badge badge-pill badge-danger': candidature.etatCondidature === 'REJECTED',
+                            'badge badge-pill badge-warning': candidature.etatCondidature === 'PENDING'
+                          }">{{ candidature.etatCondidature }}</span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button (click)="viewCV(candidature)" class="btn btn-sm btn-info">
+                                                        <i class="ni ni-single-copy-04"></i> CV
+                                                    </button>
+                                                    <button (click)="viewCoverLetter(candidature)" class="btn btn-sm btn-primary ml-2">
+                                                        <i class="ni ni-single-copy-04"></i> LM
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class.d-none]="showCv || showCoverLetter" class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="d('Close click')">Fermer</button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,103 @@
+<section class="section section-lg section-shaped">
+  <div class="shape shape-style-1 shape-default">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <br><br>
+  <!-- Forummmmm -->
+  <div class="col-md-12" style="width: 50%; margin-left:24% ;margin-top: 30px;">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> type announcment table </h4>
+        <button mat-raised-button type="button" matTooltip="Remove" (click)="openAdd()" class="btn btn-danger btn-link btn-sm btn-just-icon">
+          <i class="material-icons">Add</i>
+        </button>
+        <ng-template #classic2 let-c="close" let-d="dismiss">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-white pb-5">
+                  <div class="text-muted text-center mb-3">
+                    <small>Add Forum</small>
+                  </div>
+                </div>
+                <div class="card-body px-lg-5 py-lg-5">
+                  <form role="form" (submit)="onSubmitForm()">
+                    <div class="form-group mb-3">
+                      <input class="form-control" placeholder="Description" type="text" [ngModel]="f.libelle" (ngModelChange)="f.libelle = $event">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary my-4">Add Forum</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <div *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+          <ng-container *ngIf="alert.icon">
+            <div class="alert-inner--icon">
+              <i class="{{alert.icon}}"></i>
+            </div>
+          </ng-container>
+          <span class="alert-inner--text"><strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+        </ngb-alert>
+      </div>
+      <div class="card-body" style="width: 500px;">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Type of Announcements</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let type of types">
+                <td>{{ type.libelle }}</td>
+                <td class="text-right">
+                  <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" (click)="delete(type.idType)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                    <i class="material-icons">Delete</i>
+                  </button>
+                  <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" (click)="openUpdate(type.idType)" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <ng-template #classic1 let-c="close" let-d="dismiss">
+                    <div class="modal-content">
+                      <div class="modal-body p-0">
+                        <div class="card bg-secondary shadow border-0">
+                          <div class="card-header bg-white pb-5">
+                            <div class="text-muted text-center mb-3">
+                              <small>Update type</small>
+                            </div>
+                          </div>
+                          <div class="card-body px-lg-5 py-lg-5">
+                            <form role="form" (submit)="updateForum()">
+                              <div class="form-group mb-3">
+                                <input class="form-control" placeholder="Date" type="date"  [(ngModel)]="selectedTypeAnnouncment.libelle">
+                              </div>
+                              
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-primary my-4">Update Forum</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

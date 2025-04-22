@@ -1,0 +1,50 @@
+/* Add this to your styles.css or styles.scss file */
+
+.main-content {
+    padding: 20px;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+  }
+  
+  .card-title {
+    margin: 0;
+  }
+  
+  .table {
+    width: 100%;
+    margin-bottom: 0;
+    color: #333;
+  }
+  
+  .table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+  }
+  
+  .table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  .panel-header {
+    height: 40px; /* Adjust the height as needed */
+  }
+  
+  /* Add additional styling as needed */
+  

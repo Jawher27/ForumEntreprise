@@ -1,0 +1,224 @@
+<section class="section section-lg section-shaped">
+    <div class="shape shape-style-1 shape-default">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <section class="section section-lg pt-lg-0 section-contact-us">
+      <div class="container">
+        <div class="row justify-content-center mt--300">
+          <div class="col-lg-8">
+            <div class="card bg-gradient-secondary shadow">
+              <div class="card-body p-lg-5">
+                <h4 class="mb-1">Enter what you are searching</h4>
+                <p class="mt-0">and how much</p>
+    
+                <!-- Ajout du HTML fonctionnel ici -->
+                <div>
+                  <label for="typeLibelle">Choisissez un libellé:</label>
+                  <select id="typeLibelle" [(ngModel)]="selectedLibelle" class="form-control">
+                    <option *ngFor="let typeAnnonce of typeAnnonces" [value]="typeAnnonce.libelle">{{ typeAnnonce.libelle }}</option>
+                  </select>
+                </div>
+                <div class="form-group mt-4">
+                  <label for="requiredSupply">Quantité minimale requise:</label>
+                  <input type="number" id="requiredSupply" [(ngModel)]="requiredSupply" placeholder="Entrez la quantité minimale" class="form-control">
+                </div>
+                <button (click)="getRecommendedAnnouncements()" class="btn btn-primary btn-block btn-lg mt-4">Afficher les annonces recommandées</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- <div>
+      <label for="typeLibelle">Choisissez un libellé:</label>
+      <select id="typeLibelle" [(ngModel)]="selectedLibelle">
+        <option *ngFor="let typeAnnonce of typeAnnonces" [value]="typeAnnonce.libelle">{{ typeAnnonce.libelle }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="requiredSupply">Quantité minimale requise:</label>
+      <input type="number" id="requiredSupply" [(ngModel)]="requiredSupply" placeholder="Entrez la quantité minimale">
+    </div>
+    <button (click)="getRecommendedAnnouncements()">Afficher les annonces recommandées</button>
+     -->
+    <div *ngIf="announcements.length > 0">
+      <h2>Annonces recommandées:</h2>
+
+      <div class="row row-grid">
+        <div class="col-lg-4" *ngFor="let announcement of announcements">
+          <div class="card card-lift--hover shadow border-0">
+            <div class="card-body py-5">
+              <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
+                <i class="ni ni-check-bold"></i>
+              </div>
+              <h6 class="text-primary text-uppercase">{{ announcement.announcementName }}</h6>
+              <p class="description mt-3">{{ announcement.articlePicture }}</p>
+              <div>
+                <span class="badge badge-pill badge-primary">{{ announcement.valid }}</span>
+                <span class="badge badge-pill badge-primary">{{ announcement.quantity }}</span>
+              </div>
+              <a routerLink="/front/condidature" class="btn btn-primary mt-4">Valider</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+       <!-- <section class="section section-lg pt-lg-0 mt--200">
+        <div *ngIf="announcements.length > 0">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              
+              <div class="row row-grid">
+
+                <div class="col-lg-4" *ngFor="let announcement of announcements">
+                  <div class="card card-lift--hover shadow border-0">
+                    <div class="card-body py-5">
+                      <div class="icon icon-shape icon-shape-success rounded-circle mb-4">
+                        <i class="ni ni-istanbul"></i>
+                      </div>
+                      <h6 class="text-success text-uppercase">{{ annonce.announcementName }}</h6>
+                      <p class="description mt-3">Prix: {{ annonce.articlePrice }}</p>
+                      <p class="description mt-3">Quantité disponible: {{ annonce.quantity }}</p>
+                      <div>
+                        <span class="badge badge-pill badge-success" *ngIf="annonce.valid">Annonce validée</span>
+                        <span class="badge badge-pill badge-danger" *ngIf="!annonce.valid">Annonce non validée</span>
+                      </div>
+                      <button (click)="deleteAnnouncement(annonce.id)" class="btn btn-success mt-4">Supprimer</button>
+                    </div>
+                  </div>
+                </div>
+                
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      
+      <!-- <ul>
+        <li *ngFor="let announcement of announcements">{{ announcement.announcementName }}</li>
+      </ul> -->
+    
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- <div class="container mt-4">
+      
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+  <label for="typeDropdown">Select Type:</label>
+  <select id="typeDropdown" class="form-control" [(ngModel)]="selectedType">
+    <option *ngFor="let type of types" [value]="type.typeId">{{ type.libelle }}</option>
+  </select>
+</div>
+            </div>
+          </div>
+      
+        <div *ngIf="allAnnouncements.length > 0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>announcementName</th>
+                  <th>articlePrice</th>
+                  <th>quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let announcement of allAnnouncements">
+                  <td>{{ announcement.announcementName }}</td>
+                  <td>{{ announcement.articlePrice }}</td>
+                  <td>{{ announcement.quantity }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      
+          <div *ngIf="allAnnouncements.length === 0">
+            <p>No announcements available.</p>
+          </div>
+      </div> -->
+    <!-- Forummmmm -->
+    <!-- <div class="col-md-12" style="width: 50%; margin-left:24% ;margin-top: 30px;">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> type announcment table </h4> -->
+          <!-- <button mat-raised-button type="button" matTooltip="Remove" (click)="openAdd()" class="btn btn-danger btn-link btn-sm btn-just-icon">
+            <i class="material-icons">Add</i>
+          </button> -->
+          <!-- <ng-template #classic2 let-c="close" let-d="dismiss">
+            <div class="modal-content">
+              <div class="modal-body p-0">
+                <div class="card bg-secondary shadow border-0">
+                  <div class="card-header bg-white pb-5">
+                    <div class="text-muted text-center mb-3">
+                      <small>Add Forum</small>
+                    </div>                                                                                  
+                  </div>
+                  <div class="card-body px-lg-5 py-lg-5">
+                    <form [formGroup]="typeAnnonceForm" (ngSubmit)="AddType()">
+                      <div class="form-group mb-3">
+                        <input matInput class="form-control" placeholder="Description" type="text" formControlName="type">
+                    
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary my-4">Add Forum</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div> -->
+        <!-- <div *ngFor="let alert of alerts">
+          <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+            <ng-container *ngIf="alert.icon">
+              <div class="alert-inner--icon">
+                <i class="{{alert.icon}}"></i>
+              </div>
+            </ng-container>
+            <span class="alert-inner--text"><strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+          </ngb-alert>
+        </div>
+        <div class="card-body" style="width: 500px;">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>Type of Announcements</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let type of types">
+                  <td>{{ type.libelle }}</td>
+                  <td class="text-right">
+                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" (click)="delete(type.idType)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">Delete</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> -->
+      <!-- </div>
+    </div>
+  </section>
+   -->

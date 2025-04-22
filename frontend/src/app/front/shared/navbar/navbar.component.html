@@ -1,0 +1,74 @@
+<nav id="navbar" class="navbar navbar-main navbar-expand-lg navbar-transparent headroom headroom--top headroom--pinned">
+ 
+  <div class="container">
+    <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+      <img src="./assets/Logo_ESPRIT_-_Tunisie.png" width="100" height="150">
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a [routerLink]="['/home']">
+              <img src="./assets/img/brand/blue.png">
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+ 
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        <li class="nav-item">
+          <a routerLink="/front/reclamation" class="nav-link">
+            Réclamation
+          </a>
+        </li>
+        <li class="nav-item">
+          <!-- <a routerLink="/front/sponsor" class="nav-link">
+            Sponsor
+          </a> -->
+        </li>
+        <li class="nav-item">
+          <a routerLink="/front/annonce" class="nav-link">
+            Annonce
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+
+
+
+
+      <li *ngIf="currentUser">
+          <a routerLink="/front/profile">
+            <img src="./assets/img/theme/13.gif" alt="Profil personnel" class="rounded-circle" style="width: 70px; height: 70px;">
+          </a>
+
+
+      </li>
+
+
+
+        <li *ngIf="!currentUser"  class="nav-item d-none d-lg-block ml-lg-4">
+          <a routerLink="/RegisterPage">
+            Connexion
+          </a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+
+</nav>
+

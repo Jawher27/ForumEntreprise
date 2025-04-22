@@ -1,0 +1,158 @@
+<!--Pack-->
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Stand table </h4>
+        <button mat-raised-button type="button" matTooltip="Remove" (click)="openAdd()"  class="btn btn-danger btn-link btn-sm btn-just-icon">
+          <i class="material-icons">Add</i>
+      </button> 
+      <ng-template #classic2 let-c="close" let-d="dismiss">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-header bg-white pb-5">
+                <div class="text-muted text-center mb-3">
+                  <small>Add Stand</small>
+                </div>
+              </div>
+              <div class="card-body px-lg-5 py-lg-5">
+                <form role="form" (submit)="onSubmitForm()">
+                  <div class="form-group mb-3">
+                    <input class="form-control" placeholder="numero" type="text" [(ngModel)]="s.numero">
+                </div>
+                  
+                  
+                  <!-- <div class="form-group mb-3">
+                    <input class="form-control" placeholder="nbPlace" type="text"  [(ngModel)]="p.nbPlace">
+                  </div> -->
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary my-4">Add Stand</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>  
+      </div>
+     <div *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+          <ng-container *ngIf="alert.icon">
+            <div class="alert-inner--icon">
+              <i class="{{alert.icon}}"></i>
+            </div>
+          </ng-container>
+          <span class="alert-inner--text"><strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+        </ngb-alert>
+      </div> 
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            
+            <thead class=" text-primary">
+              <th>
+                idStand
+              </th>
+              <th>
+                numero
+              </th>
+              <th>
+                disponiblilité
+              </th>
+              <th>
+                pack
+              </th>
+              <th>
+                actions
+              </th>
+            </thead>
+            <tbody>
+               <tr *ngFor="let s of Stands">
+                <td>
+                {{s.idStand}}
+                </td>
+                <td>
+                  {{s.numero}}
+                </td>
+                <td>
+                  {{s.disponible}}
+                </td>
+                <td>
+                  {{ s.pack ? s.pack.typePack : 'Aucun pack' }}
+                  <button *ngIf="!s.pack" (click)="OpenAffecterPack(s.idStand)">Affected</button>
+              </td>
+              <ng-template #classic3 let-c="close" let-d="dismiss">
+                <div class="modal-content">
+                  <div class="modal-body p-0">
+                    <div class="card bg-secondary shadow border-0">
+                      <div class="card-header bg-white pb-5">
+                        <div class="text-muted text-center mb-3">
+                          <small>Affecte To Pack</small>
+                        </div>
+                      </div>
+                      <div class="card-body px-lg-5 py-lg-5">
+                        <form role="form" (submit)="AffecterPack()">
+                          <div class="form-group mb-3">
+                            <select class="form-control" [(ngModel)]="typePack">
+                              <option *ngFor="let type of typePackEnum" [value]="type.value">{{ type.label }}</option>
+                            </select>
+                              </div>
+                          <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-4">Affecte</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>  
+             
+                
+                <td class="text-right">
+  
+                 
+                <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" (click)="delete(s.idStand)" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                    <i class="material-icons">Delete</i>
+                </button>       
+                <ng-template #classic1 let-c="close" let-d="dismiss">
+                  <div class="modal-content">
+                    <div class="modal-body p-0">
+                      <div class="card bg-secondary shadow border-0">
+                        <div class="card-header bg-white pb-5">
+                          <div class="text-muted text-center mb-3">
+                            <small>Update Pack</small>
+                          </div>
+                        </div>
+                        <div class="card-body px-lg-5 py-lg-5">
+                          <form role="form" (submit)="updatePack()">
+                            <div class="form-group mb-3">
+                              <select class="form-control" [(ngModel)]="p.typePack">
+                                <option *ngFor="let type of typePackEnum" [value]="type.value">{{ type.label }}</option>
+                              </select>
+                                                </div>
+                            <div class="form-group mb-3">
+                              <input class="form-control" placeholder="montant" type="text" [(ngModel)]="p.montant">
+                            </div>
+                            <div class="form-group mb-3">
+                              <input class="form-control" placeholder="description" type="text" [(ngModel)]="p.description">
+                            </div>
+                            <div class="form-group mb-3">
+                              <input class="form-control" placeholder="nbPlace" type="text"  [(ngModel)]="p.nbPlace">
+                            </div>
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary my-4">Update Pack</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </td> 
+              </tr> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+<div class="container">
+<div class="card shadow mt--600">
+    <div class="text-center mt-5">
+        <h3>My Reservation
+        </h3>
+    </div>
+<div class="px-4">
+    <div class="row justify-content-center">
+
+      <table class="table">
+        
+        <thead class=" text-primary">
+         
+          <th>
+            Stand
+          </th>
+          <th>
+            Pack
+          </th>
+          <th>
+            Date Reservation
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let res of res">
+           
+            <td>
+             {{res.stand.numero}}
+            </td>
+            <td>
+              {{res.stand.pack.typePack}}
+            </td>
+            <td>
+              {{res.dateReservation}}
+            </td>
+           
+           
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+</div>
+</div>
+</div>

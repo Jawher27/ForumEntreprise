@@ -1,0 +1,96 @@
+
+
+<section class="section section-lg section-shaped">
+  <div class="shape shape-style-1 shape-default">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <br><br>
+  <br><br><br>
+  <br><br><br>
+  <br><br>
+  <br><br><br>
+ 
+
+<section >
+  <div class="container">
+    <div class="row justify-content-center mt--300">
+      <div class="col-lg-8">
+        <div class="card bg-gradient-secondary shadow">
+          <div class="card-body p-lg-5">
+            <h4 class="mb-1">Ajouter une annonce</h4>
+            <p class="mt-0">Entrez les détails de votre annonce</p>
+            <div class="form-group mt-5" >
+              <label for="libelle">Libellé:</label>
+              <select id="libelle" [(ngModel)]="libelle" class="form-control">
+                <option *ngFor="let libelle of libelles" [value]="libelle.libelle">{{ libelle.libelle }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="announcementName">Nom de l'annonce:</label>
+              <input type="text" id="announcementName" [(ngModel)]="announcement.announcementName" placeholder="Entrez le nom de l'annonce" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantité:</label>
+              <input type="number" id="quantity" [(ngModel)]="announcement.quantity" placeholder="Entrez la quantité" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="articlePrice">Prix de l'article:</label>
+              <input type="number" id="articlePrice" [(ngModel)]="announcement.articlePrice" placeholder="Entrez le prix de l'article" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="articlePicture">Image de l'article:</label>
+              <input type="text" id="articlePicture" [(ngModel)]="announcement.articlePicture" placeholder="Entrez l'URL de l'image de l'article" class="form-control">
+            </div>
+            
+            <div>
+              <button (click)="addAnnouncementWithType()" class="btn btn-default btn-round btn-block btn-lg">Ajouter l'annonce</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br><br><br>
+  <br><br><br>
+  <br><br>
+  <br><br><br><br><br><br>
+  <br><br><br>
+  
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="row row-grid">
+          <div class="col-lg-4" *ngFor="let annonce of annoncesUtilisateur">
+            <div class="card card-lift--hover shadow border-0">
+              <div class="card-body py-5">
+                <div class="icon icon-shape icon-shape-success rounded-circle mb-4">
+                  <i class="ni ni-istanbul"></i>
+                </div>
+                <h6 class="text-success text-uppercase">{{ annonce.announcementName }}</h6>
+                <p class="description mt-3">Prix: {{ annonce.articlePrice }}</p>
+                <p class="description mt-3">Quantité disponible: {{ annonce.quantity }}</p>
+                <div>
+                  <span class="badge badge-pill badge-success" *ngIf="annonce.valid">Annonce validée</span>
+                  <span class="badge badge-pill badge-danger" *ngIf="!annonce.valid">Annonce non validée</span>
+                </div>
+                <button (click)="deleteAnnouncement(annonce.id)" class="btn btn-success mt-4">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+

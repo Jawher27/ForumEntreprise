@@ -1,0 +1,105 @@
+/* Styles des formes de fond */
+.shape-style-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Empêche les formes d'interférer avec les clics */
+}
+
+.shape-style-1 span {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-style-1 span:nth-child(1) { top: 10%; left: 10%; width: 60px; height: 60px; animation-delay: 0s; }
+.shape-style-1 span:nth-child(2) { top: 20%; right: 20%; width: 80px; height: 80px; animation-delay: 1s; }
+shape-style-1 span:nth-child(3) { bottom: 15%; left: 25%; width: 40px; height: 40px; animation-delay: 2s; }
+shape-style-1 span:nth-child(4) { bottom: 20%; right: 10%; width: 70px; height: 70px; animation-delay: 3s; }
+shape-style-1 span:nth-child(5) { top: 30%; left: 30%; width: 50px; height: 50px; animation-delay: 4s; }
+shape-style-1 span:nth-child(6) { bottom: 30%; right: 30%; width: 90px; height: 90px; animation-delay: 5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+
+/* Styles pour les messages d'erreur */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Styles pour les champs de formulaire invalides */
+.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+/* Styles pour le formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Styles pour les champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles pour le bouton de soumission */
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour le message "Password not Matching" */
+.password-mismatch {
+    color: red;
+    margin-top: 5px;
+}
+
+/* Styles pour le conteneur du formulaire */
+.card-body {
+    padding: 20px;
+}
+
+/* Styles pour les icônes */
+.input-group-text {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 4px 0 0 4px;
+}
+
+/* Styles pour les liens */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour les cases à cocher */
+.custom-control-label {
+    margin-left: 5px;
+}

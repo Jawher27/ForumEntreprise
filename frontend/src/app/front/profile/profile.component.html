@@ -1,0 +1,102 @@
+<main class="profile-page" >
+    <ng-template #notAuthenticated>
+        <!-- Rediriger vers la page de connexion -->
+        <div class="text-center mt-5">
+            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.</p>
+            <button (click)="navigateToLogin()">Se connecter</button>
+        </div>
+    </ng-template>
+</main>
+    <section  class="section-profile-cover section-shaped my-0">
+        <!-- Circles background -->
+        <div class="shape shape-style-1 shape-primary alpha-4">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="card card-profile shadow mt--300">
+                <div class="px-4">
+                    <div class="row">
+                        <div class="col-lg-3 order-lg-2">
+<!--                            <button routerLink="/listcondidature" class="btn-primary">Candidtaure</button>-->
+                            <a *ngIf="isEtudiant()" [routerLink]="['/listcondidature']"  class="btn btn-white mt-4" >Canditature</a>
+                            <div class="card-profile-image">
+                                <a href="javascript:void(0)">
+                                    <img [src]="previewImage" class="rounded-circle">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 order-lg-1">
+                            <div class="row">
+
+                                <div class="col-lg-9">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+
+                                <form class="row justify-content-center" #addForm="ngForm" (ngSubmit)="upload(addForm)">
+                                    <div class="col-8">
+
+                                        <label class="btn btn-default p-0">
+                                            <input type="file" required (change)="selectFile($event)" />
+                                            <button [disabled]="addForm.form.invalid" type="submit" class="btn btn-scroll2 profile-image-upload">cloud_upload</button>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 order-lg-3">
+                            <div class="card-profile-actions py-4 mt-lg-0">
+                                <!--<button (click)="authService.signOut()">Sign Out</button>-->
+                                <button (click)="logout()">Sign Out</button>
+
+                                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5">
+                        <p Welcome  to your profile page.></p>
+                       <!-- <h3>{{currentUser.firstName}} <span class="font-weight-light"> :FirstName  </span></h3>-->
+                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *firstName: </span> </h5><h3>{{currentUser?.firstName}}</h3>
+                        </div>
+                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *lastName: </span> </h5><h3>{{currentUser?.lastName}}</h3>
+                        </div>
+                        <div *ngIf="isEntreprise()"><i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *CompanyName: </span> </h5><h3>{{currentUser?.lastName}}</h3>
+                        </div>
+                        <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><h5><span class="font-weight-light"> *Email:  </span></h5><h3>{{currentUser?.email}}</h3></div>
+<!--                        <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i><h5><span class="font-weight-light"> Role =></span></h5><h3>{{currentUser?.role}}</h3></div>-->
+                        <div *ngIf="isEtudiant()"><i  class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *Cin:  </span></h5><h3>{{currentUser?.cin}}</h3></div>
+
+                        <div><i class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *phoneNumber: </span></h5><h3>{{currentUser?.phoneNumber}}</h3></div>
+
+                         <ngx-qrcode [value]="qrData"></ngx-qrcode>
+                    </div>
+                    <div class="mt-5 py-5 border-top text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-9">
+                                <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
+                                <a href="javascript:void(0)">Show more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <app-mes-res *ngIf="isEntreprise()" ></app-mes-res><!--*ngIf="isExposant()"-->
+<app-mes-cond *ngIf="isEtudiant()" ></app-mes-cond>   <!--*ngIf="isStudent()"-->
+<app-entreprise-offers *ngIf="isEntreprise()"></app-entreprise-offers>
