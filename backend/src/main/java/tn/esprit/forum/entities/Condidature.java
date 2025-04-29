@@ -21,6 +21,8 @@ public class Condidature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     Long idCondidature;
+
+    @Enumerated(EnumType.STRING)
     EtatCondidature etatCondidature;
 
 
@@ -48,7 +50,7 @@ public class Condidature {
 
     @ManyToOne(cascade = CascadeType.ALL)
     User user;
-    EtatCondidature etatCond;
+
 
 
 }

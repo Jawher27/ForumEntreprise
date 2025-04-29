@@ -12,7 +12,9 @@ public interface CondidatureService {
     Condidature ajouterCondidatureAvecFichiers(String etatCondidature, Long offreId, Long userId,
                                                MultipartFile coverLetter, MultipartFile cv) throws IOException;
     void removeCondidature (long idCondidature);
+
     Condidature updateCondidature (Condidature condidature);
+    Condidature updateEtatCondidature (Long idCondidature,Condidature updtcondidature);
     List<Condidature> readAll();
 
     public Condidature getCondidatureById(Long candidatureId) ;

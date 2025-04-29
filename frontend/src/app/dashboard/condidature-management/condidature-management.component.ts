@@ -98,9 +98,9 @@ export class CondidatureManagementComponent implements OnInit {
    this.e.time+=":00";
       // Set the condidature state
       // this.e.condidature.etatCondidature = EtatCondidature.Accepted;
-      console.log("fghjhgfhklkjhgfd:",this.e,"\n", this.id,"\n etat :",  EtatCondidature.Waitlisted)
+      console.log("fghjhgfhklkjhgfd:",this.e,"\n", this.id,"\n etat :",  EtatCondidature.Pending)
       // Add the entretien
-      this.entretienService.addEntretien(this.e, this.id, EtatCondidature.Waitlisted).subscribe(
+      this.entretienService.addEntretien(this.e, this.id, EtatCondidature.Pending).subscribe(
         response => {
           // Handle success response
           console.log('Entretien added successfully:', response);

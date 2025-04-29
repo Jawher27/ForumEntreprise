@@ -5,7 +5,7 @@ import { Offre } from 'src/app/core/models/Offre';
 import { User } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { OfferService } from 'src/app/core/services/offer.service';
-import {Condidature} from '../../core/models/condidature';
+import {Condidature, EtatCondidature} from '../../core/models/condidature';
 import {CondidatureService} from '../../core/services/condidature.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
@@ -39,6 +39,8 @@ export class EntrepriseOffersComponent implements OnInit {
   showCv = false;
   showCoverLetter = false;
   selectedCandidature: Condidature | null = null;
+  applicationStates = Object.values(EtatCondidature);
+  EtatCondidature = EtatCondidature;
 
 
   constructor(private offreService: OfferService ,private router: Router ,private modalService: NgbModal,private authService:AuthService,
@@ -122,6 +124,59 @@ openUpdate(offreToUpdate: Offre) {
       this.openOfferModal();
 
  }
+
+  getStatusDisplayName(status: EtatCondidature): string {
+    switch (status) {
+      case EtatCondidature.Pending:
+        return 'Pending';
+      case EtatCondidature.AcceptedForFirstInterview:
+        return 'AcceptedForFirstInterview';
+      case EtatCondidature.AcceptedForSecondInterview:
+        return 'AcceptedForSecondInterview';
+      case EtatCondidature.WelcomeToTheTeam:
+        return '.WelcomeToTheTeam';
+      case EtatCondidature.NotAccepted:
+        return 'NotAccepted';
+      default:
+        return status;
+    }
+  }
+
+
+  updateCandidatureStatus(candidature: Condidature, newStatus: EtatCondidature): void {
+    // Créer une copie de la candidature avec le statut mis à jour
+    const updatedCandidature = { ...candidature, etatCondidature: newStatus };
+
+    // Appeler le service pour mettre à jour le statut
+    this.condidatureService.updateEtatCondidature(candidature.idCondidature, updatedCandidature)
+        .subscribe({
+          next: (response) => {
+            console.log('Statut mis à jour avec succès:', response);
+            // Mettre à jour l'objet candidature local pour refléter le changement
+            candidature.etatCondidature = newStatus;
+
+            // Ajouter une alerte de succès
+            this.alerts.push({
+              id: this.alerts.length + 1,
+              type: 'success',
+              strong: 'Succès!',
+              message: 'Statut mis à jour avec succès',
+              icon: 'ni ni-like-2'
+            });
+          },
+          error: (error) => {
+            console.error('Erreur lors de la mise à jour du statut:', error);
+            // Ajouter une alerte d'erreur
+            this.alerts.push({
+              id: this.alerts.length + 1,
+              type: 'danger',
+              strong: 'Erreur!',
+              message: 'Échec de la mise à jour du statut: ' + error.message,
+              icon: 'ni ni-bell-55'
+            });
+          }
+        });
+  }
 
 
  ///////////// DELETE OFFER /////////////

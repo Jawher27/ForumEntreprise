@@ -207,42 +207,78 @@
                 <!-- Liste des candidatures -->
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <div class="card shadow">
-                            <div class="card-header bg-white">
-                                <h5>Liste des candidatures</h5>
+                        <div class="card shadow-sm rounded-lg border-0">
+                            <div class="card-header bg-white border-0 py-3">
+                                <h5 class="font-weight-bold text-primary mb-0">Liste des candidatures</h5>
                             </div>
-                            <div class="card-body">
-                                <div *ngIf="candidatures.length === 0" class="text-center py-4">
-                                    <p>Aucune candidature pour cette offre.</p>
+                            <div class="card-body px-4">
+                                <!-- État vide -->
+                                <div *ngIf="candidatures.length === 0" class="text-center py-5">
+                                    <div class="empty-state">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-muted mb-3">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        <p class="text-muted font-weight-medium">Aucune candidature pour cette offre.</p>
+                                    </div>
                                 </div>
-                                <div *ngIf="candidatures.length > 0" class="table-responsive">
-                                    <table class="table align-items-center">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">Candidat</th>
 
-                                            <th scope="col">État</th>
-                                            <th scope="col">Documents</th>
+                                <!-- Table des candidatures -->
+                                <div *ngIf="candidatures.length > 0" class="table-responsive">
+                                    <table class="table align-items-center table-flush table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="text-uppercase text-muted font-weight-medium text-xs">Candidat</th>
+                                            <th scope="col" class="text-uppercase text-muted font-weight-medium text-xs">État</th>
+                                            <th scope="col" class="text-uppercase text-muted font-weight-medium text-xs">Documents</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let candidature of candidatures">
-                                            <td>{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</td>
-
-                                            <td>
-                          <span [ngClass]="{
-                            'badge badge-pill badge-success': candidature.etatCondidature === 'ACCEPTED',
-                            'badge badge-pill badge-danger': candidature.etatCondidature === 'REJECTED',
-                            'badge badge-pill badge-warning': candidature.etatCondidature === 'PENDING'
-                          }">{{ candidature.etatCondidature }}</span>
+                                        <tr *ngFor="let candidature of candidatures" class="border-top">
+                                            <td class="py-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-sm rounded-circle bg-primary text-white mr-3 d-flex align-items-center justify-content-center">
+                                                        {{ candidature.user?.firstName.charAt(0) }}{{ candidature.user?.lastName.charAt(0) }}
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</h6>
+                                                    </div>
+                                                </div>
                                             </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button (click)="viewCV(candidature)" class="btn btn-sm btn-info">
-                                                        <i class="ni ni-single-copy-04"></i> CV
+                                            <td class="py-3">
+                                                <select class="form-select custom-select-sm rounded-pill px-3"
+                                                        [(ngModel)]="candidature.etatCondidature"
+                                                        (change)="updateCandidatureStatus(candidature, candidature.etatCondidature)"
+                                                        [ngClass]="{
+                                                'bg-soft-success text-success': candidature.etatCondidature === EtatCondidature.Pending ||
+                                                                                candidature.etatCondidature === EtatCondidature.AcceptedForFirstInterview ||
+                                                                                candidature.etatCondidature === EtatCondidature.AcceptedForSecondInterview,
+                                                'bg-soft-primary text-primary': candidature.etatCondidature === EtatCondidature.WelcomeToTheTeam,
+                                                'bg-soft-warning text-warning': candidature.etatCondidature === EtatCondidature.NotAccepted
+                                            }">
+                                                    <option *ngFor="let state of applicationStates" [value]="state">
+                                                        {{ getStatusDisplayName(state) }}
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td class="py-3">
+                                                <div class="d-flex">
+                                                    <button (click)="viewCV(candidature)" class="btn btn-sm btn-icon btn-soft-info rounded-circle mr-2" title="Voir le CV">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                                        </svg>
                                                     </button>
-                                                    <button (click)="viewCoverLetter(candidature)" class="btn btn-sm btn-primary ml-2">
-                                                        <i class="ni ni-single-copy-04"></i> LM
+                                                    <button (click)="viewCoverLetter(candidature)" class="btn btn-sm btn-icon btn-soft-primary rounded-circle" title="Voir la lettre de motivation">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                                        </svg>
                                                     </button>
                                                 </div>
                                             </td>
@@ -254,10 +290,10 @@
                         </div>
                     </div>
                 </div>
+                <div [class.d-none]="showCv || showCoverLetter" class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" (click)="d('Close click')">Fermer</button>
+                </div>
             </div>
-        </div>
-        <div [class.d-none]="showCv || showCoverLetter" class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="d('Close click')">Fermer</button>
         </div>
     </div>
 </ng-template>

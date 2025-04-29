@@ -24,6 +24,11 @@ export class CondidatureService {
   }
 
 
+  updateEtatCondidature(idCondidature: number, condidature: Condidature): Observable<Condidature> {
+    return this.http.put<Condidature>(`${this.baseUrl}/updateEtat/${idCondidature}`, condidature);
+  }
+
+
   getCandidature(id: number): Observable<Condidature> {
     return this.http.get<Condidature>(`${this.baseUrl}/${id}`);
   }

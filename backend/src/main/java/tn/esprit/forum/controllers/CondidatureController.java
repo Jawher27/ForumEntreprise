@@ -151,11 +151,29 @@ public class CondidatureController {
 
 
 
+//    @PutMapping("update")
+//    public  Condidature updateCondidature(@PathVariable Long idCondidature,@RequestBody Condidature updtcondidature){
+//
+//        return condidatureService.updateCondidature(idCondidature,updtcondidature);
+//    }
+
+
+
     @PutMapping("update")
     public  Condidature updateCondidature(@RequestBody Condidature condidature){
 
         return condidatureService.updateCondidature(condidature);
     }
+    @PutMapping("updateEtat/{id}")
+    public ResponseEntity<Condidature> updateEtatCondidature(
+            @PathVariable("id") Long idCondidature,
+            @RequestBody Condidature updtcondidature) {
+
+        Condidature updatedCondidature = condidatureService.updateEtatCondidature(idCondidature, updtcondidature);
+        return ResponseEntity.ok(updatedCondidature);
+    }
+
+
     @DeleteMapping("delete/{idCondidature}")
     public boolean removeCondidature(@PathVariable long idCondidature ) {
 

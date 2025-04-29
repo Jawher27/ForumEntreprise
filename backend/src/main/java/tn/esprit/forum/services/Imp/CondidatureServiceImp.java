@@ -26,6 +26,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -182,10 +183,26 @@ public class CondidatureServiceImp implements CondidatureService {
         condidatureRepository.deleteById(idCondidature);
     }
 
-
     @Override
     public Condidature updateCondidature(Condidature condidature) {
         return condidatureRepository.save(condidature);
+    }
+
+
+    @Override
+    public Condidature updateEtatCondidature(Long idCondidature,Condidature updtcondidature) {
+
+        Condidature existingCondidature = condidatureRepository.findById(idCondidature)
+                .orElseThrow(() -> new EntityNotFoundException("Condidature non trouvée avec l'ID :" + idCondidature));
+
+        if (!Objects.equals(updtcondidature.getEtatCondidature(), existingCondidature.getEtatCondidature())){
+
+            existingCondidature.setEtatCondidature(updtcondidature.getEtatCondidature());
+        }
+        return condidatureRepository.save(existingCondidature);
+
+
+
     }
 
     @Override

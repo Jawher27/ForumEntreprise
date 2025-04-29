@@ -3,9 +3,11 @@ import { Offre } from './Offre';
 import { User } from './user';
 
 export enum EtatCondidature {
-  Waitlisted= 'Waitlisted',
-  Accepted= 'Accepted',
-  Rejected= 'Rejected',
+    Pending= 'Pending',
+    AcceptedForFirstInterview= 'AcceptedForFirstInterview',
+    AcceptedForSecondInterview= ' AcceptedForSecondInterview',
+    WelcomeToTheTeam= 'WelcomeToTheTeam',
+    NotAccepted= 'NotAccepted',
 }
 
 
