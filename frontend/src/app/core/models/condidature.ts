@@ -5,7 +5,7 @@ import { User } from './user';
 export enum EtatCondidature {
     Pending= 'Pending',
     AcceptedForFirstInterview= 'AcceptedForFirstInterview',
-    AcceptedForSecondInterview= ' AcceptedForSecondInterview',
+    AcceptedForSecondInterview= 'AcceptedForSecondInterview',
     WelcomeToTheTeam= 'WelcomeToTheTeam',
     NotAccepted= 'NotAccepted',
 }

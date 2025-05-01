@@ -249,18 +249,15 @@
                                                 </div>
                                             </td>
                                             <td class="py-3">
-                                                <select class="form-select custom-select-sm rounded-pill px-3"
+                                                <select class="form-select custom-state-select"
                                                         [(ngModel)]="candidature.etatCondidature"
-                                                        (change)="updateCandidatureStatus(candidature, candidature.etatCondidature)"
-                                                        [ngClass]="{
-                                                'bg-soft-success text-success': candidature.etatCondidature === EtatCondidature.Pending ||
-                                                                                candidature.etatCondidature === EtatCondidature.AcceptedForFirstInterview ||
-                                                                                candidature.etatCondidature === EtatCondidature.AcceptedForSecondInterview,
-                                                'bg-soft-primary text-primary': candidature.etatCondidature === EtatCondidature.WelcomeToTheTeam,
-                                                'bg-soft-warning text-warning': candidature.etatCondidature === EtatCondidature.NotAccepted
-                                            }">
-                                                    <option *ngFor="let state of applicationStates" [value]="state">
-                                                        {{ getStatusDisplayName(state) }}
+                                                        (change)="updateCandidatureStatus(candidature,candidature.etatCondidature)"
+                                                        [ngClass]="getStateCssClass(candidature.etatCondidature)">
+                                                    <option *ngFor="let stateOption of getStateOptionsForCandidature(candidature)"
+                                                            [value]="stateOption.value"
+                                                            [disabled]="!stateOption.selectable"
+                                                            [ngClass]="{'state-option': true, 'state-option-disabled': !stateOption.selectable}">
+                                                        {{ stateOption.displayName }}
                                                     </option>
                                                 </select>
                                             </td>
