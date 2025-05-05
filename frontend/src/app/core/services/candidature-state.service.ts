@@ -22,6 +22,12 @@ export class CandidatureStateService {
 
     // Déterminer les états sélectionnables en fonction de l'état actuel
     switch (currentState) {
+      case EtatCondidature.Submitted:
+        this.setSelectableStates(stateMap, [
+          EtatCondidature.Pending,
+          EtatCondidature.NotAccepted
+        ]);
+        break;
       case EtatCondidature.Pending:
         this.setSelectableStates(stateMap, [
           EtatCondidature.AcceptedForFirstInterview,

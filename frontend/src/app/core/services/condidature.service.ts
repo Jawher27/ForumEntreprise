@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, forkJoin, of, throwError  } from 'rxjs';
+
 import { Condidature } from '../models/condidature';
+import { Offre } from '../models/Offre';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,37 @@ export class CondidatureService {
   getCandidaturesByUserId(id: number): Observable<Condidature[]> {
     return this.http.get<Condidature[]>(`${this.baseUrl}/GetCanditaturesbyUser/${id}`);
   }
+  getCandidaturesByUserIdAndOffre(id: number , idOffre: number): Observable<Condidature[]> {
+    return this.http.get<Condidature[]>(`${this.baseUrl}/GetCanditaturesbyUserAnfOffre/${id}/${idOffre}`);
+  }
+  // Nouvelle méthode pour récupérer et enrichir les candidatures avec toutes les informations d'offres
+  // getEnrichedCandidaturesByUserId(userId: number, offerService: { getAllOffers: () => Observable<Offre[]> }): Observable<Condidature[]> {
+  //   return this.getCandidaturesByUserId(userId).pipe(
+  //       switchMap((candidatures: Condidature[]) => {
+  //         if (candidatures.length === 0) {
+  //           return of([] as Condidature[]);
+  //         }
+  //
+  //         return offerService.getAllOffers().pipe(
+  //             map((offers: Offre[]) => {
+  //               const offersMap = new Map<number, Offre>();
+  //               offers.forEach(offer => offersMap.set(offer.idOffre, offer));
+  //
+  //               return candidatures.map(candidature => {
+  //                 if (candidature.offre && candidature.offre.idOffre && offersMap.has(candidature.offre.idOffre)) {
+  //                   candidature.offre = offersMap.get(candidature.offre.idOffre)!;
+  //                 }
+  //                 return candidature;
+  //               });
+  //             })
+  //         );
+  //       }),
+  //       catchError(error => {
+  //         console.error('Erreur lors de l\'enrichissement des candidatures:', error);
+  //         return throwError(() => new Error('Erreur lors du chargement des données complètes des candidatures'));
+  //       })
+  //   );
+  // }
 
   getCondidaturesByOffre(idOffre: number): Observable<Condidature[]> {
     return this.http.get<Condidature[]>(`${this.baseUrl}/GetCanditaturesbyOffre/${idOffre}`);

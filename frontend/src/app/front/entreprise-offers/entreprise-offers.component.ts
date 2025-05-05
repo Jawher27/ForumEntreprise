@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Offre} from 'src/app/core/models/Offre';
+import {Offre, TypeOffre} from 'src/app/core/models/Offre';
 import {User} from 'src/app/core/models/user';
 import {AuthService} from 'src/app/core/services/auth.service';
 import {OfferService} from 'src/app/core/services/offer.service';
@@ -39,6 +39,19 @@ export class EntrepriseOffersComponent implements OnInit {
     selectedOffre: Offre = new Offre();
     candidatures: Condidature[] = [];
     o: Offre = new Offre();
+    // o: Offre = {
+    //     idOffre: 0,
+    //     titre: '',
+    //     description: '',
+    //     typeOffre: null,
+    //     periode: '',
+    //     dateDebut: null,
+    //     dateFin: null,
+    //     dateCreation: null,
+    //     lieu: '',
+    //     user: null
+    // };
+
     offers: Offre[] = [];
     currentUser: User;
     // cvUrl: SafeResourceUrl | null = null;
@@ -52,6 +65,12 @@ export class EntrepriseOffersComponent implements OnInit {
 
 // Map pour stocker les états disponibles pour chaque candidature
     candidatureStateOptions: Map<number, StateOption[]> = new Map();
+
+    typeOptions = [
+        { value: TypeOffre.STAGE_PFE_INGENIEUR, label: 'Stage PFE Ingénieur', duration: 6 },
+        { value: TypeOffre.STAGE_PFE_LICENCE, label: 'Stage PFE Licence', duration: 4 },
+        { value: TypeOffre.OFFRE_ETE, label: 'Stage Été', duration: 2 },
+    ];
 
     constructor(private offreService: OfferService, private router: Router, private modalService: NgbModal, private authService: AuthService,
                 private condidatureService: CondidatureService,
@@ -75,6 +94,29 @@ export class EntrepriseOffersComponent implements OnInit {
 
     }
 
+
+    onTypeChange(): void {
+        const selected = this.typeOptions.find(opt => opt.value === this.o.typeOffre);
+        if (selected) {
+            this.o.periode = `${selected.duration} mois`;
+            this.calculateDateFin(selected.duration);
+        }
+    }
+
+    onDateDebutChange(): void {
+        const selected = this.typeOptions.find(opt => opt.value === this.o.typeOffre);
+        if (selected) {
+            this.calculateDateFin(selected.duration);
+        }
+    }
+
+    calculateDateFin(months: number): void {
+        if (!this.o.dateDebut) return;
+        const debut = new Date(this.o.dateDebut);
+        const fin = new Date(debut);
+        fin.setMonth(fin.getMonth() + months);
+        this.o.dateFin = fin;
+    }
 
     /**
      * Génère les options d'état disponibles pour une candidature
@@ -111,6 +153,8 @@ export class EntrepriseOffersComponent implements OnInit {
      */
     getStateCssClass(state: EtatCondidature): string {
         switch (state) {
+            case EtatCondidature.Submitted:
+                return 'state-submitted';
             case EtatCondidature.Pending:
                 return 'state-pending';
             case EtatCondidature.AcceptedForFirstInterview:
@@ -165,11 +209,14 @@ export class EntrepriseOffersComponent implements OnInit {
 
     ///////////// ADD OFFER /////////////
     onSubmitForm(): void {
+        this.o.dateCreation = new Date();
         console.log(this.o);
         if (!this.o.idOffre) {
             this.offreService.addOffer(this.o, this.currentUser.id)
                 .subscribe(response => {
                     console.log('Offer saved successfully:', response);
+                    this.getOffersByUserId(this.currentUser.id);
+                    this.offerModal.reset();
                     this.modalService.dismissAll(this.offerModal);
                 }, error => {
                     console.error('Error saving offer:', error);
@@ -179,6 +226,7 @@ export class EntrepriseOffersComponent implements OnInit {
             this.offreService.updateOffre(this.o)
                 .subscribe(response => {
                     console.log('Offer updated successfully:', response);
+                    this.getOffersByUserId(this.currentUser.id);
                     this.modalService.dismissAll(this.offerModal);
                 }, error => {
                     console.error('Error updating offer:', error);
@@ -189,7 +237,13 @@ export class EntrepriseOffersComponent implements OnInit {
 
     openOfferModal() {
         this.modalService.open(this.offerModal);
+        this.resetForm();
     }
+    resetForm(){
+        this.offerModal.reset();
+
+    }
+
 
     ///////////// GET OFFERS /////////////
     getOffersByUserId(id: number): void {
@@ -206,12 +260,12 @@ export class EntrepriseOffersComponent implements OnInit {
     ///////////////////////////////////////
     getOfferTypeDisplayName(type: string): string {
         switch (type) {
-            case 'STAGE_PFE':
-                return 'Stage PFE';
+            case 'STAGE_PFE_INGENIEUR':
+                return 'Stage PFE Ingenieur';
+            case 'STAGE_PFE_LICENCE':
+                return 'Stage PFE Licence';
             case 'STAGE_ETE':
-                return 'Stage Été';
-            case 'OFFRE_EMPLOI':
-                return 'Offre d\'emploi';
+                return 'Stage ETE';
             default:
                 return type;
         }
@@ -227,6 +281,8 @@ export class EntrepriseOffersComponent implements OnInit {
 
     getStatusDisplayName(status: EtatCondidature): string {
         switch (status) {
+            case EtatCondidature.Submitted:
+                return 'Submitted';
             case EtatCondidature.Pending:
                 return 'Pending';
             case EtatCondidature.AcceptedForFirstInterview:

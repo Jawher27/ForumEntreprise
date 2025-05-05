@@ -198,7 +198,11 @@ public class CondidatureController {
         return condidatureService.findAllConditaturesByIdUser(id_User);
     }
 
+    @GetMapping("/GetCanditaturesbyUserAnfOffre/{id}/{id_Offre}")
+    public List<Condidature> findAllConditaturesByIdUserAndIdOffre(@PathVariable("id") Long id_User, @PathVariable Long id_Offre) {
 
+        return condidatureService.findAllConditaturesByIdUserAndIdOffre(id_User, id_Offre);
+    }
 
 
 }

@@ -14,9 +14,10 @@
                 </div>
 
                 <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
-                <p class="description mt-3"><strong>Required Experience:</strong> {{ offre.experience }}</p>
+                <p class="description mt-3"><strong>Stage:</strong> {{ offre.titre }}</p>
                 <p class="description mt-3"><strong>Location:</strong> {{ offre.lieu }}</p>
-                <p class="description mt-3"><strong>Posted on:</strong> {{ offre.dateCreation | date }}</p>
+                  <p class="description mt-3"><strong>Date debut:</strong> {{ offre.dateDebut | date }}</p>
+                  <p class="description mt-3"><strong>Posted:</strong> {{ offre.dateCreation |  date:'yyyy-MM-dd HH:mm' }}</p>
                 <p class="description mt-3">{{ offre.description }}</p>
 
                 <div class="mt-4">

@@ -3,6 +3,7 @@ import { Offre } from './Offre';
 import { User } from './user';
 
 export enum EtatCondidature {
+    Submitted= 'Submitted',
     Pending= 'Pending',
     AcceptedForFirstInterview= 'AcceptedForFirstInterview',
     AcceptedForSecondInterview= 'AcceptedForSecondInterview',
@@ -13,6 +14,7 @@ export enum EtatCondidature {
 
 export class Condidature {
     idCondidature: number;
+    refCondidature: string;
     etatCondidature: EtatCondidature;
     coverLetter: string;
     cv: string;

@@ -130,6 +130,12 @@
     font-weight: bold;
 }
 
+.state-submitted {
+    background-color: #f0f0f0; /* Fond gris clair */
+    color: #6c757d;            /* Texte gris */
+
+    font-weight: bold;
+}
 /* Styles pour les différents états */
 .state-pending {
     background-color: #e3f2fd;
@@ -178,3 +184,58 @@
     background-size: 12px;
     cursor: pointer;
 }
+
+/* ✅ Alignement général du formulaire */
+form {
+    max-width: 100%;
+}
+
+/* ✅ Espacement des champs */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* ✅ Champs de saisie plus doux */
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+/* ✅ Champs en lecture seule plus visibles */
+.form-control[readonly] {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* ✅ Boutons dans le formulaire */
+button[type="submit"] {
+    width: 100%;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+/* ✅ Checkbox alignée proprement */
+.form-check-label {
+    margin-left: 0.5rem;
+}
+
+/* ✅ Titre modale */
+.modal-title {
+    font-weight: bold;
+    color: #32325d;
+}
+
+/* ✅ Amélioration de la zone textarea */
+textarea.form-control {
+    resize: vertical;
+}
+
+/* ✅ Responsive sur petits écrans */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+    }
+}
+

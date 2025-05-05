@@ -22,5 +22,6 @@ public interface CondidatureRepository extends JpaRepository<Condidature,Long> {
 
     List<Condidature> findByUser_IdOrderByIdCondidatureAsc(Long id);
 
+    List<Condidature> findByUser_IdAndOffre_IdOffreOrderByIdCondidatureAsc(Long id, Long idOffre);
 
 }

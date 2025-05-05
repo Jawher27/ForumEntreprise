@@ -24,6 +24,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -144,7 +146,24 @@ public class CondidatureServiceImp implements CondidatureService {
         condidature.setOffre(offre);
         condidature.setUser(user);
 
-        return condidatureRepository.save(condidature);
+        // Sauvegarder d'abord pour obtenir l'ID
+        Condidature savedCondidature = condidatureRepository.save(condidature);
+
+        // Récupérer la date de création de l'offre
+        LocalDateTime dateCreationOffre = offre.getDateCreation();
+
+        // Extraire le jour et le mois de la date
+        String jour = String.format("%02d", dateCreationOffre.getDayOfMonth());
+        String mois = String.format("%02d", dateCreationOffre.getMonthValue());
+
+        // Générer la référence unique: ID-JourMois
+        String reference = savedCondidature.getIdCondidature() + "-" + jour + mois;
+        savedCondidature.setRefCondidature(reference);
+
+        // Sauvegarder à nouveau pour mettre à jour la référence
+        return condidatureRepository.save(savedCondidature);
+
+//        return condidatureRepository.save(condidature);
     }
 
 
@@ -219,6 +238,11 @@ public class CondidatureServiceImp implements CondidatureService {
      public List<Condidature> findAllConditaturesByIdUser(Long id_User){
 
         return condidatureRepository.findByUser_IdOrderByIdCondidatureAsc(id_User);
+    }
+
+    @Override
+    public List<Condidature> findAllConditaturesByIdUserAndIdOffre(Long id_User, Long idOffre) {
+        return condidatureRepository.findByUser_IdAndOffre_IdOffreOrderByIdCondidatureAsc(id_User,idOffre);
     }
 
 

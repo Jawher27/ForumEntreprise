@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import tn.esprit.forum.entities.Enum.TypeOffre;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +21,25 @@ public class Offre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     Long idOffre;
+
+    String titre;
+
+
+    @Column(columnDefinition = "TEXT")
     String Description;
+
     @Enumerated(EnumType.STRING)
     TypeOffre typeOffre;
-    String experience;
-    Date dateCreation;
+
+    String periode;
+
+    Date dateDebut;
+
+    Date dateFin;
+
     String lieu;
-    Boolean validite;
+    LocalDateTime dateCreation;
+
     @ManyToOne  // (cascade = CascadeType.ALL) // na7ina l cascade khater ki tfasakh offer yetfasa5 user maaha
     User user;
 

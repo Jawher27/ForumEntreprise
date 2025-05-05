@@ -22,6 +22,8 @@ public class Condidature {
     @Setter(AccessLevel.NONE)
     Long idCondidature;
 
+    String refCondidature;
+
     @Enumerated(EnumType.STRING)
     EtatCondidature etatCondidature;
 
@@ -45,12 +47,10 @@ public class Condidature {
     Entretien entretien;
 
     @ManyToOne
-    @JsonIgnore
+    //@JsonIgnore
     Offre offre;
 
     @ManyToOne(cascade = CascadeType.ALL)
     User user;
-
-
 
 }

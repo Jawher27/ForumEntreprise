@@ -33,105 +33,256 @@
 <br><br><br>
 <br><br><br>
 
+<!--<section class="section section-lg pt-lg-0 mt&#45;&#45;200">-->
+<!--  <div class="container">-->
+<!--    <div class="row justify-content-center">-->
+<!--      <div class="col-lg-12">-->
+<!--        <div class="row row-grid">-->
+<!--          -->
+<!--        -->
+<!--         &lt;!&ndash; Use *ngFor to iterate over each offer &ndash;&gt;-->
+<!--         <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4">-->
+<!--            <div class="card card-lift&#45;&#45;hover shadow border-0">-->
+<!--              <div class="card-body py-5">-->
+<!--                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">-->
+<!--                  <i class="ni ni-planet"></i>-->
+<!--                  -->
+<!--                </div>-->
+
+<!--                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>-->
+<!--&lt;!&ndash;                <p class="description mt-3"><strong>Required Experience :</strong> {{ offre.experience }}</p> &ndash;&gt;-->
+<!--                <p class="description mt-3"><strong>Location :</strong> {{ offre.lieu }}</p> -->
+<!--                <p class="description mt-3"> <strong>Posted on:</strong> {{offre.dateCreation | date }}</p> -->
+
+<!--                <p class="description mt-3">{{ offre.description }}</p>-->
+<!--                &lt;!&ndash; Action buttons go here &ndash;&gt;-->
+<!--                <div class="text-center">-->
+<!--                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>-->
+<!--                  </div>-->
+<!--                  <div class="text-center">-->
+<!--                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>-->
+<!--                  </div>-->
+<!--                  <div class="text-center mt-2">-->
+<!--                      <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>-->
+<!--                  </div>-->
+<!--                -->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="text-center mt-4">-->
+<!--    <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>-->
+<!--    &lt;!&ndash; Show Less button &ndash;&gt;-->
+<!--    <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--<section class="section section-lg pt-lg-0 mt&#45;&#45;200">-->
+<!--    <div class="container">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-12">-->
+<!--                <div class="row row-grid">-->
+<!--                    &lt;!&ndash; ✅ Affichage des offres &ndash;&gt;-->
+<!--                    <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4 mb-4">-->
+<!--                        <div class="card card-lift&#45;&#45;hover shadow border-0">-->
+<!--                            <div class="card-body py-5">-->
+<!--                                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">-->
+<!--                                    <i class="ni ni-planet"></i>-->
+<!--                                </div>-->
+
+<!--                                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>-->
+<!--                                <p class="description mt-3"><strong>Lieu :</strong> {{ offre.lieu }}</p>-->
+<!--                                <p class="description mt-3"><strong>Durée :</strong> {{ offre.periode }}</p>-->
+<!--                                <p class="description mt-3"><strong>Date de début :</strong> {{ offre.dateDebut | date:'yyyy-MM-dd' }}</p>-->
+<!--                                <p class="description mt-3"><strong>Date de fin :</strong> {{ offre.dateFin | date:'yyyy-MM-dd' }}</p>-->
+<!--                                <p class="description mt-3"><strong>Créé le :</strong> {{ offre.dateCreation | date:'yyyy-MM-dd HH:mm' }}</p>-->
+<!--                                <p class="description mt-3">{{ offre.description }}</p>-->
+
+<!--                                &lt;!&ndash; Action buttons &ndash;&gt;-->
+<!--                                <div class="text-center">-->
+<!--                                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>-->
+<!--                                </div>-->
+<!--                                <div class="text-center">-->
+<!--                                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>-->
+<!--                                </div>-->
+<!--                                <div class="text-center mt-2">-->
+<!--                                    <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="text-center mt-4">-->
+<!--        <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>-->
+<!--        <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<section class="section section-lg pt-lg-0 mt&#45;&#45;200">-->
+<!--    <div class="container">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-12">-->
+<!--                <div class="row row-grid">-->
+<!--                    &lt;!&ndash; ✅ Affichage des offres &ndash;&gt;-->
+<!--                    <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4 mb-4">-->
+<!--                        <div class="card card-lift&#45;&#45;hover shadow border-0">-->
+<!--                            <div class="card-body py-5">-->
+<!--                                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">-->
+<!--                                    <i class="ni ni-planet"></i>-->
+<!--                                </div>-->
+
+<!--                                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>-->
+<!--                                <p class="description mt-3"><strong>Lieu :</strong> {{ offre.lieu }}</p>-->
+<!--                                <p class="description mt-3"><strong>Durée :</strong> {{ offre.periode }}</p>-->
+<!--                                <p class="description mt-3"><strong>Date de début :</strong> {{ offre.dateDebut | date:'yyyy-MM-dd' }}</p>-->
+<!--                                <p class="description mt-3"><strong>Date de fin :</strong> {{ offre.dateFin | date:'yyyy-MM-dd' }}</p>-->
+<!--                                <p class="description mt-3"><strong>Créé le :</strong> {{ offre.dateCreation | date:'yyyy-MM-dd HH:mm' }}</p>-->
+<!--                                <p class="description mt-3">{{ offre.description }}</p>-->
+
+<!--                                &lt;!&ndash; Action buttons &ndash;&gt;-->
+<!--                                <div class="text-center">-->
+<!--                                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>-->
+<!--                                </div>-->
+<!--                                <div class="text-center">-->
+<!--                                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>-->
+<!--                                </div>-->
+<!--                                <div class="text-center mt-2">-->
+<!--                                    <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="text-center mt-4">-->
+<!--        <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>-->
+<!--        <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>-->
+<!--    </div>-->
+<!--</section>-->
+
+
 <section class="section section-lg pt-lg-0 mt--200">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div class="row row-grid">
-          
-        
-         <!-- Use *ngFor to iterate over each offer -->
-         <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4">
-            <div class="card card-lift--hover shadow border-0">
-              <div class="card-body py-5">
-                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                  <i class="ni ni-planet"></i>
-                  
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row row-grid">
+
+
+                    <!-- Use *ngFor to iterate over each offer -->
+                    <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4">
+                        <div class="card card-lift--hover shadow border-0">
+                            <div class="card-body py-5">
+                                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
+                                    <i class="ni ni-planet"></i>
+
+                                </div>
+
+                                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
+                                <p class="description mt-3"><strong>Stage:</strong> {{ offre.titre }}</p>
+                                <p class="description mt-3"><strong>Location:</strong> {{ offre.lieu }}</p>
+                                <p class="description mt-3"><strong>Date debut:</strong> {{ offre.dateDebut | date }}</p>
+                                <p class="description mt-3"><strong>Posted:</strong> {{ offre.dateCreation |  date:'yyyy-MM-dd HH:mm' }}</p>
+                                <p class="description mt-3">{{ offre.description }}</p>
+                                <!-- Action buttons go here -->
+                                <div class="text-center">
+                                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
-                <p class="description mt-3"><strong>Required Experience :</strong> {{ offre.experience }}</p> 
-                <p class="description mt-3"><strong>Location :</strong> {{ offre.lieu }}</p> 
-                <p class="description mt-3"> <strong>Posted on:</strong> {{offre.dateCreation | date }}</p> 
-
-                <p class="description mt-3">{{ offre.description }}</p>
-                <!-- Action buttons go here -->
-                <div class="text-center">
-                    <button type="button" (click)="openUpdate(offre)" class="btn btn-danger creative-button">Edit Offer</button>
-                  </div>
-                  <div class="text-center">
-                    <button type="button" (click)="delete(offre.idOffre)" class="btn btn-danger creative-button">Delete Offer</button>
-                  </div>
-                  <div class="text-center mt-2">
-                      <button type="button" (click)="openDetailsModal(offre)" class="btn btn-info creative-button">Voir Détails</button>
-                  </div>
-                
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="text-center mt-4">
-    <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>
-    <!-- Show Less button -->
-    <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>
-  </div>
+    <div class="text-center mt-4">
+        <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>
+        <!-- Show Less button -->
+        <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>
+    </div>
 </section>
-
 
 
  <!--************************************     MODAL    ************************************-->
 
+<!-- ✅ MODAL AJOUT OFFRE AVEC CHAMPS INTELLIGENTS -->
 <ng-template #offerModal let-c="close" let-d="dismiss">
-  <div class="modal-content">
-    <div class="modal-body p-0">
-      <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-white pb-5">
-          <div class="text-muted text-center mb-3">
-            <small>Offer</small>
-          </div>
+    <div class="modal-content">
+        <div class="modal-body p-0">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-white pb-5">
+                    <div class="text-muted text-center mb-3">
+                        <small>Ajouter une Offre</small>
+                    </div>
+                </div>
+                <div class="card-body px-lg-5 py-lg-5">
+                    <form role="form" (ngSubmit)="onSubmitForm()">
+                        <div class="form-group mb-3">
+                            <label for="titre">Titre</label>
+                            <input class="form-control" placeholder="Titre" id="titre" name="titre" [(ngModel)]="o.titre">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="typeOffre">Type d'offre</label>
+                            <select class="form-control" id="typeOffre" name="typeOffre" [(ngModel)]="o.typeOffre" (change)="onTypeChange()">
+                                <option *ngFor="let opt of typeOptions" [ngValue]="opt.value">{{ opt.label }}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="periode">Période</label>
+                            <input class="form-control" id="periode" name="periode" [value]="o.periode" readonly>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="dateDebut">Date de début</label>
+                            <input type="date" class="form-control" id="dateDebut" name="dateDebut" [(ngModel)]="o.dateDebut" (change)="onDateDebutChange()">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="dateFin">Date de fin</label>
+                            <input class="form-control" id="dateFin" name="dateFin" [value]="o.dateFin | date:'yyyy-MM-dd'" readonly>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="lieu">Lieu</label>
+                            <input class="form-control" placeholder="Lieu" id="lieu" name="lieu" [(ngModel)]="o.lieu">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" [(ngModel)]="o.description" rows="4"></textarea>
+                        </div>
+
+<!--                        <div class="form-group form-check mb-3">-->
+<!--                            <input class="form-check-input" type="checkbox" id="validite" name="validite" [(ngModel)]="o.validite">-->
+<!--                            <label class="form-check-label" for="validite">Offre Active</label>-->
+<!--                        </div>-->
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-4">Soumettre</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="card-body px-lg-5 py-lg-5">
-          <form role="form" (submit)="onSubmitForm()">
-            <div class="form-group mb-3">
-              <label for="description">Description</label>
-              <textarea  class="form-control" placeholder="Description" type="text" id ="description" name ="description" [(ngModel)]="o.description"> </textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="typeOffre">Type</label>
-              <select class="form-control" id="typeOffre" name="typeOffre" [(ngModel)]="o.typeOffre">
-                <option value="STAGE_PFE">Stage PFE</option>
-                <option value="STAGE_ETE">Stage Été</option>
-                <option value="OFFRE_EMPLOI">Offre d'emploi</option>
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <label for="experience">Experience</label>
-              <input class="form-control" placeholder="Experience" type="text" id ="experience" name ="experience" [(ngModel)]="o.experience">
-            </div>
-            <div class="form-group mb-3">
-              <label for="dateCreation">Date de creation</label>
-              <input class="form-control" placeholder="Date Creation" type="date" id ="creation" name ="creation"  [(ngModel)]="o.dateCreation">
-            </div>
-            <div class="form-group mb-3">
-              <label for="lieu">Lieu</label>
-              <input class="form-control" placeholder="Lieu" type="text" id ="lieu" name ="lieu"  [(ngModel)]="o.lieu">
-            </div>
-            <div class="form-group mb-3">
-              <label for="validite">Validity</label>
-              <input class="form-control" placeholder="Validity" type="checkbox" id ="validity" name ="validity" [(ngModel)]="o.validite">
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary my-4">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
+
 
 <!-- Modale de détails et candidatures -->
 <ng-template #detailsModal let-c="close" let-d="dismiss">
@@ -184,9 +335,9 @@
                                     <p>{{ selectedOffre.description }}</p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <p><strong>Experience requise:</strong> {{ selectedOffre.experience }}</p>
-                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <p><strong>Experience requise:</strong> {{ selectedOffre.experience }}</p>-->
+<!--                                    </div>-->
                                     <div class="col-md-6">
                                         <p><strong>Lieu:</strong> {{ selectedOffre.lieu }}</p>
                                     </div>

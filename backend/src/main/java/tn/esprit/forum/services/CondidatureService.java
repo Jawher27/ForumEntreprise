@@ -22,4 +22,6 @@ public interface CondidatureService {
 
     List<Condidature> findAllConditaturesByIdUser(Long id_User);
 
+    List<Condidature> findAllConditaturesByIdUserAndIdOffre(Long id_User,  Long idOffre);
+
 }

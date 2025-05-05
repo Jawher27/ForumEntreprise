@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h2>Liste des candidatures</h2>
+    <h2>Liste mes candidatures</h2>
 
     <div *ngIf="isLoading" class="text-center my-5">
         <div class="spinner-border text-primary" role="status">
@@ -29,25 +29,186 @@
             <tbody>
             <tr *ngFor="let candidature of con">
 <!--                <td>{{ candidature.idCondidature }}</td>-->
-                <td>{{ candidature.offre?.description }} {{ candidature.offre?.description }}</td>
+                <td>{{ candidature.offre?.titre }} {{ candidature.offre?.titre }}</td>
 <!--                <td>{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</td>-->
                 <td>
-            <span class="badge" [ngClass]="{
-              'bg-primary': candidature.etatCondidature === 'SOUMISE',
-              'bg-warning': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',
-              'bg-success': candidature.etatCondidature === 'RETENUE',
-              'bg-danger': candidature.etatCondidature === 'REJETEE'
-            }">
+            <span class="badge" >
               {{ candidature.etatCondidature }}
             </span>
                 </td>
                 <td>
-                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">
+<!--                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">-->
+<!--                        <i class="bi bi-eye-fill"></i> Détails-->
+<!--                    </a>-->
+                    <button class="btn btn-sm btn-outline-primary me-2" (click)="openDetailModal(candidature.idCondidature)">
                         <i class="bi bi-eye-fill"></i> Détails
-                    </a>
+                    </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+    <!-- Modal Détails Candidature -->
+    <div class="modal" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Détails de la candidature</h5>
+                    <button type="button" class="btn-close btn-close-white" (click)="closeDetailModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="isLoadingDetails" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="detailsErrorMessage" class="alert alert-danger">
+                        {{ detailsErrorMessage }}
+                    </div>
+
+                    <!-- PDF Viewer Modal -->
+                    <div *ngIf="showCv || showCoverLetter" class="pdf-viewer-container">
+                        <div class="pdf-viewer-header">
+                            <h4>{{ showCv ? 'CV' : 'Lettre de motivation' }}</h4>
+                            <div>
+                            <button class="btn btn-danger me-2" (click)="closeViewer()">
+                                <i class="bi bi-x-circle"></i> Fermer
+                            </button>
+                            </div>
+                        </div>
+                        <div class="pdf-viewer-content">
+                            <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="500" frameborder="0"></iframe>
+                            <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="500" frameborder="0"></iframe>
+                        </div>
+                    </div>
+
+                    <div *ngIf="selectedCandidature && !isLoadingDetails" [class.d-none]="showCv || showCoverLetter">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Informations</h5>
+                                <p><strong>Ref:</strong> {{ selectedCandidature.refCondidature || 'Non disponible' }}</p>
+                                <p><strong>Offre:</strong> {{ selectedCandidature.offre?.titre || 'Non disponible' }}</p>
+                                <p><strong>Description:</strong> {{ selectedCandidature.offre?.description || 'Non disponible' }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Documents</h5>
+                                <div class="d-grid gap-2">
+                                    <button (click)="viewCV()" class="btn btn-outline-primary">
+                                        <i class="bi bi-file-earmark-pdf-fill"></i> Voir le CV
+                                    </button>
+                                    <button (click)="viewCoverLetter()" class="btn btn-outline-primary">
+                                        <i class="bi bi-file-earmark-text-fill"></i> Voir la lettre de motivation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4" *ngIf="selectedCandidature.entretien">
+                            <h5>Entretien planifié</h5>
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <p><strong>Date:</strong> {{ selectedCandidature.entretien.date | date:'medium' }}</p>
+                                    <p><strong>Lieu:</strong> {{ selectedCandidature.entretien.room }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info me-2" (click)="printCandidatureDetails()">
+                        <i class="bi bi-printer"></i> Imprimer
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="closeDetailModal()">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show" *ngIf="isModalOpen"></div>
+
+    <!-- Ajoutez également un bouton "Détails" dans votre liste de candidatures -->
+    <!-- Par exemple, dans votre boucle d'affichage des candidatures: -->
+    <!--
+    <button class="btn btn-sm btn-primary" (click)="openDetailModal(candidature.idCondidature)">
+      Détails
+    </button>
+    -->
+
 </div>
+
+
+
+<!--<div class="container mt-4">-->
+<!--    <h2>Mes candidatures</h2>-->
+
+<!--    &lt;!&ndash; Filtre par offre &ndash;&gt;-->
+<!--    <div class="row mb-4">-->
+<!--        <div class="col-md-6">-->
+<!--            <div class="form-group">-->
+<!--                <label for="offreSelect" class="form-label">Filtrer par offre:</label>-->
+<!--                <select class="form-select" id="offreSelect" (change)="filterByOffre($event.target.value ? +$event.target.value : null)">-->
+<!--                    <option value="">Toutes les offres</option>-->
+<!--                    <option *ngFor="let offre of offers" [value]="offre.idOffre">{{ offre.description }}</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Loading spinner &ndash;&gt;-->
+<!--    <div *ngIf="isLoading" class="text-center my-5">-->
+<!--        <div class="spinner-border text-primary" role="status">-->
+<!--            <span class="visually-hidden">Chargement...</span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Error message &ndash;&gt;-->
+<!--    <div *ngIf="errorMessage" class="alert alert-danger">-->
+<!--        {{ errorMessage }}-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; No candidatures found &ndash;&gt;-->
+<!--    <div *ngIf="con && con.length === 0 && !isLoading" class="alert alert-info">-->
+<!--        Aucune candidature trouvée.-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Candidatures table &ndash;&gt;-->
+<!--    <div class="table-responsive" *ngIf="con && con.length > 0 && !isLoading">-->
+<!--        <table class="table table-striped table-hover">-->
+<!--            <thead class="table-dark">-->
+<!--            <tr>-->
+<!--                <th scope="col">Offre</th>-->
+<!--                <th scope="col">État</th>-->
+<!--                <th scope="col">Actions</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let candidature of con">-->
+<!--                <td>-->
+<!--                    <ng-container *ngIf="candidature.offre; else noOffre">-->
+<!--                        {{ candidature.offre.description || 'Description non disponible' }}-->
+<!--                        <div class="small text-muted" *ngIf="candidature.offre.poste">-->
+<!--                            {{ candidature.offre.poste }}-->
+<!--                        </div>-->
+<!--                    </ng-container>-->
+<!--                    <ng-template #noOffre>Offre non disponible</ng-template>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                        <span class="badge" [ngClass]="{-->
+<!--                            'bg-primary': candidature.etatCondidature === 'SOUMISE',-->
+<!--                            'bg-warning': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',-->
+<!--                            'bg-success': candidature.etatCondidature === 'RETENUE',-->
+<!--                            'bg-danger': candidature.etatCondidature === 'REJETEE'-->
+<!--                        }">-->
+<!--                            {{ candidature.etatCondidature }}-->
+<!--                        </span>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">-->
+<!--                        <i class="bi bi-eye-fill"></i> Détails-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->

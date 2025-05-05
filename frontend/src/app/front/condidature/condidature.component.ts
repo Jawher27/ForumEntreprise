@@ -104,7 +104,7 @@ export class CondidatureComponent implements OnInit {
         this.condidatureService.submitCandidature(
             this.offreId,
             this.userId,
-            EtatCondidature.Pending,
+            EtatCondidature.Submitted,
             this.coverLetterFile,
             this.cvFile
         ).subscribe({
