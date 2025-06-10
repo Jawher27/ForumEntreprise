@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from '../models/Reservation';
 import { TypePack } from '../models/Pack';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private baseURL = "http://localhost:9090/reservation"
+  private baseURL =  `${environment.apiUrl}/reservation`;
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient) {}
 
   
-  getAllReservation(): Observable<Reservation[]>{
+  getAllReservation(): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(`${this.baseURL}/all`);
   }
   
@@ -21,10 +21,10 @@ export class ReservationService {
     return this.httpClient.post<Reservation[]>(`${this.baseURL}/add/${idUser}/${idStand}`, {});
   }
   
-  UpdateReservation(reser: Reservation,reservationId :number): Observable<Reservation[]> {
+  UpdateReservation(reser: Reservation, reservationId: number): Observable<Reservation[]> {
     return this.httpClient.put<Reservation[]>(`${this.baseURL}/update/${reservationId}`, reser);
   }
-  DeleteReservation(reservationId :number):Observable<Reservation[]> {
+  DeleteReservation(reservationId: number): Observable<Reservation[]> {
     return this.httpClient.delete<Reservation[]>(`${this.baseURL}/delete/${reservationId}`);
   }
   getMyReservation(idUser:number): Observable<Reservation[]>{

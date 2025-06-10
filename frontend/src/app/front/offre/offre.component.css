@@ -1,117 +1,244 @@
-/* Add custom styles for the job cards */
-.job-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  
-  .job-card .card-header {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .job-card .card-body {
-    padding: 15px;
-  }
-  
-  .job-card .card-footer {
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-top: 1px solid #e0e0e0;
-    text-align: center;
-  }
-  
-  .job-card button.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  
-  .job-card button.btn-primary:hover {
-    background-color: #0056b3;
-  }
-
-  .rating-input {
-    font-size: 24px; /* Adjust the font size as needed */
-  }
-  
-  .star {
-    cursor: pointer;
-    margin-right: 8px; /* Adjust the spacing between stars as needed */
-  }
-  /* Add these styles to your CSS file or component styles */
-
-/* General styling for card section */
-.section {
-  padding: 80px 0;
+/* Gradient background for the offers section */
+section.relative {
+  background: linear-gradient(135deg, #ffffff 0%, #f8ebee 50%, #f5f5f5 100%);
 }
 
-.card {
-  border-radius: 15px;
-  transition: transform 0.3s ease-in-out;
+/* Card styling with attractive borders like in the screenshot */
+.grid > div > div {
+  border: 1px solid #e0e0e0;
+  border-left: 3px solid #cf1650;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f8ebee 50%);
+  border-radius: 0 20px 0 20px; /* Angle droit en haut à gauche et en bas à droite, arrondi en haut à droite et en bas à gauche */
 }
 
-.card:hover {
-  transform: scale(1.05);
+/* Add decorative elements similar to the screenshot */
+.grid > div > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 50px 50px 0;
+  border-color: transparent #f8ebee transparent transparent;
+  z-index: 1;
+  transition: all 0.4s ease;
 }
 
-/* Styling for buttons */
-.btn {
-  border-radius: 25px;
+/* Hover effect that changes background color to match the palette in the screenshot */
+.grid > div:hover > div {
+  background: linear-gradient(135deg, #ed1a3b 0%, #b11364 100%);
+  border-color: #cf1650;
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(179, 20, 99, 0.2);
+  transition: all 0.4s ease;
+  border-radius: 20px 0 20px 0; /* Inverse les angles arrondis au survol pour un effet dynamique */
 }
 
-.btn-primary {
-  background-color: #5e72e4;
+/* Change text color to white on hover */
+.grid > div:hover h3,
+.grid > div:hover p,
+.grid > div:hover span,
+.grid > div:hover li,
+.grid > div:hover svg,
+.grid > div:hover button {
+  color: white !important;
+  stroke: white;
 }
 
-.btn-secondary {
-  background-color: #f4f5f7;
-  color: #8898aa;
+/* Ensure SVG icons change color on hover */
+.grid > div:hover svg {
+  stroke: white;
 }
 
-.btn-warning {
-  background-color: #fb6340;
+/* Add color variations for different cards to match the palette in the screenshot */
+.grid > div:nth-child(3n+1) > div {
+  border-left-color: #cf1650;
 }
 
-.btn-info {
-  background-color: #11cdef;
+/*.grid > div:nth-child(3n+2) > div {
+  border-left-color: #ec1c3c;
 }
 
-.btn-danger {
-  background-color: #f5365c;
+.grid > div:nth-child(3n+3) > div {
+  border-left-color: #ec6983;
+}*/
+
+/*.grid > div:nth-child(3n+1):hover > div {
+  background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+  border-color: #cf1650;
 }
 
-/* Additional styling for the suggested offers section */
-.section-lg.pt-lg-5.mt--200 {
-  background-color: #f8f9fe;
+/*.grid > div:nth-child(3n+2):hover > div {
+  background: linear-gradient(135deg, #ec1c3c 0%, #df3960 100%);
+  border-color: #ec1c3c;
 }
 
-/* Adjust spacing for improved alignment */
-.mb-5 {
-  margin-bottom: 2.5rem;
+.grid > div:nth-child(3n+3):hover > div {
+  background: linear-gradient(135deg, #ec6983 0%, #d484ac 100%);
+  border-color: #ec6983;
+}*/
+
+/* Add a subtle animation to the cards */
+.grid > div {
+  transition: transform 0.3s ease;
 }
 
-/* Centered text */
-.text-center {
-  text-align: center;
+/* Add a subtle glow effect to the cards on hover */
+.grid > div > div {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Card hover effect */
-.card-lift--hover:hover {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+.grid > div:hover > div::before {
+  border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+  border-width: 0 60px 60px 0;
+  transition: all 0.4s ease;
 }
 
-/* Adjust button spacing in the card */
-.card-body .btn {
-  margin-right: 10px;
+/* Add a subtle border effect to match the image */
+.grid > div > div::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(207, 22, 80, 0.3), transparent);
+  transition: all 0.3s ease;
 }
 
-/* Optional: Add animation to buttons */
-.btn-sm {
-  transition: transform 0.2s ease-in-out;
+.grid > div:nth-child(3n+1) > div::after {
+  background: linear-gradient(90deg, transparent, rgba(207, 22, 80, 0.3), transparent);
 }
 
-.btn-sm:hover {
-  transform: scale(1.1);
+.grid > div:nth-child(3n+2) > div::after {
+  background: linear-gradient(90deg, transparent, rgba(236, 28, 60, 0.3), transparent);
+}
+
+.grid > div:nth-child(3n+3) > div::after {
+  background: linear-gradient(90deg, transparent, rgba(236, 105, 131, 0.3), transparent);
+}
+
+.grid > div:hover > div::after {
+  height: 5px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* Style the "Load More" button to match the design */
+.text-center button {
+  background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+  border: none;
+  transition: all 0.3s ease;
+  border-radius: 20px 0 20px 0; /* Angle aigu en haut à droite et en bas à gauche, circulaire en haut à gauche et en bas à droite */
+  position: relative;
+  overflow: hidden;
+}
+
+.text-center button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.text-center button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(207, 22, 80, 0.3);
+  background: linear-gradient(135deg, #ec1c3c 0%, #c8427f 100%);
+  border-radius: 0 20px 0 20px; /* Inverse les angles arrondis au survol pour un effet dynamique */
+}
+
+.text-center button:hover::before {
+  border-width: 0 25px 25px 0;
+  border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+}
+
+/* Style for Show Less button */
+.text-center button.bg-gray-100 {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  color: #cf1650;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px 0 20px 0; /* Angle aigu en haut à droite et en bas à gauche, circulaire en haut à gauche et en bas à droite */
+  position: relative;
+  overflow: hidden;
+}
+
+.text-center button.bg-gray-100::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(207, 22, 80, 0.1) transparent transparent;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.text-center button.bg-gray-100:hover {
+  background: linear-gradient(135deg, #e8e8e8 0%, #d5d5d5 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0 20px 0 20px; /* Inverse les angles arrondis au survol pour un effet dynamique */
+  color: #b31463;
+}
+
+.text-center button.bg-gray-100:hover::before {
+  border-width: 0 25px 25px 0;
+  border-color: transparent rgba(207, 22, 80, 0.2) transparent transparent;
+}
+
+/* Enhance the Apply Now button */
+.grid button.bg-red-600 {
+  background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+  border: none;
+  transition: all 0.3s ease;
+  border-radius: 15px 0 15px 0; /* Angle aigu en haut à droite et en bas à gauche, circulaire en haut à gauche et en bas à droite */
+  position: relative;
+  overflow: hidden;
+}
+
+.grid button.bg-red-600::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px 0;
+  border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.grid button.bg-red-600:hover {
+  background: linear-gradient(135deg, #ec1c3c 0%, #d73f6f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(207, 22, 80, 0.3);
+  border-radius: 0 15px 0 15px; /* Inverse les angles arrondis au survol pour un effet dynamique */
+}
+
+.grid button.bg-red-600:hover::before {
+  border-width: 0 20px 20px 0;
+  border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+}
+
+/* Add a subtle border to the section */
+section {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
 }

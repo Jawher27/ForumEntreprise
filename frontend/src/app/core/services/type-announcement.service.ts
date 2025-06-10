@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { TypeAnnonce } from '../models/typeAnnonce';
 import { Observable } from 'rxjs';
 import { Announcement } from '../models/Announcment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TypeAnnouncementService {
-  private baseURL = "http://localhost:9090/announcementtype";
-  private baseURLAnnonce = "http://localhost:9090/announcement";
+  private baseURL = `${environment.apiUrl}/announcementtype`;
+
+  private baseURLAnnonce = `${environment.apiUrl}/announcement`;
 
 
   constructor(private http: HttpClient) { }

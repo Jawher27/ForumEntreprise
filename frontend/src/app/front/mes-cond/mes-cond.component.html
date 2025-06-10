@@ -1,214 +1,612 @@
-<div class="container mt-4">
-    <h2>Liste mes candidatures</h2>
-
-    <div *ngIf="isLoading" class="text-center my-5">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Chargement...</span>
-        </div>
-    </div>
-
-    <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-    </div>
-
-    <div *ngIf="con.length === 0 && !isLoading" class="alert alert-info">
-        Aucune candidature trouvée.
-    </div>
-
-    <div class="table-responsive" *ngIf="con.length > 0 && !isLoading">
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-            <tr>
-<!--                <th scope="col">ID</th>-->
-                <th scope="col">Offre</th>
-<!--                <th scope="col">Candidat</th>-->
-                <th scope="col">État</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let candidature of con">
-<!--                <td>{{ candidature.idCondidature }}</td>-->
-                <td>{{ candidature.offre?.titre }} {{ candidature.offre?.titre }}</td>
-<!--                <td>{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</td>-->
-                <td>
-            <span class="badge" >
-              {{ candidature.etatCondidature }}
-            </span>
-                </td>
-                <td>
-<!--                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">-->
-<!--                        <i class="bi bi-eye-fill"></i> Détails-->
-<!--                    </a>-->
-                    <button class="btn btn-sm btn-outline-primary me-2" (click)="openDetailModal(candidature.idCondidature)">
-                        <i class="bi bi-eye-fill"></i> Détails
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Modal Détails Candidature -->
-    <div class="modal" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">Détails de la candidature</h5>
-                    <button type="button" class="btn-close btn-close-white" (click)="closeDetailModal()"></button>
-                </div>
-                <div class="modal-body">
-                    <div *ngIf="isLoadingDetails" class="text-center">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Chargement...</span>
-                        </div>
-                    </div>
-
-                    <div *ngIf="detailsErrorMessage" class="alert alert-danger">
-                        {{ detailsErrorMessage }}
-                    </div>
-
-                    <!-- PDF Viewer Modal -->
-                    <div *ngIf="showCv || showCoverLetter" class="pdf-viewer-container">
-                        <div class="pdf-viewer-header">
-                            <h4>{{ showCv ? 'CV' : 'Lettre de motivation' }}</h4>
-                            <div>
-                            <button class="btn btn-danger me-2" (click)="closeViewer()">
-                                <i class="bi bi-x-circle"></i> Fermer
-                            </button>
-                            </div>
-                        </div>
-                        <div class="pdf-viewer-content">
-                            <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="500" frameborder="0"></iframe>
-                            <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="500" frameborder="0"></iframe>
-                        </div>
-                    </div>
-
-                    <div *ngIf="selectedCandidature && !isLoadingDetails" [class.d-none]="showCv || showCoverLetter">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5>Informations</h5>
-                                <p><strong>Ref:</strong> {{ selectedCandidature.refCondidature || 'Non disponible' }}</p>
-                                <p><strong>Offre:</strong> {{ selectedCandidature.offre?.titre || 'Non disponible' }}</p>
-                                <p><strong>Description:</strong> {{ selectedCandidature.offre?.description || 'Non disponible' }}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Documents</h5>
-                                <div class="d-grid gap-2">
-                                    <button (click)="viewCV()" class="btn btn-outline-primary">
-                                        <i class="bi bi-file-earmark-pdf-fill"></i> Voir le CV
-                                    </button>
-                                    <button (click)="viewCoverLetter()" class="btn btn-outline-primary">
-                                        <i class="bi bi-file-earmark-text-fill"></i> Voir la lettre de motivation
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4" *ngIf="selectedCandidature.entretien">
-                            <h5>Entretien planifié</h5>
-                            <div class="card bg-light">
-                                <div class="card-body">
-                                    <p><strong>Date:</strong> {{ selectedCandidature.entretien.date | date:'medium' }}</p>
-                                    <p><strong>Lieu:</strong> {{ selectedCandidature.entretien.room }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info me-2" (click)="printCandidatureDetails()">
-                        <i class="bi bi-printer"></i> Imprimer
-                    </button>
-                    <button type="button" class="btn btn-secondary" (click)="closeDetailModal()">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-backdrop fade show" *ngIf="isModalOpen"></div>
-
-    <!-- Ajoutez également un bouton "Détails" dans votre liste de candidatures -->
-    <!-- Par exemple, dans votre boucle d'affichage des candidatures: -->
-    <!--
-    <button class="btn btn-sm btn-primary" (click)="openDetailModal(candidature.idCondidature)">
-      Détails
-    </button>
-    -->
-
-</div>
-
-
-
 <!--<div class="container mt-4">-->
-<!--    <h2>Mes candidatures</h2>-->
+<!--    <h2>Liste mes candidatures</h2>-->
 
-<!--    &lt;!&ndash; Filtre par offre &ndash;&gt;-->
-<!--    <div class="row mb-4">-->
-<!--        <div class="col-md-6">-->
-<!--            <div class="form-group">-->
-<!--                <label for="offreSelect" class="form-label">Filtrer par offre:</label>-->
-<!--                <select class="form-select" id="offreSelect" (change)="filterByOffre($event.target.value ? +$event.target.value : null)">-->
-<!--                    <option value="">Toutes les offres</option>-->
-<!--                    <option *ngFor="let offre of offers" [value]="offre.idOffre">{{ offre.description }}</option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Loading spinner &ndash;&gt;-->
 <!--    <div *ngIf="isLoading" class="text-center my-5">-->
 <!--        <div class="spinner-border text-primary" role="status">-->
 <!--            <span class="visually-hidden">Chargement...</span>-->
 <!--        </div>-->
 <!--    </div>-->
 
-<!--    &lt;!&ndash; Error message &ndash;&gt;-->
 <!--    <div *ngIf="errorMessage" class="alert alert-danger">-->
 <!--        {{ errorMessage }}-->
 <!--    </div>-->
 
-<!--    &lt;!&ndash; No candidatures found &ndash;&gt;-->
-<!--    <div *ngIf="con && con.length === 0 && !isLoading" class="alert alert-info">-->
+<!--    <div *ngIf="con.length === 0 && !isLoading" class="alert alert-info">-->
 <!--        Aucune candidature trouvée.-->
 <!--    </div>-->
 
-<!--    &lt;!&ndash; Candidatures table &ndash;&gt;-->
-<!--    <div class="table-responsive" *ngIf="con && con.length > 0 && !isLoading">-->
+<!--    <div class="table-responsive" *ngIf="con.length > 0 && !isLoading">-->
 <!--        <table class="table table-striped table-hover">-->
 <!--            <thead class="table-dark">-->
 <!--            <tr>-->
+<!--&lt;!&ndash;                <th scope="col">ID</th>&ndash;&gt;-->
 <!--                <th scope="col">Offre</th>-->
+<!--&lt;!&ndash;                <th scope="col">Candidat</th>&ndash;&gt;-->
 <!--                <th scope="col">État</th>-->
 <!--                <th scope="col">Actions</th>-->
 <!--            </tr>-->
 <!--            </thead>-->
 <!--            <tbody>-->
 <!--            <tr *ngFor="let candidature of con">-->
+<!--&lt;!&ndash;                <td>{{ candidature.idCondidature }}</td>&ndash;&gt;-->
+<!--                <td>{{ candidature.offre?.titre }} {{ candidature.offre?.titre }}</td>-->
+<!--&lt;!&ndash;                <td>{{ candidature.user?.firstName }} {{ candidature.user?.lastName }}</td>&ndash;&gt;-->
 <!--                <td>-->
-<!--                    <ng-container *ngIf="candidature.offre; else noOffre">-->
-<!--                        {{ candidature.offre.description || 'Description non disponible' }}-->
-<!--                        <div class="small text-muted" *ngIf="candidature.offre.poste">-->
-<!--                            {{ candidature.offre.poste }}-->
-<!--                        </div>-->
-<!--                    </ng-container>-->
-<!--                    <ng-template #noOffre>Offre non disponible</ng-template>-->
+<!--            <span class="badge" >-->
+<!--              {{ candidature.etatCondidature }}-->
+<!--            </span>-->
 <!--                </td>-->
 <!--                <td>-->
-<!--                        <span class="badge" [ngClass]="{-->
-<!--                            'bg-primary': candidature.etatCondidature === 'SOUMISE',-->
-<!--                            'bg-warning': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',-->
-<!--                            'bg-success': candidature.etatCondidature === 'RETENUE',-->
-<!--                            'bg-danger': candidature.etatCondidature === 'REJETEE'-->
-<!--                        }">-->
-<!--                            {{ candidature.etatCondidature }}-->
-<!--                        </span>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">-->
+<!--&lt;!&ndash;                    <a [routerLink]="['/candidatures', candidature.idCondidature]" class="btn btn-sm btn-outline-primary me-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <i class="bi bi-eye-fill"></i> Détails&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--                    <button class="btn btn-sm btn-outline-primary me-2" (click)="openDetailModal(candidature.idCondidature)">-->
 <!--                        <i class="bi bi-eye-fill"></i> Détails-->
-<!--                    </a>-->
+<!--                    </button>-->
 <!--                </td>-->
 <!--            </tr>-->
 <!--            </tbody>-->
 <!--        </table>-->
 <!--    </div>-->
+<!--    &lt;!&ndash; Modal Détails Candidature &ndash;&gt;-->
+<!--    <div class="modal" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'" tabindex="-1" role="dialog">-->
+<!--        <div class="modal-dialog modal-lg" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header bg-primary text-white">-->
+<!--                    <h5 class="modal-title">Détails de la candidature</h5>-->
+<!--                    <button type="button" class="btn-close btn-close-white" (click)="closeDetailModal()"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div *ngIf="isLoadingDetails" class="text-center">-->
+<!--                        <div class="spinner-border text-primary" role="status">-->
+<!--                            <span class="visually-hidden">Chargement...</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div *ngIf="detailsErrorMessage" class="alert alert-danger">-->
+<!--                        {{ detailsErrorMessage }}-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; PDF Viewer Modal &ndash;&gt;-->
+<!--                    <div *ngIf="showCv || showCoverLetter" class="pdf-viewer-container">-->
+<!--                        <div class="pdf-viewer-header">-->
+<!--                            <h4>{{ showCv ? 'CV' : 'Lettre de motivation' }}</h4>-->
+<!--                            <div>-->
+<!--                            <button class="btn btn-danger me-2" (click)="closeViewer()">-->
+<!--                                <i class="bi bi-x-circle"></i> Fermer-->
+<!--                            </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="pdf-viewer-content">-->
+<!--                            <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="500" frameborder="0"></iframe>-->
+<!--                            <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="500" frameborder="0"></iframe>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div *ngIf="selectedCandidature && !isLoadingDetails" [class.d-none]="showCv || showCoverLetter">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6">-->
+<!--                                <h5>Informations</h5>-->
+<!--                                <p><strong>Ref:</strong> {{ selectedCandidature.refCondidature || 'Non disponible' }}</p>-->
+<!--                                <p><strong>Offre:</strong> {{ selectedCandidature.offre?.titre || 'Non disponible' }}</p>-->
+<!--                                <p><strong>Description:</strong> {{ selectedCandidature.offre?.description || 'Non disponible' }}</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6">-->
+<!--                                <h5>Documents</h5>-->
+<!--                                <div class="d-grid gap-2">-->
+<!--                                    <button (click)="viewCV()" class="btn btn-outline-primary">-->
+<!--                                        <i class="bi bi-file-earmark-pdf-fill"></i> Voir le CV-->
+<!--                                    </button>-->
+<!--                                    <button (click)="viewCoverLetter()" class="btn btn-outline-primary">-->
+<!--                                        <i class="bi bi-file-earmark-text-fill"></i> Voir la lettre de motivation-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mt-4" *ngIf="selectedCandidature.entretien">-->
+<!--                            <h5>Entretien planifié</h5>-->
+<!--                            <div class="card bg-light">-->
+<!--                                <div class="card-body">-->
+<!--                                    <p><strong>Date:</strong> {{ selectedCandidature.entretien.date | date:'medium' }}</p>-->
+<!--                                    <p><strong>Lieu:</strong> {{ selectedCandidature.entretien.room }}</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-info me-2" (click)="printCandidatureDetails()">-->
+<!--                        <i class="bi bi-printer"></i> Imprimer-->
+<!--                    </button>-->
+<!--                    <button type="button" class="btn btn-secondary" (click)="closeDetailModal()">Fermer</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="modal-backdrop fade show" *ngIf="isModalOpen"></div>-->
+
+<!--   -->
+
 <!--</div>-->
+
+
+
+<!--<div class="bg-white rounded-xl shadow-lg p-6 mb-8">-->
+<!--    <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />-->
+<!--        </svg>-->
+<!--        Mes candidatures-->
+<!--    </h2>-->
+
+<!--    &lt;!&ndash; Loading State &ndash;&gt;-->
+<!--    <div *ngIf="isLoading" class="flex justify-center items-center py-12">-->
+<!--        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Error Message &ndash;&gt;-->
+<!--    <div *ngIf="errorMessage" class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-md">-->
+<!--        <div class="flex items-center">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />-->
+<!--            </svg>-->
+<!--            <p class="text-red-700">{{ errorMessage }}</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; No Candidatures &ndash;&gt;-->
+<!--    <div *ngIf="con.length === 0 && !isLoading" class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-md">-->
+<!--        <div class="flex items-center">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />-->
+<!--            </svg>-->
+<!--            <p class="text-blue-700">Aucune candidature trouvée.</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Candidatures List &ndash;&gt;-->
+<!--    <div *ngIf="con.length > 0 && !isLoading" class="overflow-x-auto">-->
+<!--        <table class="min-w-full bg-white rounded-lg overflow-hidden">-->
+<!--            <thead class="bg-gradient-to-r from-blue-600 to-blue-800 text-white">-->
+<!--            <tr>-->
+<!--                <th class="py-3 px-4 text-left font-semibold">Offre</th>-->
+<!--                <th class="py-3 px-4 text-left font-semibold">État</th>-->
+<!--                <th class="py-3 px-4 text-left font-semibold">Actions</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody class="divide-y divide-gray-200">-->
+<!--            <tr *ngFor="let candidature of con" class="hover:bg-blue-50 transition-colors duration-150">-->
+<!--                <td class="py-3 px-4">-->
+<!--                    <div class="font-medium text-gray-800">{{ candidature.offre?.titre }}</div>-->
+<!--                    <div class="text-sm text-gray-500">{{ candidature.offre?.description | slice:0:50 }}{{ candidature.offre?.description?.length > 50 ? '...' : '' }}</div>-->
+<!--                </td>-->
+<!--                <td class="py-3 px-4">-->
+<!--            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"-->
+<!--                  [ngClass]="{-->
+<!--                    'bg-blue-100 text-blue-800': candidature.etatCondidature === 'SOUMISE',-->
+<!--                    'bg-yellow-100 text-yellow-800': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',-->
+<!--                    'bg-green-100 text-green-800': candidature.etatCondidature === 'RETENUE',-->
+<!--                    'bg-red-100 text-red-800': candidature.etatCondidature === 'REJETEE'-->
+<!--                  }">-->
+<!--              <span class="w-2 h-2 mr-2 rounded-full"-->
+<!--                    [ngClass]="{-->
+<!--                      'bg-blue-500': candidature.etatCondidature === 'SOUMISE',-->
+<!--                      'bg-yellow-500': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',-->
+<!--                      'bg-green-500': candidature.etatCondidature === 'RETENUE',-->
+<!--                      'bg-red-500': candidature.etatCondidature === 'REJETEE'-->
+<!--                    }"></span>-->
+<!--                {{ candidature.etatCondidature }}-->
+<!--            </span>-->
+<!--                </td>-->
+<!--                <td class="py-3 px-4">-->
+<!--                    <button class="inline-flex items-center px-3 py-1 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-300" (click)="openDetailModal(candidature.idCondidature)">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />-->
+<!--                        </svg>-->
+<!--                        Détails-->
+<!--                    </button>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Modal Détails Candidature &ndash;&gt;-->
+<!--    <div class="fixed inset-0 z-50 overflow-y-auto" [class.hidden]="!isModalOpen">-->
+<!--        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">-->
+<!--            &lt;!&ndash; Background overlay &ndash;&gt;-->
+<!--            <div class="fixed inset-0 transition-opacity" aria-hidden="true" (click)="closeDetailModal()">-->
+<!--                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Modal panel &ndash;&gt;-->
+<!--            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">-->
+<!--                &lt;!&ndash; Modal header &ndash;&gt;-->
+<!--                <div class="bg-gradient-to-r from-blue-600 to-blue-800 px-4 py-3 sm:px-6 flex justify-between items-center">-->
+<!--                    <h3 class="text-lg leading-6 font-medium text-white">-->
+<!--                        Détails de la candidature-->
+<!--                    </h3>-->
+<!--                    <button type="button" class="text-white hover:text-gray-200 focus:outline-none" (click)="closeDetailModal()">-->
+<!--                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />-->
+<!--                        </svg>-->
+<!--                    </button>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Modal body &ndash;&gt;-->
+<!--                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">-->
+<!--                    &lt;!&ndash; Loading state &ndash;&gt;-->
+<!--                    <div *ngIf="isLoadingDetails" class="flex justify-center py-8">-->
+<!--                        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; Error message &ndash;&gt;-->
+<!--                    <div *ngIf="detailsErrorMessage" class="bg-red-50 border-l-4 border-red-500 p-4 mb-4 rounded-md">-->
+<!--                        <div class="flex">-->
+<!--                            <div class="flex-shrink-0">-->
+<!--                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">-->
+<!--                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />-->
+<!--                                </svg>-->
+<!--                            </div>-->
+<!--                            <div class="ml-3">-->
+<!--                                <p class="text-sm text-red-700">-->
+<!--                                    {{ detailsErrorMessage }}-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; PDF Viewer &ndash;&gt;-->
+<!--                    <div *ngIf="showCv || showCoverLetter" class="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">-->
+<!--                        <div class="flex items-center justify-between px-4 py-3 bg-gray-100 border-b border-gray-200">-->
+<!--                            <h4 class="font-medium text-gray-800">{{ showCv ? 'CV' : 'Lettre de motivation' }}</h4>-->
+<!--                            <button class="inline-flex items-center px-3 py-1 border border-red-600 text-red-600 rounded-md hover:bg-red-600 hover:text-white transition-colors duration-300" (click)="closeViewer()">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />-->
+<!--                                </svg>-->
+<!--                                Fermer-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <div class="p-2">-->
+<!--                            <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="500" frameborder="0" class="rounded"></iframe>-->
+<!--                            <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="500" frameborder="0" class="rounded"></iframe>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; Candidature details &ndash;&gt;-->
+<!--                    <div *ngIf="selectedCandidature && !isLoadingDetails" [class.hidden]="showCv || showCoverLetter">-->
+<!--                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">-->
+<!--                            &lt;!&ndash; Information section &ndash;&gt;-->
+<!--                            <div class="bg-blue-50 p-4 rounded-lg">-->
+<!--                                <h5 class="text-lg font-semibold text-blue-800 mb-3 flex items-center">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />-->
+<!--                                    </svg>-->
+<!--                                    Informations-->
+<!--                                </h5>-->
+<!--                                <div class="space-y-2">-->
+<!--                                    <div class="bg-white p-3 rounded-md shadow-sm">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Référence</p>-->
+<!--                                        <p class="font-medium">{{ selectedCandidature.refCondidature || 'Non disponible' }}</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-white p-3 rounded-md shadow-sm">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Offre</p>-->
+<!--                                        <p class="font-medium">{{ selectedCandidature.offre?.titre || 'Non disponible' }}</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-white p-3 rounded-md shadow-sm">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Description</p>-->
+<!--                                        <p class="text-gray-700">{{ selectedCandidature.offre?.description || 'Non disponible' }}</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Documents section &ndash;&gt;-->
+<!--                            <div class="bg-gray-50 p-4 rounded-lg">-->
+<!--                                <h5 class="text-lg font-semibold text-blue-800 mb-3 flex items-center">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />-->
+<!--                                    </svg>-->
+<!--                                    Documents-->
+<!--                                </h5>-->
+<!--                                <div class="space-y-3">-->
+<!--                                    <button (click)="viewCV()" class="w-full flex items-center justify-between p-3 bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-blue-600">-->
+<!--                                        <div class="flex items-center">-->
+<!--                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />-->
+<!--                                            </svg>-->
+<!--                                            <span class="font-medium">Voir le CV</span>-->
+<!--                                        </div>-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />-->
+<!--                                        </svg>-->
+<!--                                    </button>-->
+<!--                                    <button (click)="viewCoverLetter()" class="w-full flex items-center justify-between p-3 bg-white rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 border-l-4 border-blue-600">-->
+<!--                                        <div class="flex items-center">-->
+<!--                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />-->
+<!--                                            </svg>-->
+<!--                                            <span class="font-medium">Voir la lettre de motivation</span>-->
+<!--                                        </div>-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />-->
+<!--                                        </svg>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; Interview section &ndash;&gt;-->
+<!--                        <div class="mt-6" *ngIf="selectedCandidature.entretien">-->
+<!--                            <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">-->
+<!--                                <h5 class="text-lg font-semibold text-blue-800 mb-3 flex items-center">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />-->
+<!--                                    </svg>-->
+<!--                                    Entretien planifié-->
+<!--                                </h5>-->
+<!--                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">-->
+<!--                                    <div class="bg-white p-3 rounded-md shadow-sm">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Date</p>-->
+<!--                                        <p class="font-medium">{{ selectedCandidature.entretien.date | date:'medium' }}</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-white p-3 rounded-md shadow-sm">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Lieu</p>-->
+<!--                                        <p class="font-medium">{{ selectedCandidature.entretien.room }}</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Modal footer &ndash;&gt;-->
+<!--                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">-->
+<!--                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm" (click)="printCandidatureDetails()">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />-->
+<!--                        </svg>-->
+<!--                        Imprimer-->
+<!--                    </button>-->
+<!--                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" (click)="closeDetailModal()">-->
+<!--                        Fermer-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+<div class="candidatures-container">
+    <div class="candidatures-header">
+        <h2 class="candidatures-title">Mes candidatures</h2>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+        <div class="loading-spinner"></div>
+        <span class="loading-text">Chargement des candidatures...</span>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="error-icon">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 8V12" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 16H12.01" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ errorMessage }}</span>
+    </div>
+
+    <!-- No Candidatures -->
+    <div *ngIf="con.length === 0 && !isLoading" class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="empty-icon">
+            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 2V8H20" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 18V12" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 15H15" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="empty-text">Aucune candidature trouvée.</p>
+        <p class="empty-subtext">Vos candidatures apparaîtront ici une fois que vous aurez postulé à des offres.</p>
+    </div>
+
+    <!-- Candidatures Table -->
+    <div *ngIf="con.length > 0 && !isLoading" class="candidatures-table-container">
+        <table class="candidatures-table">
+            <thead>
+            <tr>
+                <th>Offre</th>
+                <th>État</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let candidature of con" class="candidature-row">
+                <td class="candidature-offer">
+                    <div class="offer-title">{{ candidature.offre?.titre }}</div>
+                    <div class="offer-description">{{ candidature.offre?.description | slice:0:80 }}{{ candidature.offre?.description?.length > 80 ? '...' : '' }}</div>
+                </td>
+                <td class="candidature-status">
+            <span class="status-badge"
+                  [ngClass]="{
+                    'status-submitted': candidature.etatCondidature === 'SOUMISE',
+                    'status-processing': candidature.etatCondidature === 'EN_COURS_DE_TRAITEMENT',
+                    'status-accepted': candidature.etatCondidature === 'RETENUE',
+                    'status-rejected': candidature.etatCondidature === 'REJETEE'
+                  }">
+              {{ candidature.etatCondidature }}
+            </span>
+                </td>
+                <td class="candidature-actions">
+                    <button class="action-btn" (click)="openDetailModal(candidature.idCondidature)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="action-icon">
+                            <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.45825 12C3.73253 7.94288 7.52281 5 12.0004 5C16.4781 5 20.2684 7.94291 21.5426 12C20.2684 16.0571 16.4781 19 12.0005 19C7.52281 19 3.73251 16.0571 2.45825 12Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Détails
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Détails Candidature -->
+    <div class="modal-overlay" [class.active]="isModalOpen" (click)="closeDetailModal()"></div>
+    <div class="modal-container" [class.active]="isModalOpen">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title">Détails de la candidature</h3>
+                <button class="modal-close" (click)="closeDetailModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Loading State -->
+                <div *ngIf="isLoadingDetails" class="modal-loading">
+                    <div class="loading-spinner"></div>
+                    <span class="loading-text">Chargement des détails...</span>
+                </div>
+
+                <!-- Error Message -->
+                <div *ngIf="detailsErrorMessage" class="modal-error">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="error-icon">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 8V12" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 16H12.01" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ detailsErrorMessage }}</span>
+                </div>
+
+                <!-- PDF Viewer -->
+                <div *ngIf="showCv || showCoverLetter" class="pdf-viewer">
+                    <div class="pdf-header">
+                        <h4 class="pdf-title">{{ showCv ? 'CV' : 'Lettre de motivation' }}</h4>
+                        <button class="pdf-close" (click)="closeViewer()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 6L18 18" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Fermer
+                        </button>
+                    </div>
+                    <div class="pdf-content">
+                        <iframe *ngIf="showCv && cvUrl" [src]="cvUrl" width="100%" height="500" frameborder="0"></iframe>
+                        <iframe *ngIf="showCoverLetter && coverLetterUrl" [src]="coverLetterUrl" width="100%" height="500" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+                <!-- Candidature Details -->
+                <div *ngIf="selectedCandidature && !isLoadingDetails" [class.hidden]="showCv || showCoverLetter">
+                    <div class="details-grid">
+                        <!-- Information Section -->
+                        <div class="details-section">
+                            <h4 class="section-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon">
+                                    <path d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Informations
+                            </h4>
+                            <div class="info-list">
+                                <div class="info-row">
+                                    <span class="info-key">Référence:</span>
+                                    <span class="info-value">{{ selectedCandidature.refCondidature || 'Non disponible' }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-key">Offre:</span>
+                                    <span class="info-value">{{ selectedCandidature.offre?.titre || 'Non disponible' }}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-key">Description:</span>
+                                    <span class="info-value description">{{ selectedCandidature.offre?.description || 'Non disponible' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documents Section -->
+                        <div class="details-section">
+                            <h4 class="section-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 2V8H20" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16 13H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16 17H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 9H9H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Documents
+                            </h4>
+                            <div class="documents-list">
+                                <button (click)="viewCV()" class="document-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="document-icon">
+                                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 2V8H20" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Voir le CV
+                                </button>
+                                <button (click)="viewCoverLetter()" class="document-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="document-icon">
+                                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 2V8H20" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M16 13H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M16 17H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 9H9H8" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Voir la lettre de motivation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interview Section -->
+                    <div *ngIf="selectedCandidature.entretien" class="interview-section">
+                        <h4 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="section-icon">
+                                <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 2V6" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 2V6" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 10H21" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Entretien planifié
+                        </h4>
+                        <div class="interview-details">
+                            <div class="interview-row">
+                                <span class="interview-key">Date:</span>
+                                <span class="interview-value">{{ selectedCandidature.entretien.date | date:'medium' }}</span>
+                            </div>
+                            <div class="interview-row">
+                                <span class="interview-key">Lieu:</span>
+                                <span class="interview-value">{{ selectedCandidature.entretien.room }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="vermeg-btn-secondary" (click)="printCandidatureDetails()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-icon">
+                        <path d="M6 9V2H18V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 18H4C3.46957 18 2.96086 17.7893 2.58579 17.4142C2.21071 17.0391 2 16.5304 2 16V11C2 10.4696 2.21071 9.96086 2.58579 9.58579C2.96086 9.21071 3.46957 9 4 9H20C20.5304 9 21.0391 9.21071 21.4142 9.58579C21.7893 9.96086 22 10.4696 22 11V16C22 16.5304 21.7893 17.0391 21.4142 17.4142C21.0391 17.7893 20.5304 18 20 18H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 14H6V22H18V14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Imprimer
+                </button>
+                <button type="button" class="vermeg-btn" (click)="closeDetailModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

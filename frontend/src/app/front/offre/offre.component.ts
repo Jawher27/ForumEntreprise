@@ -17,17 +17,16 @@ import {Router} from '@angular/router';
   styleUrls: ['./offre.component.css']
 })
 export class OffreComponent implements OnInit {
-  /// LIST AND INSTANCE DECLARATION /// 
+  /// LIST AND INSTANCE DECLARATION ///
   focus:any;
   focus1:any;
   closeResult: string;
   @ViewChild('reviewModal') reviewModal: any;
   showBadWordsAlert: boolean = false;
-  reviews:Review[]
+  reviews:Review[];
   r:Review=new Review();
-  
 
-  offers:Offre[]=[];
+  offers: Offre[] = [];
   suggestedOffers: Offre[] = [];
   currentUser:User;
 
@@ -36,7 +35,7 @@ export class OffreComponent implements OnInit {
   constructor(private offreService: OfferService , private reviewService : ReviewService ,private modalService: NgbModal,private authService:AuthService, private router: Router ) { }
 
   ngOnInit(): void {
-    
+
 /********Get the user connected*********/
 this.authService.CurrentUser().subscribe(
   (user: User) => {
@@ -67,7 +66,7 @@ this.authService.CurrentUser().subscribe(
   getSuggestedOffers(id: number): void {
      // Replace with the actual user ID
     this.offreService.getSuggestedOffers(id)
-      .subscribe(data => {
+      .subscribe(data =>{
         console.log('Suggested Offers:', data);
         // Handle the suggested offers as needed
         this.suggestedOffers = data ;
@@ -82,7 +81,7 @@ this.authService.CurrentUser().subscribe(
     });
   }
 
-  
+
 
   onSubmitReview(): void {
     console.log(this.r);
@@ -92,10 +91,10 @@ this.authService.CurrentUser().subscribe(
         this.showBadWordsAlert = true;  // Show the alert
         return;
       }
-    
+
       // Reset the alert status if the submission is successful
       this.showBadWordsAlert = false;
-    
+
       if (this.r.offre && this.r.offre.idOffre) {
         this.reviewService.addReviewAndAssignToOfferAndUser(this.r, this.r.offre.idOffre, this.currentUser.id )
           .subscribe(response => {
@@ -105,9 +104,9 @@ this.authService.CurrentUser().subscribe(
             console.error('Error saving review:', error);
           });
       } else {
-        console.error('Error: The review must be associated with an offer.'); 
+        console.error('Error: The review must be associated with an offer.');
       }
-   
+
   }
 
   openReviewModal(offer: Offre): void {
@@ -125,9 +124,9 @@ this.authService.CurrentUser().subscribe(
     const lowercasedText = text.toLowerCase();
     return badWordsList.some(word => lowercasedText.includes(word));
   }
-  
 /// ************ LOAD MORE & SHOW LESS **************** ////
-displayedOffers: number = 3;
+
+  displayedOffers = 3;
 
 loadMoreOffers(): void {
   if (this.offers) {

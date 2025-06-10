@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Entretien } from 'src/app/core/models/Entretien'; // Assurez-vous d'importer le modèle Entretien
 import { Condidature } from '../models/condidature';
 import { EtatCondidature } from '../models/condidature';
+import {environment} from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class EntretienService {
 
-  private baseUrl = 'http://localhost:9090'; // Base URL of your Spring Boot backend
+  private baseUrl = environment.apiUrl ; // Base URL of your Spring Boot backend
 
   constructor(private http: HttpClient) { }
 

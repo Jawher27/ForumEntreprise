@@ -197,6 +197,9 @@ export class MesCondComponent implements OnInit {
     openDetailModal(candidatureId: number): void {
         this.selectedCandidatureId = candidatureId;
         this.isModalOpen = true;
+
+        this.cvUrl = null;
+        this.coverLetterUrl = null;
         this.loadCandidatureDetails(candidatureId);
     }
 
@@ -282,6 +285,31 @@ export class MesCondComponent implements OnInit {
         if (this.coverLetterUrl) {
             URL.revokeObjectURL(this.coverLetterUrl.toString());
         }
+
+        this.resetDocumentUrls();
+    }
+
+    resetDocumentUrls(): void {
+        // Nettoyer les URLs existantes
+        if (this.cvUrl) {
+            const urlString = this.cvUrl.toString();
+            // Extraire l'URL du blob depuis SafeResourceUrl si nécessaire
+            if (urlString.includes('blob:')) {
+                const blobUrl = urlString.substring(urlString.indexOf('blob:'));
+                URL.revokeObjectURL(blobUrl);
+            }
+        }
+
+        if (this.coverLetterUrl) {
+            const urlString = this.coverLetterUrl.toString();
+            if (urlString.includes('blob:')) {
+                const blobUrl = urlString.substring(urlString.indexOf('blob:'));
+                URL.revokeObjectURL(blobUrl);
+            }
+        }
+
+        this.cvUrl = null;
+        this.coverLetterUrl = null;
     }
 
 

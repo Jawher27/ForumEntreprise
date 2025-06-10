@@ -41,8 +41,6 @@ import { PostTypeAnnouncmentComponent } from './TypeAnnouncment-managment/post-t
     PostTypeAnnouncmentComponent,
 
 
-   
-
   ],
   imports: [
     HttpClientModule,
@@ -53,5 +51,8 @@ import { PostTypeAnnouncmentComponent } from './TypeAnnouncment-managment/post-t
     FormsModule
   ],
 
+  exports: [
+    NavbarComponent
+  ]
 })
 export class DashboardModule { }

@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*!* Styles personnalisés *!*/
+/*.profile-image-upload {*/
+/*    @apply relative inline-flex items-center justify-center;*/
+/*}*/
+
+/*!* Animation de transition pour les boutons *!*/
+/*.btn {*/
+/*    @apply transition-all duration-200 ease-in-out;*/
+/*}*/
+
+/*!* Style des badges d'état *!*/
+/*.badge {*/
+/*    @apply px-3 py-1 rounded-full text-sm font-semibold;*/
+/*}*/

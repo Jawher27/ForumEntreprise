@@ -22,6 +22,8 @@ export class CondidatureComponent implements OnInit {
     errorMessage = '';
     cvFile: File | null = null;
     coverLetterFile: File | null = null;
+    cvFileName: string = '';
+    coverLetterFileName: string = '';
     etatCondidature = 'Waitlisted';
     showSuccessAlert = false;
     showFailedsAlert = false;
@@ -55,12 +57,14 @@ export class CondidatureComponent implements OnInit {
             const file = event.target.files[0];
             if (file.type === 'application/pdf') {
                 this.cvFile = file;
+                this.cvFileName = file.name;
                 this.candidatureForm.patchValue({
                     cv: file
                 });
             } else {
                 this.errorMessage = 'Le CV doit être un fichier PDF';
                 this.cvFile = null;
+                this.cvFileName = '';
                 this.candidatureForm.patchValue({
                     cv: null
                 });
@@ -73,12 +77,14 @@ export class CondidatureComponent implements OnInit {
             const file = event.target.files[0];
             if (file.type === 'application/pdf') {
                 this.coverLetterFile = file;
+                this.coverLetterFileName = file.name;
                 this.candidatureForm.patchValue({
                     coverLetter: file
                 });
             } else {
                 this.errorMessage = 'La lettre de motivation doit être un fichier PDF';
                 this.coverLetterFile = null;
+                this.coverLetterFileName = '';
                 this.candidatureForm.patchValue({
                     coverLetter: null
                 });
@@ -137,6 +143,7 @@ export class CondidatureComponent implements OnInit {
 
     closeAlert() {
         this.showSuccessAlert = false;
+        this.resetForm();
     }
 
     openFailedAlert() {
@@ -145,8 +152,18 @@ export class CondidatureComponent implements OnInit {
             this.showFailedsAlert = false;
         }, 3000);
     }
-
+    
     closeFailedAlert() {
         this.showFailedsAlert = false;
     }
+    
+    resetForm(): void {
+        this.candidatureForm.reset();
+        this.cvFile = null;
+        this.coverLetterFile = null;
+        this.cvFileName = '';
+        this.coverLetterFileName = '';
+        this.errorMessage = '';
+    }
+       
 }

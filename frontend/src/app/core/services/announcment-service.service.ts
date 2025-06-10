@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient,HttpHeaders} from '@angular/common/http'
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { Announcement } from '../models/Announcment';
 import { Observable, map } from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 
 // const AddType_URL= "http://localhost:9091/announcementType/addAnnonce";
@@ -9,7 +10,7 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root'
 })
 export class AnnouncmentServiceService {
-  private baseURLAnnonce = "http://localhost:9090/announcement";
+  private baseURLAnnonce = environment.apiUrl + '/announcement';
 
   constructor(private http: HttpClient) { }
 

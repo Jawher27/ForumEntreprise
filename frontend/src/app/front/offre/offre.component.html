@@ -1,128 +1,389 @@
-<br><br><br>
-<br><br><br>
-<section class="section section-lg pt-lg-5 mt--200">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <h2 class="text-center mb-4">Jobs and Internships Offers </h2>
-        <div class="row row-grid">
-          <div *ngFor="let offre of offers.slice(0, displayedOffers)" class="col-lg-4 mb-5">
-            <div class="card card-lift--hover shadow-lg border-0">
-              <div class="card-body py-5">
-                <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                  <i class="ni ni-planet"></i>
-                </div>
+<!--<section class="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-20 overflow-hidden">-->
+<!--    &lt;!&ndash; Éléments décoratifs d'arrière-plan &ndash;&gt;-->
+<!--    <div class="absolute top-0 left-0 w-full h-full opacity-10">-->
+<!--        <div class="absolute top-20 left-20 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>-->
+<!--        <div class="absolute top-40 right-32 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>-->
+<!--        <div class="absolute bottom-20 left-1/2 w-64 h-64 bg-sky-200 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>-->
+<!--    </div>-->
 
-                <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
-                <p class="description mt-3"><strong>Stage:</strong> {{ offre.titre }}</p>
-                <p class="description mt-3"><strong>Location:</strong> {{ offre.lieu }}</p>
-                  <p class="description mt-3"><strong>Date debut:</strong> {{ offre.dateDebut | date }}</p>
-                  <p class="description mt-3"><strong>Posted:</strong> {{ offre.dateCreation |  date:'yyyy-MM-dd HH:mm' }}</p>
-                <p class="description mt-3">{{ offre.description }}</p>
+<!--    <div class="relative container mx-auto px-6 z-10">-->
+<!--        <h2 class="text-4xl font-bold text-center text-blue-700 mb-16 animate-fade-in">-->
+<!--            🚀 Offres d'emploi et de stages-->
+<!--        </h2>-->
 
-                <div class="mt-4">
-                    <a (click)="applyNow(offre.idOffre)" class="btn btn-warning btn-sm mr-4">Apply Now</a>
-<!--                  <a [routerLink]="['/front/condidature', offre.id]" class="btn btn-warning btn-sm mr-4">Apply Now</a>-->
-                  <a routerLink="/front/detaille-offre" class="btn btn-info btn-sm mr-4">Learn More</a>
-                  <button mat-raised-button type="button" matTooltip="Remove" (click)="openReviewModal(offre)" class="btn btn-danger btn-sm btn-just-icon">
-                    <span _ngcontent-xar-c109="" class="nav-link-icon d-block"><i _ngcontent-xar-c109="" class="ni ni-chat-round"></i></span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<!--        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 animate-fade-in-up">-->
+<!--            <div *ngFor="let offre of offers.slice(0, displayedOffers)"-->
+<!--                 class="transform transition-all duration-500 hover:scale-105">-->
+<!--                <div class="bg-white rounded-xl shadow-xl overflow-hidden h-full">-->
+<!--                    <div class="p-6">-->
+<!--                        <div class="flex items-center justify-between mb-3">-->
+<!--                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">{{ offre.typeOffre }}</span>-->
+<!--                            <i class="ni ni-planet text-blue-500 text-lg"></i>-->
+<!--                        </div>-->
+
+<!--                        <h3 class="text-2xl font-bold text-gray-800 mb-2">{{ offre.titre }}</h3>-->
+
+<!--                        <ul class="text-sm text-gray-600 space-y-2">-->
+<!--                            <li class="flex items-center">-->
+<!--                                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>-->
+<!--                                </svg>-->
+<!--                                {{ offre.lieu }}-->
+<!--                            </li>-->
+<!--                            <li class="flex items-center">-->
+<!--                                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>-->
+<!--                                </svg>-->
+<!--                                {{ offre.dateDebut | date }}-->
+<!--                            </li>-->
+<!--                            <li class="flex items-center">-->
+<!--                                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>-->
+<!--                                </svg>-->
+<!--                                {{ offre.dateCreation | date:'yyyy-MM-dd HH:mm' }}-->
+<!--                            </li>-->
+<!--                        </ul>-->
+
+<!--                        <p class="mt-4 text-gray-600 text-sm line-clamp-4">{{ offre.description }}</p>-->
+
+<!--                        <div class="flex flex-wrap gap-3 mt-6">-->
+<!--                            <button (click)="applyNow(offre.idOffre)"-->
+<!--                                    class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">-->
+<!--                                Postuler maintenant-->
+<!--                            </button>-->
+<!--                            <a routerLink="/front/detaille-offre"-->
+<!--                               class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-all">-->
+<!--                                En savoir plus-->
+<!--                            </a>-->
+<!--                            <button (click)="openReviewModal(offre)"-->
+<!--                                    class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full text-sm shadow transition-all">-->
+<!--                                <i class="ni ni-chat-round"></i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--        <div class="text-center mt-12">-->
+<!--            <button *ngIf="displayedOffers < offers.length"-->
+<!--                    (click)="loadMoreOffers()"-->
+<!--                    class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">-->
+<!--                Voir plus-->
+<!--            </button>-->
+<!--            <button *ngIf="displayedOffers > 3"-->
+<!--                    (click)="showLessOffers()"-->
+<!--                    class="ml-4 bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold transition-all">-->
+<!--                Voir moins-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<ng-template #reviewModal let-c="close" let-d="dismiss">-->
+<!--    <div class="modal-content rounded-xl overflow-hidden">-->
+<!--        <div class="bg-white p-8 shadow-lg">-->
+<!--            <h3 class="text-xl font-bold text-center text-blue-700 mb-6">📝 Leave Feedback</h3>-->
+
+<!--            <form (submit)="onSubmitReview()" class="space-y-6">-->
+<!--                <div>-->
+<!--                    <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>-->
+<!--                    <div class="flex gap-1">-->
+<!--            <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)" class="cursor-pointer text-xl">-->
+<!--              <i class="ni ni-planet"-->
+<!--                 [ngClass]="{-->
+<!--                   'text-yellow-400': star <= r.rating,-->
+<!--                   'text-gray-300': star > r.rating-->
+<!--                 }"></i>-->
+<!--            </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div>-->
+<!--                    <label class="block text-sm font-medium text-gray-700 mb-1">Comment</label>-->
+<!--                    <input type="text"-->
+<!--                           [(ngModel)]="r.comment"-->
+<!--                           name="comment"-->
+<!--                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:border-blue-500"-->
+<!--                           placeholder="Your feedback here!">-->
+<!--                </div>-->
+
+<!--                <input type="hidden" [(ngModel)]="r.offre.idOffre" name="offreId">-->
+
+<!--                <div *ngIf="showBadWordsAlert" class="text-red-500 text-sm">-->
+<!--                    🚫 Please avoid using inappropriate language.-->
+<!--                </div>-->
+
+<!--                <div class="text-center">-->
+<!--                    <button type="submit"-->
+<!--                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-semibold">-->
+<!--                        Submit-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</ng-template>-->
+
+<section class="relative py-20 overflow-hidden">
+  <!-- Header with branded accent colors -->
+  <div class="relative container mx-auto px-6 z-10">
+    <!-- Section header with branding inspired by the screenshot -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center mb-4">
+        <div class="h-1 w-16 bg-red-600 mr-3"></div>
+        <h6 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Vermeg Opportunities</h6>
+        <div class="h-1 w-16 bg-red-600 ml-3"></div>
       </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Join Our Team</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover internship and job opportunities with leading financial technology innovators
+      </p>
     </div>
 
-  </div>
-</section>
-
-<!-- Suggested Offers Section -->
-<section class="section section-lg pt-lg-5 mt--150">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div *ngIf="suggestedOffers && suggestedOffers.length > 0">
-          <div class="text-center mt-5">
-            <button *ngIf="displayedOffers < offers.length" class="btn btn-primary" (click)="loadMoreOffers()">Show More</button>
-            <button *ngIf="displayedOffers > 3" class="btn btn-secondary" (click)="showLessOffers()">Show Less</button>
-          </div>
-          <h2 class="text-center mb-4">Opportunities for you </h2>
-          <div class="row">
-            <div *ngFor="let offre of suggestedOffers" class="col-lg-4 mb-5">
-              <div class="card card-lift--hover shadow-lg border-0">
-                <div class="card-body py-5">
-                  <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
-                    <i class="ni ni-planet"></i>
-                  </div>
-
-                  <h6 class="text-warning text-uppercase">{{ offre.typeOffre }}</h6>
-                  <p class="description mt-3"><strong>Required Experience:</strong> {{ offre.experience }}</p>
-                  <p class="description mt-3"><strong>Location:</strong> {{ offre.lieu }}</p>
-                  <p class="description mt-3"><strong>Posted on:</strong> {{ offre.dateCreation | date }}</p>
-                  <p class="description mt-3">{{ offre.description }}</p>
-
-                  <div class="mt-4">
-                      <a (click)="applyNow(offre.idOffre)" class="btn btn-warning btn-sm mr-4">Apply Now</a>
-<!--                    <a routerLink="/front/condidature" class="btn btn-warning btn-sm mr-4">Apply Now</a>-->
-                    <a routerLink="/front/detaille-offre" class="btn btn-info btn-sm mr-4">Learn More</a>
-                    <button mat-raised-button type="button" matTooltip="Remove" (click)="openReviewModal(offre)" class="btn btn-danger btn-sm btn-just-icon">
-                      <span _ngcontent-xar-c109="" class="nav-link-icon d-block"><i _ngcontent-xar-c109="" class="ni ni-chat-round"></i></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<ng-template #reviewModal let-c="close" let-d="dismiss">
-  <div class="modal-content">
-    <div class="modal-body p-0">
-      <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-white pb-5">
-          <div class="text-muted text-center mb-3">
-            <small>Feedback</small>
-          </div>
-        </div>
-        <div class="card-body px-lg-5 py-lg-5">
-          <form role="form" (submit)="onSubmitReview()">
-            <div>
-            <label for="rating">Rate</label>
-            <div class="rating-input">
-              <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" (click)="setRating(star)">
-                <i class="ni ni-planet" [ngClass]="{'text-warning': star <= r.rating, 'text-muted': star > r.rating}"></i>
+    <!-- Offers grid with Vermeg styling -->
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let offre of offers.slice(0, displayedOffers)"
+        class="transform transition-all duration-300"
+      >
+        <div
+          class="bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden h-full hover:shadow-lg relative"
+        >
+          <div class="p-6">
+            <!-- Offer header -->
+            <div class="flex items-center justify-between mb-3">
+              <span
+                class="text-xs font-bold text-red-600 uppercase tracking-wider"
+              >
+                {{ offre.typeOffre }}
               </span>
-            </div>
-            </div>
-            <div class="form-group mb-3">
-              <label for="comment">FeedBaack</label>
-              <input class="form-control" placeholder="you feedback here ! " type="text" id ="experience" name ="comment" [(ngModel)]="r.comment">
+              <span class="text-xs font-medium text-gray-500">Full-time</span>
             </div>
 
-            <input type="hidden" [(ngModel)]="r.offre.idOffre" name="offreId">
+            <!-- Offer title -->
+            <h3 class="text-xl font-bold text-red-600 mb-3">{{ offre.titre }}</h3>
 
-            <div class="text-center">
-              <!-- Alert element for bad words -->
-              <div *ngIf="showBadWordsAlert" class="alert alert-danger">
-                Please avoid using inappropriate language in your comment.
+            <!-- Offer details -->
+            <ul class="text-sm text-gray-600 space-y-2 mb-4">
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 mr-2 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                </svg>
+                {{ offre.lieu }}
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 mr-2 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  ></path>
+                </svg>
+                {{ offre.dateDebut | date }}
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 mr-2 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                Posted {{ offre.dateCreation | date : "MMM d" }}
+              </li>
+            </ul>
+
+            <!-- Offer description -->
+            <p class="mt-3 text-gray-600 text-sm line-clamp-3">
+              {{ offre.description }}
+            </p>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap gap-3 mt-6">
+              <button
+                (click)="applyNow(offre.idOffre)"
+                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-medium shadow transition-all"
+              >
+                Apply Now
+              </button>
+              <div class="ml-auto flex items-center">
+                <button
+                  (click)="openReviewModal(offre)"
+                  class="text-gray-500 hover:text-gray-700 p-2 rounded-full text-sm transition-all"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                    ></path>
+                  </svg>
+                </button>
+<!--                <svg class="w-5 h-5 text-red-600 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
+<!--                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>-->
+<!--                </svg>-->
+              </div>
             </div>
-
-              <button type="submit" class="btn btn-primary my-4">Submit</button>
-            </div>
-
-
-          </form>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="text-center mt-12">
+      <button
+        *ngIf="displayedOffers < offers.length"
+        (click)="loadMoreOffers()"
+        class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded font-semibold shadow transition-all"
+      >
+        Load More Opportunities
+      </button>
+      <button
+        *ngIf="displayedOffers > 3"
+        (click)="showLessOffers()"
+        class="ml-4 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded font-semibold transition-all"
+      >
+        Show Less
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Review Modal -->
+<ng-template #reviewModal let-c="close" let-d="dismiss">
+  <div
+    class="modal-content rounded-lg overflow-hidden bg-white border border-gray-200 shadow-xl"
+  >
+    <div class="p-8">
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center">
+          <div class="h-5 w-1 bg-red-600 mr-3"></div>
+          <h3 class="text-xl font-bold text-gray-800">Share Your Feedback</h3>
+        </div>
+        <button (click)="d()" class="text-gray-400 hover:text-gray-600">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <form (submit)="onSubmitReview()" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Rating</label
+          >
+          <div class="flex gap-1">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+              (click)="setRating(star)"
+              class="cursor-pointer text-2xl"
+            >
+              <svg
+                class="w-6 h-6"
+                [ngClass]="{
+                  'text-red-600 fill-current': star <= r.rating,
+                  'text-gray-300': star > r.rating
+                }"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Your Feedback</label
+          >
+          <textarea
+            [(ngModel)]="r.comment"
+            name="comment"
+            rows="4"
+            class="w-full bg-white border border-gray-300 rounded px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
+            placeholder="Share your experience..."
+          ></textarea>
+        </div>
+
+        <input type="hidden" [(ngModel)]="r.offre.idOffre" name="offreId" />
+
+        <div
+          *ngIf="showBadWordsAlert"
+          class="text-red-600 text-sm flex items-center"
+        >
+          <svg
+            class="w-5 h-5 mr-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            ></path>
+          </svg>
+          Please keep your feedback professional
+        </div>
+
+        <div class="flex justify-end gap-3 pt-2">
+          <button
+            type="button"
+            (click)="d()"
+            class="px-4 py-2 text-gray-500 hover:text-gray-700 transition"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded transition font-semibold shadow"
+          >
+            Submit Feedback
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </ng-template>
-
-

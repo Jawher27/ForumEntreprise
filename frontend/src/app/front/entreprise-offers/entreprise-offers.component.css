@@ -1,6 +1,9 @@
 .creative-section {
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8ebee 50%, #f5f5f5 100%);
+    z-index: 10;
+    margin-bottom: 3rem;
 }
 
 .creative-image {
@@ -13,23 +16,72 @@
 .creative-card {
     height: 100%;
     border-radius: 15px; /* Add rounded corners to the card */
+    border-left: 3px solid #cf1650;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8ebee 50%);
+    z-index: 20;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+.creative-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    border-color: transparent #f8ebee transparent transparent;
+    z-index: 1;
+    transition: all 0.4s ease;
 }
 
 .creative-title {
     font-size: 1.5em;
-    color: hsl(0, 0%, 0%); /* Set text color to white */
+    color: #333;
+    transition: all 0.3s ease;
 }
 
 .creative-button {
     font-size: 1.2em;
     padding: 10px 20px;
-    border-radius: 25px; /* Add rounded corners to the button */
-    background-color: #ff5454; /* Set button background color to red */
+    border-radius: 0 15px 0 15px; /* Angle aigu en haut à gauche et en bas à droite, circulaire en haut à droite et en bas à gauche */
+    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
     border: none; /* Remove button border */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 6px rgba(207, 22, 80, 0.2);
+}
+
+.creative-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+    z-index: 1;
+    transition: all 0.3s ease;
 }
 
 .creative-button:hover {
-    background-color: #e04141; /* Change button color on hover */
+    background: linear-gradient(135deg, #ec1c3c 0%, #c8427f 100%);
+    border-radius: 15px 0 15px 0; /* Inverse les angles arrondis au survol pour un effet dynamique */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(207, 22, 80, 0.3);
+}
+
+.creative-button:hover::before {
+    border-width: 0 25px 25px 0;
+    border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
 }
 
 .pdf-viewer-container {
@@ -114,6 +166,103 @@
 /*.empty-state {*/
 /*    padding: 2rem;*/
 /*}*/
+
+/* Styles pour les cartes d'offres */
+.card.card-lift--hover {
+    border: 1px solid #e0e0e0;
+    border-left: 3px solid #cf1650;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8ebee 50%);
+    border-radius: 0 20px 0 20px; /* Angle droit en haut à gauche et en bas à droite, arrondi en haut à droite et en bas à gauche */
+    z-index: 5;
+}
+
+.card.card-lift--hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    border-color: transparent #f8ebee transparent transparent;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.card.card-lift--hover:hover {
+    background: linear-gradient(135deg, #ed1a3b 0%, #b11364 100%);
+    border-color: #cf1650;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(179, 20, 99, 0.2);
+    transition: all 0.4s ease;
+    border-radius: 20px 0 20px 0; /* Inverse les angles arrondis au survol pour un effet dynamique */
+}
+
+.card.card-lift--hover:hover h6,
+.card.card-lift--hover:hover p,
+.card.card-lift--hover:hover .description,
+.card.card-lift--hover:hover strong,
+.card.card-lift--hover:hover i,
+.card.card-lift--hover:hover .text-muted,
+.card.card-lift--hover:hover .badge {
+    color: white !important;
+}
+
+.card.card-lift--hover:hover .badge.badge-pill.badge-danger {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.card.card-lift--hover:hover .icon-shape,
+.card.card-lift--hover:hover .icon-xs {
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.card.card-lift--hover:hover .icon-shape i,
+.card.card-lift--hover:hover .icon-xs i {
+    color: white !important;
+}
+
+.card.card-lift--hover:hover::before {
+    border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+    border-width: 0 60px 60px 0;
+    transition: all 0.4s ease;
+}
+
+/* Styles pour les badges et icônes */
+/*.badge-danger {*/
+/*    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);*/
+/*    border: none;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
+
+.icon-shape-danger {
+    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%) !important;
+    color: white;
+    box-shadow: 0 4px 6px rgba(207, 22, 80, 0.2);
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%) !important;
+}
+
+.icon-xs {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.icon-xs i {
+    font-size: 0.75rem;
+}
 
 /* Styles pour les états de candidature */
 .state-option {
@@ -232,10 +381,180 @@ textarea.form-control {
     resize: vertical;
 }
 
+/* Styles pour les boutons d'action */
+.btn-danger.creative-button, 
+.btn-info.creative-button {
+    margin-top: 8px;
+    font-size: 0.9em;
+    padding: 8px 15px;
+    border-radius: 0 15px 0 15px;
+    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 6px rgba(207, 22, 80, 0.2);
+}
+
+.btn-info.creative-button {
+    background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+}
+
+.btn-danger.creative-button::before, 
+.btn-info.creative-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 15px 15px 0;
+    border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.btn-danger.creative-button:hover, 
+.btn-info.creative-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(207, 22, 80, 0.3);
+    border-radius: 15px 0 15px 0;
+}
+
+.btn-info.creative-button:hover {
+    box-shadow: 0 5px 15px rgba(33, 147, 176, 0.3);
+}
+
+.btn-danger.creative-button:hover::before, 
+.btn-info.creative-button:hover::before {
+    border-width: 0 20px 20px 0;
+    border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+}
+
+/* Styles pour les boutons de pagination */
+.text-center .btn-primary,
+.text-center .btn-secondary {
+    background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+    border: none;
+    transition: all 0.3s ease;
+    border-radius: 20px 0 20px 0;
+    position: relative;
+    overflow: hidden;
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.text-center .btn-secondary {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    color: #cf1650;
+    border: 1px solid #e0e0e0;
+}
+
+.text-center .btn-primary::before,
+.text-center .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent rgba(255, 255, 255, 0.2) transparent transparent;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.text-center .btn-primary:hover,
+.text-center .btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(207, 22, 80, 0.3);
+    border-radius: 0 20px 0 20px;
+}
+
+.text-center .btn-secondary:hover {
+    background: linear-gradient(135deg, #e8e8e8 0%, #d5d5d5 100%);
+    color: #b31463;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.text-center .btn-primary:hover::before,
+.text-center .btn-secondary:hover::before {
+    border-width: 0 25px 25px 0;
+    border-color: transparent rgba(255, 255, 255, 0.3) transparent transparent;
+}
+
+/* Styles pour les sections et espacements */
+.section {
+    position: relative;
+    padding: 4rem 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.section.section-lg.pt-lg-0 {
+    padding-top: 3rem;
+}
+
+.mt--200 {
+    /*margin-top: -100px;*/
+    /*position: relative;*/
+    /*z-index: 1;*/
+}
+
+/* Styles pour les états vides */
+.icon-xl {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.icon-xl i {
+    font-size: 2rem;
+}
+
+/* Animation subtile pour les cartes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card.card-lift--hover {
+    animation: fadeInUp 0.5s ease-out;
+}
+
 /* ✅ Responsive sur petits écrans */
 @media (max-width: 768px) {
     .modal-content {
         margin: 1rem;
+    }
+    
+    .card.card-lift--hover {
+        margin-bottom: 20px;
+    }
+    
+    .mt--200 {
+        margin-top: -100px;
+    }
+    
+    .creative-section {
+        padding: 2rem 0;
+    }
+    
+    .display-3 {
+        font-size: 2.5rem;
     }
 }
 

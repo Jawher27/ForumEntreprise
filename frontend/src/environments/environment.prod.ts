@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://backend-service.backend.svc.cluster.local:9090'
 };

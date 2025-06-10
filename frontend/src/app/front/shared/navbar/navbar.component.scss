@@ -1,14 +1,84 @@
+  //
+  //.navbar {
+  //  position: relative; /* Assure que la sub-navbar est positionnée par rapport à la navbar */
+  //  z-index: 1; /* Élève la navbar au-dessus de la sub-navbar */
+  //}
+  //
+  //.sub-navbar {
+  //  position: absolute; /* Position absolue par rapport à son conteneur parent (.navbar) */
+  //  top: 100%; /* Place la sub-navbar juste en dessous de la navbar */
+  //  left: 0; /* Alignement à gauche */
+  //  width: 100%; /* La sub-navbar prend toute la largeur */
+  //  z-index: 0; /* Par défaut, laisse la sub-navbar en dessous de la navbar */
+  //}
 
-  .navbar {
-    position: relative; /* Assure que la sub-navbar est positionnée par rapport à la navbar */
-    z-index: 1; /* Élève la navbar au-dessus de la sub-navbar */
+
+
+
+
+
+  /* Effet sur le logo */
+  .logo-container {
+    .logo {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      &:hover {
+        transform: scale(1.05) rotate(1deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+      }
+    }
   }
-  
-  .sub-navbar {
-    position: absolute; /* Position absolue par rapport à son conteneur parent (.navbar) */
-    top: 100%; /* Place la sub-navbar juste en dessous de la navbar */
-    left: 0; /* Alignement à gauche */
-    width: 100%; /* La sub-navbar prend toute la largeur */
-    z-index: 0; /* Par défaut, laisse la sub-navbar en dessous de la navbar */
+
+  /* Liens de navigation */
+  .nav-link {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
   }
-  
+
+  /* Bouton hamburger animé */
+  .hamburger-btn {
+    .hamburger-icon {
+      @apply w-6 h-0.5 bg-gray-800 relative transition-all duration-300;
+
+      &::before, &::after {
+        content: '';
+        @apply absolute w-6 h-0.5 bg-gray-800 transition-all duration-300;
+      }
+
+      &::before { transform: translateY(-6px); }
+      &::after { transform: translateY(6px); }
+    }
+
+    &[aria-expanded="true"] .hamburger-icon {
+      @apply bg-transparent;
+
+      &::before { transform: rotate(45deg); }
+      &::after { transform: rotate(-45deg); }
+    }
+  }
+
+  /* Menu mobile */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+
+    &:not(.hidden) {
+      max-height: 500px;
+      opacity: 1;
+    }
+  }

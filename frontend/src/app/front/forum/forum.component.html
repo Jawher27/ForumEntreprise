@@ -1,45 +1,173 @@
-<section class="section section-shaped">
-    <div class="shape shape-style-1 shape-default">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-   
-   
-   <div class="container py-md">
-      <div class="row justify-content-between align-items-center">
-        <div class="col-lg-5 mb-5 mb-lg-0">
-          <h1 class="text-white font-weight-light">Business forum</h1>
-          <p class="lead text-white mt-4">{{f.description}}</p>
-          <p class="lead text-white mt-4">Date {{f.dateForum}}</p>
-          <p class="lead text-white mt-4">{{f.hour}} PM</p>
-          <p class="lead text-white mt-4">Bloc {{f.bloc}}</p>
-          <p class="lead text-white mt-4">Be on Time</p>
-          <a *ngIf="isExposant()" [routerLink]="['/front/book']"  class="btn btn-white mt-4" >Stand Book</a>
+<section
+  class="relative bg-gradient-to-br from-gray-900 to-[#b31463] py-20 overflow-hidden min-h-[80vh] flex items-center animate-fadeIn"
+>
+  <!-- Background elements with animated bubbles -->
+  <div class="absolute inset-0 overflow-hidden z-0">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-[#ec6983] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-[#c8427f] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-0 left-1/2 w-64 h-64 bg-[#d73f6f] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"
+    ></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <!-- Forum Infos -->
+      <div class="w-full lg:w-1/2 space-y-6">
+        <div
+          class="inline-block bg-[#cf1650]/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 transform transition-all duration-300 hover:scale-105"
+        >
+          <p class="text-sm font-medium text-white">
+            Forum de Recrutement ESPRIT
+          </p>
         </div>
-        <div class="col-lg-6 mb-lg-auto">
-          <div class="rounded shadow-lg overflow-hidden transform-perspective-right bootstrap-slider">
-            <ngb-carousel>
-                <ng-template ngbSlide>
-                  <img class="img-td" src="assets/Banniére Logo 20ans-01-cc95.webp" alt="First slide">
-                </ng-template>
-                <ng-template ngbSlide>
-                  <img class="img-td" src="assets/logoEsprit1.png" alt="Second slide">
-                </ng-template>
-            </ngb-carousel>
+
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white"
+        >
+        Launch Your Career with Vermeg <span class="text-[#f48c94]">Explore exciting internship opportunities and grow with us.</span>
+        </h1>
+
+        <div class="space-y-4 text-[#f8ebee]">
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-[#ec6983]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-lg md:text-xl">
+              {{ f.dateForum | date : "fullDate" : "" : "fr" }}
+            </p>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-[#ec6983]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-lg md:text-xl">{{ f.hour }} (GMT+1)</p>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-[#ec6983]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </div>
+            <p class="text-lg md:text-xl">Bloc {{ f.bloc }} - Campus ESPRIT</p>
+          </div>
+        </div>
+
+        <p class="text-lg md:text-xl text-[#f8ebee] opacity-90 mt-6">
+          {{ f.description }}
+        </p>
+
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a
+            *ngIf="isExposant()"
+            [routerLink]="['/front/book']"
+            class="inline-flex items-center px-6 py-3 bg-[#cf1650] hover:bg-[#b31463] text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-pink-500/30"
+          >
+            Réserver un stand
+            <svg
+              class="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              ></path>
+            </svg>
+          </a>
+
+<!--          <a-->
+<!--            href="#"-->
+<!--            class="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-[#ec6983]/20 border border-[#f48c94]/30 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-pink-500/20"-->
+<!--          >-->
+<!--            Voir les entreprises participantes-->
+<!--            <svg-->
+<!--              class="w-5 h-5 ml-2"-->
+<!--              fill="none"-->
+<!--              stroke="currentColor"-->
+<!--              viewBox="0 0 24 24"-->
+<!--            >-->
+<!--              <path-->
+<!--                stroke-linecap="round"-->
+<!--                stroke-linejoin="round"-->
+<!--                stroke-width="2"-->
+<!--                d="M9 5l7 7-7 7"-->
+<!--              ></path>-->
+<!--            </svg>-->
+<!--          </a>-->
+        </div>
+      </div>
+
+      <!-- Image asymétrique -->
+      <div class="w-full lg:w-1/2">
+        <div
+          class="relative overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-[#ec6983]/40"
+        >
+          <div class="relative h-80 md:h-96 w-full asymmetric-container">
+            <img
+              src="assets/Corporate-picture.png"
+              alt="Image Corporate"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#b31463]/60 to-transparent flex items-end p-8"
+            >
+              <div>
+                <h3 class="text-xl font-bold text-white">
+                  Rejoignez-nous
+                </h3>
+                <p class="text-gray-200">Construisons l'avenir ensemble</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-  
-    <!-- SVG separator -->
-    <div class="separator separator-bottom separator-skew">
-      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-      </svg>
-    </div>
-  </section>
+  </div>
+</section>

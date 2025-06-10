@@ -1,102 +1,386 @@
-<main class="profile-page" >
+<!--<main class="profile-page" >-->
+<!--    <ng-template #notAuthenticated>-->
+<!--        &lt;!&ndash; Rediriger vers la page de connexion &ndash;&gt;-->
+<!--        <div class="text-center mt-5">-->
+<!--            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.</p>-->
+<!--            <button (click)="navigateToLogin()">Se connecter</button>-->
+<!--        </div>-->
+<!--    </ng-template>-->
+<!--</main>-->
+<!--    <section  class="section-profile-cover section-shaped my-0">-->
+<!--        &lt;!&ndash; Circles background &ndash;&gt;-->
+<!--        <div class="shape shape-style-1 shape-primary alpha-4">-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; SVG separator &ndash;&gt;-->
+<!--        <div class="separator separator-bottom separator-skew">-->
+<!--            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">-->
+<!--                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>-->
+<!--            </svg>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    <section class="section">-->
+<!--        <div class="container">-->
+<!--            <div class="card card-profile shadow mt&#45;&#45;300">-->
+<!--                <div class="px-4">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-3 order-lg-2">-->
+<!--&lt;!&ndash;                            <button routerLink="/listcondidature" class="btn-primary">Candidtaure</button>&ndash;&gt;-->
+<!--                            <div class="card-profile-image">-->
+<!--                                <a href="javascript:void(0)">-->
+<!--                                    <img [src]="previewImage" class="rounded-circle">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-9 order-lg-1">-->
+<!--                            <div class="row">-->
+
+<!--                                <div class="col-lg-9">-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-3">-->
+
+<!--                                <form class="row justify-content-center" #addForm="ngForm" (ngSubmit)="upload(addForm)">-->
+<!--                                    <div class="col-8">-->
+
+<!--                                        <label class="btn btn-default p-0">-->
+<!--                                            <input type="file" required (change)="selectFile($event)" />-->
+<!--                                            <button [disabled]="addForm.form.invalid" type="submit" class="btn btn-scroll2 profile-image-upload">cloud_upload</button>-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-12 order-lg-3">-->
+<!--                            <div class="card-profile-actions py-4 mt-lg-0">-->
+<!--                                &lt;!&ndash;<button (click)="authService.signOut()">Sign Out</button>&ndash;&gt;-->
+<!--                                <button (click)="logout()">Sign Out</button>-->
+
+<!--                                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="text-center mt-5">-->
+<!--                        <p Welcome  to your profile page.></p>-->
+<!--                       &lt;!&ndash; <h3>{{currentUser.firstName}} <span class="font-weight-light"> :FirstName  </span></h3>&ndash;&gt;-->
+<!--                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *firstName: </span> </h5><h3>{{currentUser?.firstName}}</h3>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *lastName: </span> </h5><h3>{{currentUser?.lastName}}</h3>-->
+<!--                        </div>-->
+<!--                        <div *ngIf="isEntreprise()"><i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *CompanyName: </span> </h5><h3>{{currentUser?.lastName}}</h3>-->
+<!--                        </div>-->
+<!--                        <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><h5><span class="font-weight-light"> *Email:  </span></h5><h3>{{currentUser?.email}}</h3></div>-->
+<!--&lt;!&ndash;                        <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i><h5><span class="font-weight-light"> Role =></span></h5><h3>{{currentUser?.role}}</h3></div>&ndash;&gt;-->
+<!--                        <div *ngIf="isEtudiant()"><i  class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *Cin:  </span></h5><h3>{{currentUser?.cin}}</h3></div>-->
+
+<!--                        <div><i class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *phoneNumber: </span></h5><h3>{{currentUser?.phoneNumber}}</h3></div>-->
+
+<!--                         <ngx-qrcode [value]="qrData"></ngx-qrcode>-->
+<!--                    </div>-->
+<!--                    <div class="mt-5 py-5 border-top text-center">-->
+<!--                        <div class="row justify-content-center">-->
+<!--                            <div class="col-lg-9">-->
+<!--                                <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>-->
+<!--                                <a href="javascript:void(0)">Show more</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    <app-mes-res *ngIf="isEntreprise()" ></app-mes-res>&lt;!&ndash;*ngIf="isExposant()"&ndash;&gt;-->
+<!--<app-mes-cond *ngIf="isEtudiant()" ></app-mes-cond>   &lt;!&ndash;*ngIf="isStudent()"&ndash;&gt;-->
+<!--<app-entreprise-offers *ngIf="isEntreprise()"></app-entreprise-offers>-->
+
+
+
+
+
+
+
+
+<!--<main class="min-h-screen bg-gradient-to-b from-blue-50 to-white">-->
+<!--    <ng-template #notAuthenticated>-->
+<!--        <div class="flex flex-col items-center justify-center min-h-screen p-4">-->
+<!--            <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-blue-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 0v2m0-2h2m-2 0H9m3-4V7a3 3 0 00-3-3H6a3 3 0 00-3 3v4a3 3 0 003 3h3a3 3 0 003-3z" />-->
+<!--                </svg>-->
+<!--                <h2 class="text-2xl font-bold text-gray-800 mb-2">Accès restreint</h2>-->
+<!--                <p class="text-gray-600 mb-6">Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.</p>-->
+<!--                <button (click)="navigateToLogin()" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 transform hover:scale-105">-->
+<!--                    Se connecter-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </ng-template>-->
+
+<!--    &lt;!&ndash; Header Section with Wave Background &ndash;&gt;-->
+<!--    <section class="relative bg-gradient-to-r from-blue-600 to-blue-800 pt-20 pb-32">-->
+<!--        <div class="absolute inset-0 overflow-hidden">-->
+<!--            <div class="absolute waves h-full w-full">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute bottom-0 opacity-20">-->
+<!--                    <path fill="#ffffff" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>-->
+<!--                </svg>-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute bottom-0 opacity-30">-->
+<!--                    <path fill="#ffffff" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,90.7C672,85,768,107,864,144C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>-->
+<!--                </svg>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Profile Card Section &ndash;&gt;-->
+<!--    <section class="relative px-4 -mt-32 z-10">-->
+<!--        <div class="container mx-auto max-w-5xl">-->
+<!--            <div class="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-3xl">-->
+
+<!--                &lt;!&ndash; Profile Header &ndash;&gt;-->
+<!--                <div class="relative">-->
+<!--                    <div class="flex flex-col md:flex-row">-->
+<!--                        &lt;!&ndash; Profile Image Section &ndash;&gt;-->
+<!--                        <div class="md:w-1/3 p-6 flex flex-col items-center">-->
+<!--                            <div class="relative group">-->
+<!--                                <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4 group-hover:shadow-xl transition-all duration-300">-->
+<!--                                    <img [src]="previewImage" alt="Photo de profil" class="w-full h-full object-cover">-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; Upload Image Form &ndash;&gt;-->
+<!--                                <form class="absolute -bottom-2 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" #addForm="ngForm" (ngSubmit)="upload(addForm)">-->
+<!--                                    <label class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white cursor-pointer shadow-lg hover:bg-blue-700 transition-colors">-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">-->
+<!--                                            <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />-->
+<!--                                            <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />-->
+<!--                                        </svg>-->
+<!--                                        <input type="file" required (change)="selectFile($event)" class="hidden">-->
+<!--                                    </label>-->
+<!--                                    <button [disabled]="addForm.form.invalid" type="submit" class="hidden">Envoyer</button>-->
+<!--                                </form>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; QR Code &ndash;&gt;-->
+<!--                            <div class="mt-4 p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">-->
+<!--                                <ngx-qrcode [value]="qrData" class="block"></ngx-qrcode>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Actions &ndash;&gt;-->
+<!--                            <div class="mt-6 w-full flex flex-col gap-2">-->
+<!--                                <button (click)="logout()" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">-->
+<!--                                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V7.414l-5-5H3zm7 5a1 1 0 10-2 0v4.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L12 12.586V8z" />-->
+<!--                                    </svg>-->
+<!--                                    Déconnexion-->
+<!--                                </button>-->
+<!--                                <a href="javascript:void(0)" class="w-full py-2 px-4 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-300 text-center">-->
+<!--                                    Message-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; Profile Info Section &ndash;&gt;-->
+<!--                        <div class="md:w-2/3 p-6">-->
+<!--                            <div class="bg-blue-50 rounded-lg p-6 shadow-inner mb-6">-->
+<!--                                <h2 class="text-2xl font-bold text-blue-800 mb-4">Informations personnelles</h2>-->
+
+<!--                                <div class="space-y-4">-->
+<!--                                    &lt;!&ndash; Étudiant Info &ndash;&gt;-->
+<!--                                    <div *ngIf="isEtudiant()" class="grid grid-cols-1 md:grid-cols-2 gap-4">-->
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">Prénom</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.firstName || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">Nom</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.lastName || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">CIN</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.cin || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">Téléphone</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.phoneNumber || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Entreprise Info &ndash;&gt;-->
+<!--                                    <div *ngIf="isEntreprise()" class="grid grid-cols-1 md:grid-cols-2 gap-4">-->
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300 md:col-span-2">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">Nom de l'entreprise</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.lastName || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                            <p class="text-sm text-blue-600 font-medium">Téléphone</p>-->
+<!--                                            <p class="text-lg font-semibold text-gray-800">{{currentUser?.phoneNumber || 'Non renseigné'}}</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Common Info &ndash;&gt;-->
+<!--                                    <div class="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                        <p class="text-sm text-blue-600 font-medium">Email</p>-->
+<!--                                        <p class="text-lg font-semibold text-gray-800">{{currentUser?.email || 'Non renseigné'}}</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Bio Section &ndash;&gt;-->
+<!--                            <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">-->
+<!--                                <h3 class="text-xl font-semibold text-blue-800 mb-3">À propos</h3>-->
+<!--                                <p class="text-gray-700 mb-4">-->
+<!--                                    An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.-->
+<!--                                </p>-->
+<!--                                <a href="javascript:void(0)" class="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-300">-->
+<!--                                    En savoir plus-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Conditional Components &ndash;&gt;-->
+<!--    <section class="container mx-auto max-w-5xl px-4 py-8">-->
+<!--        <app-mes-res *ngIf="isEntreprise()"></app-mes-res>-->
+<!--        <app-mes-cond *ngIf="isEtudiant()"></app-mes-cond>-->
+<!--        <app-entreprise-offers *ngIf="isEntreprise()"></app-entreprise-offers>-->
+<!--    </section>-->
+<!--</main>-->
+
+
+
+
+<main class="profile-page">
     <ng-template #notAuthenticated>
-        <!-- Rediriger vers la page de connexion -->
-        <div class="text-center mt-5">
-            <p>Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.</p>
-            <button (click)="navigateToLogin()">Se connecter</button>
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#E31937"/>
+                    </svg>
+                </div>
+                <h2 class="auth-title">Accès restreint</h2>
+                <p class="auth-text">Vous n'êtes pas connecté. Veuillez vous connecter pour accéder à cette page.</p>
+                <button (click)="navigateToLogin()" class="vermeg-btn">Se connecter</button>
+            </div>
         </div>
     </ng-template>
-</main>
-    <section  class="section-profile-cover section-shaped my-0">
-        <!-- Circles background -->
-        <div class="shape shape-style-1 shape-primary alpha-4">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <!-- SVG separator -->
-        <div class="separator separator-bottom separator-skew">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="card card-profile shadow mt--300">
-                <div class="px-4">
-                    <div class="row">
-                        <div class="col-lg-3 order-lg-2">
-<!--                            <button routerLink="/listcondidature" class="btn-primary">Candidtaure</button>-->
-                            <a *ngIf="isEtudiant()" [routerLink]="['/listcondidature']"  class="btn btn-white mt-4" >Canditature</a>
-                            <div class="card-profile-image">
-                                <a href="javascript:void(0)">
-                                    <img [src]="previewImage" class="rounded-circle">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 order-lg-1">
-                            <div class="row">
 
-                                <div class="col-lg-9">
+    <!-- Header Banner -->
+    <div class="profile-header">
+        <div class="gradient-overlay"></div>
+    </div>
 
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
+    <!-- Profile Content -->
+    <div class="profile-content-container">
+        <div class="profile-card">
+            <!-- Profile Header -->
+            <div class="profile-card-header">
+                <div class="profile-image-container">
+                    <img [src]="previewImage" alt="Photo de profil" class="profile-image">
+                    <form class="profile-image-upload" #addForm="ngForm" (ngSubmit)="upload(addForm)">
+                        <label class="upload-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 8L12 3L7 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 3V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <input type="file" required (change)="selectFile($event)" class="hidden-input">
+                        </label>
+                        <button [disabled]="addForm.form.invalid" type="submit" class="hidden-submit"></button>
+                    </form>
+                </div>
+                <div class="profile-actions">
+                    <button (click)="logout()" class="vermeg-btn-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
+                            <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 17L21 12L16 7" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12H9" stroke="#E31937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Déconnexion
+                    </button>
+                    <a href="javascript:void(0)" class="vermeg-btn">Message</a>
+                </div>
+            </div>
 
-                                <form class="row justify-content-center" #addForm="ngForm" (ngSubmit)="upload(addForm)">
-                                    <div class="col-8">
+            <!-- Profile Info -->
+            <div class="profile-info">
+                <h2 class="profile-title">Informations personnelles</h2>
 
-                                        <label class="btn btn-default p-0">
-                                            <input type="file" required (change)="selectFile($event)" />
-                                            <button [disabled]="addForm.form.invalid" type="submit" class="btn btn-scroll2 profile-image-upload">cloud_upload</button>
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 order-lg-3">
-                            <div class="card-profile-actions py-4 mt-lg-0">
-                                <!--<button (click)="authService.signOut()">Sign Out</button>-->
-                                <button (click)="logout()">Sign Out</button>
-
-                                <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
-                            </div>
-                        </div>
+                <!-- Étudiant Info -->
+                <div *ngIf="isEtudiant()" class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Prénom</span>
+                        <span class="info-value">{{currentUser?.firstName || 'Non renseigné'}}</span>
                     </div>
-                    <div class="text-center mt-5">
-                        <p Welcome  to your profile page.></p>
-                       <!-- <h3>{{currentUser.firstName}} <span class="font-weight-light"> :FirstName  </span></h3>-->
-                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *firstName: </span> </h5><h3>{{currentUser?.firstName}}</h3>
-                        </div>
-                        <div *ngIf="isEtudiant()"> <i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *lastName: </span> </h5><h3>{{currentUser?.lastName}}</h3>
-                        </div>
-                        <div *ngIf="isEntreprise()"><i class="ni education_hat mr-2"></i>  <h5><span class="font-weight-light"> *CompanyName: </span> </h5><h3>{{currentUser?.lastName}}</h3>
-                        </div>
-                        <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i><h5><span class="font-weight-light"> *Email:  </span></h5><h3>{{currentUser?.email}}</h3></div>
-<!--                        <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i><h5><span class="font-weight-light"> Role =></span></h5><h3>{{currentUser?.role}}</h3></div>-->
-                        <div *ngIf="isEtudiant()"><i  class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *Cin:  </span></h5><h3>{{currentUser?.cin}}</h3></div>
-
-                        <div><i class="ni education_hat mr-2"></i><h5><span class="font-weight-light"> *phoneNumber: </span></h5><h3>{{currentUser?.phoneNumber}}</h3></div>
-
-                         <ngx-qrcode [value]="qrData"></ngx-qrcode>
+                    <div class="info-item">
+                        <span class="info-label">Nom</span>
+                        <span class="info-value">{{currentUser?.lastName || 'Non renseigné'}}</span>
                     </div>
-                    <div class="mt-5 py-5 border-top text-center">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-9">
-                                <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
-                                <a href="javascript:void(0)">Show more</a>
-                            </div>
-                        </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{currentUser?.email || 'Non renseigné'}}</span>
                     </div>
+                    <div class="info-item">
+                        <span class="info-label">CIN</span>
+                        <span class="info-value">{{currentUser?.cin || 'Non renseigné'}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Téléphone</span>
+                        <span class="info-value">{{currentUser?.phoneNumber || 'Non renseigné'}}</span>
+                    </div>
+                </div>
+
+                <!-- Entreprise Info -->
+                <div *ngIf="isEntreprise()" class="info-grid">
+                    <div class="info-item full-width">
+                        <span class="info-label">Nom de l'entreprise</span>
+                        <span class="info-value">{{currentUser?.lastName || 'Non renseigné'}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{currentUser?.email || 'Non renseigné'}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Téléphone</span>
+                        <span class="info-value">{{currentUser?.phoneNumber || 'Non renseigné'}}</span>
+                    </div>
+                </div>
+
+                <!-- QR Code -->
+                <div class="qr-container">
+                    <h3 class="qr-title">Code QR</h3>
+                    <ngx-qrcode [value]="qrData" class="qr-code"></ngx-qrcode>
+                </div>
+
+                <!-- Bio Section -->
+                <div class="bio-section">
+                    <h3 class="bio-title">À propos</h3>
+                    <p class="bio-text">
+                        An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.
+                    </p>
+                    <a href="javascript:void(0)" class="bio-link">En savoir plus</a>
                 </div>
             </div>
         </div>
-    </section>
-    <app-mes-res *ngIf="isEntreprise()" ></app-mes-res><!--*ngIf="isExposant()"-->
-<app-mes-cond *ngIf="isEtudiant()" ></app-mes-cond>   <!--*ngIf="isStudent()"-->
-<app-entreprise-offers *ngIf="isEntreprise()"></app-entreprise-offers>
+    </div>
+
+    <!-- Conditional Components -->
+    <div class="components-container">
+<!--        <app-mes-res *ngIf="isEntreprise()"></app-mes-res>-->
+        <app-mes-cond *ngIf="isEtudiant()"></app-mes-cond>
+        <app-entreprise-offers *ngIf="isEntreprise()"></app-entreprise-offers>
+    </div>
+</main>

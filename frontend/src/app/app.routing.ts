@@ -4,11 +4,11 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './front/signup/signup.component';
+import { LoginComponent } from './front/login/login.component';
 import { SignupAlumniComponent } from './signup-alumni/signup-alumni.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
-import { SignupClientComponent } from './signup-client/signup-client.component';
+import { RegisterPageComponent } from './front/register-page/register-page.component';
+import { SignupClientComponent } from './front/signup-client/signup-client.component';
 import {CandidaturelistComponent} from './candidaturelist/candidaturelist.component';
 import {CandidaturedetailsComponent} from './candidaturedetails/candidaturedetails.component';
 

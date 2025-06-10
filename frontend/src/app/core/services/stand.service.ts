@@ -3,17 +3,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Stand } from '../models/Stand';
 import { TypePack } from '../models/Pack';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StandService {
-  private baseURL = "http://localhost:9090/stand"
+  private baseURL = `${environment.apiUrl}/stand`;
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient) {}
 
   
-  getAllStand(): Observable<Stand[]>{
+  getAllStand(): Observable<Stand[]> {
     return this.httpClient.get<Stand[]>(`${this.baseURL}/all`);
   }
   SaveStand(stand: Stand): Observable<Stand[]> {
@@ -25,7 +26,7 @@ export class StandService {
   DeleteStand(standId :number):Observable<Stand[]> {
     return this.httpClient.delete<Stand[]>(`${this.baseURL}/delete/${standId}`);
   }
-  getStandByTypePack(type:TypePack): Observable<Stand[]>{
+  getStandByTypePack(type:TypePack): Observable<Stand[]> {
     return this.httpClient.get<Stand[]>(`${this.baseURL}/{type}`);
   }
 }

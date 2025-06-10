@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, forkJoin, of, throwError  } from 'rxjs';
 
 import { Condidature } from '../models/condidature';
+import { environment } from '../../../environments/environment';
 import { Offre } from '../models/Offre';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -10,7 +11,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CondidatureService {
-  private baseUrl = 'http://localhost:9090/condidature'; // Base URL of your Spring Boot backend
+  private baseUrl = environment.apiUrl + '/condidature'; // Base URL of your Spring Boot backend
 
   constructor(private http: HttpClient) { }
   submitCandidature(offreId: number, userId: number, etatCondidature: string,

@@ -1,52 +1,69 @@
-/* contact.component.css */
+/* condidature.component.css */
 
-.red-background {
-    background-color: rgba(128, 3, 3, 0.964);
-  }
-  
-  .contact-form-container {
-    background-color: rgba(224, 212, 212, 0.271); /* Couleur de fond transparente */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(203, 194, 194, 0.732); /* Ombre autour du cadre */
-  }
-  .btn-success {
-    background-color: transparent; /* Rendre le fond du bouton transparent */
-    color: rgb(16, 16, 16); /* Définir la couleur du texte en vert */
-    border: 2px solid rgba(183, 186, 183, 0.711); /* Ajouter une bordure solide verte */
-  }
-  
-  .btn-success:hover {
-    background-color: rgba(163, 175, 163, 0.755); /* Changer la couleur du fond au survol */
-    color: white; /* Changer la couleur du texte au survol */
-  }
-  .text-white {
-    color: #fff; /* Couleur blanche */
-  }
-  /* Style minimaliste pour le combo modèle de lettre */
-.select-wrapper {
+:root {
+  --vermeg-red: #E31937;
+  --vermeg-dark: #000000;
+  --vermeg-light: #FFFFFF;
+  --vermeg-gray: #F5F5F5;
+  --vermeg-text: #333333;
+  --vermeg-border: #E0E0E0;
+}
+
+/* Base styles */
+section {
+  font-family: 'Inter', sans-serif;
+}
+
+/* File upload styling */
+.relative input[type="file"] {
+  cursor: pointer;
+}
+
+.relative:hover {
+  border-color: var(--vermeg-red);
+}
+
+/* Button styling */
+button[type="submit"] {
+  background: linear-gradient(135deg, #cf1650 0%, #b31463 100%);
+  border: none;
+  transition: all 0.3s ease;
+  border-radius: 0 15px 0 15px; /* Angle aigu en haut à gauche et en bas à droite, circulaire en haut à droite et en bas à gauche */
   position: relative;
-  width: 200px; /* Largeur du combo */
+  overflow: hidden;
 }
 
-.select-wrapper select {
-  width: 100%;
-  padding: 8px; /* Espacement intérieur */
-  font-size: 14px; /* Taille de police */
-  border: 1px solid #ced4da; /* Bordure */
-  border-radius: 4px; /* Coins arrondis */
-  appearance: none; /* Suppression de l'apparence native */
-  background-color: #fff; /* Couleur de fond */
-  cursor: pointer; /* Curseur */
+button[type="submit"]:hover:not([disabled]) {
+  background: linear-gradient(135deg, #ec1c3c 0%, #d73f6f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(207, 22, 80, 0.3);
+  border-radius: 15px 0 15px 0; /* Inverse les angles arrondis au survol pour un effet dynamique */
 }
 
-/* Flèche de sélection */
-.select-wrapper::after {
-  content: "\25BC"; /* Unicode de la flèche vers le bas */
-  font-size: 12px;
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
-  pointer-events: none; /* Empêche le clic sur la flèche */
+button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Animation for spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Alert styling */
+.alert-dismissible {
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

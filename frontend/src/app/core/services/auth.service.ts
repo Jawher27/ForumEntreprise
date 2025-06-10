@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest, HttpResponse} from "@angular/common/http";
 import {catchError, map, Observable, Subject, throwError} from "rxjs";
+import { environment } from 'src/environments/environment';
 import {ForumService} from "./forum.service";
 import {StorageService} from "./storage.service";
-const BASE_URL = 'http://localhost:9090/user/';
+//const BASE_URL = 'http://localhost:9090/user/';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 export const AUTH_HEADER='authorization';
@@ -16,23 +17,23 @@ import { User } from '../models/user';
 
 })
 export class AuthService {
-
-  constructor(private httpClient: HttpClient,private storageService: StorageService,public jwtHelper: JwtHelperService ,private router:Router){
+    private readonly BASE_URL = `${environment.apiUrl}/user/`;
+  constructor(private httpClient: HttpClient, private storageService: StorageService, public jwtHelper: JwtHelperService ,private router:Router) {
   }
 
   signupCompany(signupRequestDto: any): Observable<any> {
-    return this.httpClient.post(BASE_URL + 'Company/signup', signupRequestDto)
+    return this.httpClient.post(this.BASE_URL + 'Company/signup', signupRequestDto);
   }
 
   signupClient(signupRequestDto: any): Observable<any> {
-    return this.httpClient.post(BASE_URL + 'Client/signup', signupRequestDto)
+    return this.httpClient.post(this.BASE_URL + 'Client/signup', signupRequestDto);
   }
     AddAdmin(signupRequestDto: any): Observable<any> {
-        return this.httpClient.post(BASE_URL + 'addAdmin', signupRequestDto)
+        return this.httpClient.post(this.BASE_URL + 'addAdmin', signupRequestDto);
     }
 
   signupAlumni(signupRequestDto: any): Observable<any> {
-    return this.httpClient.post(BASE_URL + 'Alumni/signup', signupRequestDto)
+    return this.httpClient.post(this.BASE_URL + 'Alumni/signup', signupRequestDto);
   }
 
 
@@ -46,7 +47,7 @@ export class AuthService {
 
 
 
-        const req = new HttpRequest('POST', BASE_URL +`upload`, formData, {
+        const req = new HttpRequest('POST', this.BASE_URL + `upload`, formData, {
 
             reportProgress: true,
 
@@ -60,10 +61,10 @@ export class AuthService {
 
     }
 getbyEmail(email: string): Observable<any> {
-      return this.httpClient.get(BASE_URL + `Email/${email}`);
+      return this.httpClient.get(this.BASE_URL + `Email/${email}`);
   }
   getById(id: number): Observable<any> {
-    return this.httpClient.get(BASE_URL + `id/${id}`);
+    return this.httpClient.get(this.BASE_URL + `id/${id}`);
   }
 
 
@@ -79,7 +80,7 @@ getbyEmail(email: string): Observable<any> {
 
 
     login(email: string, password: string): Observable<any> {
-        return this.httpClient.post(`http://localhost:9090/user/authenticate`, { email, password }, { observe: 'response', responseType: 'text' })
+        return this.httpClient.post(this.BASE_URL + 'authenticate', { email, password }, { observe: 'response', responseType: 'text' })
             .pipe(
                 map(response => {
                     try {
@@ -99,7 +100,7 @@ getbyEmail(email: string): Observable<any> {
                             console.log('Decoded token:', decodedToken);
                             var email = decodedToken.sub// Print the decoded token
                             this.getbyEmail(email).subscribe(data => {
-                                localStorage.setItem('role',data.role);});
+                                localStorage.setItem('role',data.role); });
 
                             localStorage.setItem('loggedUser', JSON.stringify(decodedToken)); // Use 'sub' instead of 'username'
                             localStorage.setItem('isloggedIn', String(true));
@@ -189,8 +190,8 @@ getbyEmail(email: string): Observable<any> {
 
     }
 
-    getAllUser(): Observable<User[]>{
-        return this.httpClient.get<User[]>(BASE_URL + 'allUser');
+    getAllUser(): Observable<User[]> {
+        return this.httpClient.get<User[]>(this.BASE_URL + 'allUser');
     }
 
 
@@ -199,14 +200,14 @@ getbyEmail(email: string): Observable<any> {
         // Après la déconnexion réussie
 
 
-        return this.httpClient.post<any>('http://localhost:9090/user/signout',{});
+        return this.httpClient.post<any>(this.BASE_URL + 'signout',{});
     }
     disableUser(id: number): Observable<string> {
-        return this.httpClient.put(BASE_URL+`ban/${id}`, {}, { responseType: 'text' });
+        return this.httpClient.put(this.BASE_URL + `ban/${id}`, {}, { responseType: 'text' });
     }
 
     enableUser(id: number): Observable<string> {
-        return this.httpClient.put(BASE_URL+`Disban/${id}`, {}, { responseType: 'text' });
+        return this.httpClient.put(this.BASE_URL + `Disban/${id}`, {}, { responseType: 'text' });
     }
     signOutt() {
         // Clear all local authentication data

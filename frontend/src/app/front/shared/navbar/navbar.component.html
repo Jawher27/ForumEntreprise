@@ -1,74 +1,145 @@
-<nav id="navbar" class="navbar navbar-main navbar-expand-lg navbar-transparent headroom headroom--top headroom--pinned">
- 
-  <div class="container">
-    <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
-      <img src="./assets/Logo_ESPRIT_-_Tunisie.png" width="100" height="150">
-    </a>
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
-      <div class="navbar-collapse-header">
-        <div class="row">
-          <div class="col-6 collapse-brand">
-            <a [routerLink]="['/home']">
-              <img src="./assets/img/brand/blue.png">
-            </a>
-          </div>
-          <div class="col-6 collapse-close">
-            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
-                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
-              <span></span>
-              <span></span>
-            </button>
-          </div>
+<!--<nav id="navbar" class="navbar navbar-main navbar-expand-lg navbar-transparent headroom headroom&#45;&#45;top headroom&#45;&#45;pinned">-->
+<!-- -->
+<!--  <div class="container">-->
+<!--    <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">-->
+<!--      <img src="./assets/Logo_Vermeg1.png" width="100" height="450">-->
+<!--    </a>-->
+<!--    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"-->
+<!--          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">-->
+<!--      <div class="navbar-collapse-header">-->
+<!--        <div class="row">-->
+<!--          <div class="col-6 collapse-brand">-->
+<!--            <a [routerLink]="['/home']">-->
+<!--              <img src="./assets/img/brand/blue.png">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-6 collapse-close">-->
+<!--            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"-->
+<!--                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">-->
+<!--              <span></span>-->
+<!--              <span></span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!-- -->
+<!--      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">-->
+<!--        <li class="nav-item">-->
+<!--          <a routerLink="/front/reclamation" class="nav-link">-->
+<!--            Réclamation-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          &lt;!&ndash; <a routerLink="/front/sponsor" class="nav-link">-->
+<!--            Sponsor-->
+<!--          </a> &ndash;&gt;-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a routerLink="/front/annonce" class="nav-link">-->
+<!--            Annonce-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+
+<!--      <ul class="navbar-nav align-items-lg-center ml-lg-auto">-->
+
+
+
+
+<!--      <li *ngIf="currentUser">-->
+<!--          <a routerLink="/front/profile">-->
+<!--            <img src="./assets/img/theme/13.gif" alt="Profil personnel" class="rounded-circle" style="width: 70px; height: 70px;">-->
+<!--          </a>-->
+
+
+<!--      </li>-->
+
+
+
+<!--        <li *ngIf="!currentUser"  class="nav-item d-none d-lg-block ml-lg-4">-->
+<!--          <a routerLink="/RegisterPage">-->
+<!--            Connexion-->
+<!--          </a>-->
+<!--        </li>-->
+
+
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</nav>-->
+
+
+
+
+
+
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white shadow-md transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo -->
+        <a [routerLink]="['/home']" class="flex items-center">
+            <img
+                    src="./assets/Logo_Vermeg1.png"
+                    alt="Logo Vermeg"
+                    class="h-12 w-auto object-contain"
+            />
+        </a>
+
+        <!-- Menu Desktop -->
+        <div class="hidden lg:flex items-center space-x-8">
+            <ul class="flex space-x-6">
+                <li><a routerLink="/front/reclamation" class="nav-link">Réclamation</a></li>
+                <li><a routerLink="/front/annonce" class="nav-link">Annonce</a></li>
+            </ul>
+
+            <!-- Utilisateur Connecté / Non Connecté -->
+            <div class="flex items-center space-x-4">
+                <ng-container *ngIf="currentUser; else loginButton">
+                    <a routerLink="/front/profile" class="profile-link">
+                        <img
+                                src="./assets/img/theme/13.gif"
+                                alt="Profil"
+                                class="w-12 h-12 rounded-full object-cover border-2 border-transparent hover:border-blue-500 transition-all"
+                        />
+                    </a>
+                </ng-container>
+                <ng-template #loginButton>
+                    <a routerLink="/RegisterPage" class="login-button">Connexion</a>
+                </ng-template>
+            </div>
         </div>
-      </div>
- 
-      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <li class="nav-item">
-          <a routerLink="/front/reclamation" class="nav-link">
-            Réclamation
-          </a>
-        </li>
-        <li class="nav-item">
-          <!-- <a routerLink="/front/sponsor" class="nav-link">
-            Sponsor
-          </a> -->
-        </li>
-        <li class="nav-item">
-          <a routerLink="/front/annonce" class="nav-link">
-            Annonce
-          </a>
-        </li>
-      </ul>
 
-      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-
-
-
-
-      <li *ngIf="currentUser">
-          <a routerLink="/front/profile">
-            <img src="./assets/img/theme/13.gif" alt="Profil personnel" class="rounded-circle" style="width: 70px; height: 70px;">
-          </a>
-
-
-      </li>
-
-
-
-        <li *ngIf="!currentUser"  class="nav-item d-none d-lg-block ml-lg-4">
-          <a routerLink="/RegisterPage">
-            Connexion
-          </a>
-        </li>
-
-
-      </ul>
+        <!-- Bouton Mobile (Hamburger) -->
+        <button
+                class="lg:hidden focus:outline-none"
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"
+        >
+            <div class="hamburger-icon" [class.active]="!isCollapsed"></div>
+        </button>
     </div>
-  </div>
 
+    <!-- Menu Mobile -->
+    <div
+            class="lg:hidden mobile-menu bg-white shadow-lg"
+            [class.hidden]="isCollapsed"
+    >
+        <ul class="px-4 py-6 space-y-4">
+            <li><a routerLink="/front/reclamation" class="nav-link">Réclamation</a></li>
+            <li><a routerLink="/front/annonce" class="nav-link">Annonce</a></li>
+        </ul>
+        <div class="px-4 py-4 border-t">
+            <a *ngIf="!currentUser" routerLink="/RegisterPage" class="login-button">Connexion</a>
+            <a *ngIf="currentUser" routerLink="/front/profile" class="profile-link-mobile">
+                <img
+                        src="./assets/img/theme/13.gif"
+                        alt="Profil"
+                        class="w-10 h-10 rounded-full mx-auto"
+                />
+            </a>
+        </div>
+    </div>
 </nav>
-

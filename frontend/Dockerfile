@@ -1,6 +1,6 @@
 # Stage 1: Build the Angular application
 FROM node:18.19.0 AS build
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy package.json and package-lock.json first for better caching
 COPY ./package*.json ./
@@ -16,7 +16,7 @@ RUN npm run build -- --configuration=production
 FROM nginx:alpine
 
 # Copy the build output to replace the default nginx contents
-COPY --from=build /app/dist/argon-design-system-angular/ /usr/share/nginx/html/
+COPY --from=build /frontend/dist/argon-design-system-angular/ /usr/share/nginx/html/
 
 # Configure Nginx for Angular routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf

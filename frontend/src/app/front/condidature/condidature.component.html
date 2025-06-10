@@ -1,89 +1,138 @@
-<section class="section section-lg section-shaped">
-    <br>
-    <div class="shape shape-style-1 shape-default">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+<section class="bg-white min-h-screen py-16">
+    <!-- Vermeg-inspired header with red accent -->
+    <div class="container mx-auto px-4 mb-8">
+        <div class="flex items-center justify-center mb-6">
+            <div class="h-1 w-16 bg-[#E31937] mr-3"></div>
+            <h6 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Vermeg empowers talents</h6>
+            <div class="h-1 w-16 bg-[#E31937] ml-3"></div>
+        </div>
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Submit your application</h2>
+        <p class="text-center text-gray-600 mb-8">Please upload your CV and Cover Letter</p>
     </div>
 
-    <section class="section section-lg pt-lg-0 section-contact-us">
-        <div class="container">
-            <div class="row row-grid align-items-center">
-                <div class="col-md-6 order-md-2">
-                    <img src="./assets/img/theme/Logo_ESPRIT_-_Tunisie.png" class="img-fluid floating">
-                </div>
-                <div class="col-md-6 order-md-1">
-                    <div class="pr-md-5">
-                        <div class="contact-form-container">
-                            <div class="card-body">
-                                <!-- Alert de succès -->
-                                <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-                                    Votre candidature a été soumise avec succès!
-                                    <button type="button" class="btn-close" (click)="closeAlert()"></button>
-                                </div>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap -mx-4 items-center">
+            <!-- Logo section -->
+          <!-- <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0 flex justify-center">
+                <img src="./assets/img/theme/Logo_ESPRIT_-_Tunisie.png" class="max-w-xs md:max-w-sm transition-all duration-300 hover:shadow-lg rounded-lg">
+            </div>
+            
+            <!-- Form section -->
+            <div class="w-full md:w-1/2 px-4">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <!-- Alert de succès -->
+                    <div *ngIf="showSuccessAlert" class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-md relative">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <p class="text-green-700">Your application has been successfully submitted !</p>
+                        </div>
+                        <button type="button" class="absolute top-2 right-2 text-green-500" (click)="closeAlert()">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
 
-                                <!-- Alert d'échec -->
-                                <div *ngIf="showFailedsAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    Une erreur s'est produite lors de la soumission de votre candidature.
-                                    <button type="button" class="btn-close" (click)="closeFailedAlert()"></button>
-                                </div>
+                    <!-- Alert d'échec -->
+                    <div *ngIf="showFailedsAlert" class="bg-red-50 border-l-4 border-[#E31937] p-4 mb-6 rounded-md relative">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-[#E31937] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p class="text-[#E31937]">An error occurred while submitting your application.</p>
+                        </div>
+                        <button type="button" class="absolute top-2 right-2 text-[#E31937]" (click)="closeFailedAlert()">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
 
-                                <!-- Message d'erreur général -->
-                                <div *ngIf="errorMessage" class="alert alert-danger">
-                                    {{ errorMessage }}
-                                </div>
+                    <!-- Message d'erreur général -->
+                    <div *ngIf="errorMessage" class="bg-red-50 border-l-4 border-[#E31937] p-4 mb-6 rounded-md">
+                        <p class="text-[#E31937]">{{ errorMessage }}</p>
+                    </div>
 
-                                <form [formGroup]="candidatureForm" (ngSubmit)="onSubmit()">
-                                    <div class="mb-3">
-                                        <label for="cv" class="form-label">CV (format PDF uniquement)</label>
-                                        <input
-                                                type="file"
-                                                class="form-control"
-                                                id="cv"
-                                                accept="application/pdf"
-                                                (change)="onCvChange($event)"
-                                                formControlName="cv"
-                                                required>
-                                        <div *ngIf="candidatureForm.get('cv').invalid && candidatureForm.get('cv').touched" class="text-danger">
-                                            Le CV est requis
-                                        </div>
+                    <form [formGroup]="candidatureForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                        <!-- CV Upload -->
+                        <div>
+                            <label for="cv" class="block text-sm font-medium text-gray-700 mb-2">CV (format PDF uniquement)</label>
+                            <div class="relative border-2 border-gray-300 border-dashed rounded-md p-6 hover:border-[#E31937] transition-colors">
+                                <input
+                                    type="file"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    id="cv"
+                                    accept="application/pdf"
+                                    (change)="onCvChange($event)"
+                                    formControlName="cv"
+                                    required>
+                                <div class="text-center">
+                                    <svg *ngIf="!cvFileName" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4h-8m-12 0H8m12 0a4 4 0 01-4-4v-4m32 0v-8a4 4 0 00-4-4h-8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <p *ngIf="!cvFileName" class="mt-1 text-sm text-gray-600">
+                                        Click or drag and drop your CV
+                                    </p>
+                                    <div *ngIf="cvFileName" class="flex items-center justify-center">
+                                        <svg class="h-6 w-6 text-[#E31937] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        <span class="text-sm font-medium text-gray-700">{{ cvFileName }}</span>
                                     </div>
-
-                                    <div class="mb-3">
-                                        <label for="coverLetter" class="form-label">Lettre de motivation (format PDF uniquement)</label>
-                                        <input
-                                                type="file"
-                                                class="form-control"
-                                                id="coverLetter"
-                                                accept="application/pdf"
-                                                (change)="onCoverLetterChange($event)"
-                                                formControlName="coverLetter"
-                                                required>
-                                        <div *ngIf="candidatureForm.get('coverLetter').invalid && candidatureForm.get('coverLetter').touched" class="text-danger">
-                                            La lettre de motivation est requise
-                                        </div>
-                                    </div>
-
-                                    <div class="d-grid">
-                                        <button
-                                                type="submit"
-                                                class="btn btn-primary"
-                                                [disabled]="candidatureForm.invalid || isSubmitting">
-                                            <span class="spinner-border spinner-border-sm" *ngIf="isSubmitting"></span>
-                                            Soumettre la candidature
-                                        </button>
-                                    </div>
-                                </form>
+                                </div>
+                            </div>
+                            <div *ngIf="candidatureForm.get('cv').invalid && candidatureForm.get('cv').touched" class="text-[#E31937] text-sm mt-1">
+                                Required CV
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Lettre de motivation Upload -->
+                        <div>
+                            <label for="coverLetter" class="block text-sm font-medium text-gray-700 mb-2">Lettre de motivation (format PDF uniquement)</label>
+                            <div class="relative border-2 border-gray-300 border-dashed rounded-md p-6 hover:border-[#E31937] transition-colors">
+                                <input
+                                    type="file"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    id="coverLetter"
+                                    accept="application/pdf"
+                                    (change)="onCoverLetterChange($event)"
+                                    formControlName="coverLetter"
+                                    required>
+                                <div class="text-center">
+                                    <svg *ngIf="!coverLetterFileName" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4h-8m-12 0H8m12 0a4 4 0 01-4-4v-4m32 0v-8a4 4 0 00-4-4h-8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <p *ngIf="!coverLetterFileName" class="mt-1 text-sm text-gray-600">
+                                        Click or drag and drop your Cover Letter
+                                    </p>
+                                    <div *ngIf="coverLetterFileName" class="flex items-center justify-center">
+                                        <svg class="h-6 w-6 text-[#E31937] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        <span class="text-sm font-medium text-gray-700">{{ coverLetterFileName }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="candidatureForm.get('coverLetter').invalid && candidatureForm.get('coverLetter').touched" class="text-[#E31937] text-sm mt-1">
+                                required cover letter
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button
+                                type="submit"
+                                class="w-full bg-[#E31937] hover:bg-[#c01730] text-white py-3 px-4 rounded-md font-medium transition-colors duration-300 shadow-md flex items-center justify-center"
+                                [disabled]="candidatureForm.invalid || isSubmitting">
+                                <span class="inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" *ngIf="isSubmitting"></span>
+                                Submit application
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </section>

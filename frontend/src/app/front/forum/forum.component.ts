@@ -9,10 +9,14 @@ import { ForumService } from 'src/app/core/services/forum.service';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-  f:Forum= new Forum();
+   f:Forum= new Forum();
     userRole: string | null = null;
+    // f: Forum | null = null;
+    isLoading: boolean = true; // Ajoutez un état de chargement
+    error: string | null = null;
 
-  constructor(private forumServive:ForumService,private authService: AuthService) { }
+
+    constructor(private forumServive:ForumService,private authService: AuthService) { }
 
   ngOnInit(): void {
   //  this.isExposant();
@@ -20,9 +24,8 @@ export class ForumComponent implements OnInit {
       this.userRole = this.authService.getUserRole();
   }
   private getLatestForum(){
-    this.forumServive.getLatestForum().subscribe(data =>{
-      
-        this.f=data;
+    this.forumServive.getLatestForum().subscribe(data => {
+        this.f = data;
      });
 
  }
